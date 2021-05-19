@@ -1,0 +1,21 @@
+.main_header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--darkest);
+    padding: 10px;
+    z-index: 1;
+}
+
+.main_header h1 {
+    margin: 0;
+    display: inline;
+    color: white;
+    font-size: x-large;
+}
+
+.main_header button {
+    position: absolute;
+    display: inline;
+    right: 0px;
+}

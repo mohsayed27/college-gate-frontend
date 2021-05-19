@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import { HomePage } from './containers/HomePage';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Professor from './Users/Professor';
 
 function App() {
-  return <div className="App">
-    <HomePage/>
-  </div>
+  // return <div className="App">
+  //   <HomePage/>
+  // </div>
 
     // <div className="App">
     //   <header className="App-header">
@@ -24,6 +26,18 @@ function App() {
     //   </header>
     // </div>
   ;
+
+  
+
+  return (
+
+    
+    <Router>
+      <div className='yamaniTemp'>
+        <Professor/>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
