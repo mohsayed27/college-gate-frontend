@@ -1,6 +1,10 @@
+:root {
+    --sidebar_width: 200px;
+}
+
 .sidebar {
     position: fixed;
-    width: 200px;
+    width: var(--sidebar_width);
     top: 0;
     margin: 0;
     padding-top: 50px;
@@ -8,7 +12,11 @@
     background-color: var(--darker);
     color: white;
     text-align: center;
+    left: 0;
+    z-index: 1;
+    transition: left 0.1s ease-in-out;
 }
+
 
 .sidebar ul {
     display: inline-block;
@@ -24,4 +32,20 @@
 .sidebar a {
     color: white;
     text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    .sidebar {
+        left: calc(-1*var(--sidebar_width));
+    }
+
+    .sidebar_open {
+        left: 0;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    .sidebar {
+        left: 0;
+    }
 }

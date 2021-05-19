@@ -4,18 +4,40 @@
     width: 100%;
     background-color: var(--darkest);
     padding: 10px;
-    z-index: 1;
+    z-index: 2;
 }
 
-.main_header h1 {
+.main_header_content {
+    /* background-color: aquamarine; */
+    display: flex;
+    align-items: center;
+}
+
+.main_header_content h1 {
     margin: 0;
     display: inline;
     color: white;
     font-size: x-large;
 }
 
-.main_header button {
-    position: absolute;
-    display: inline;
-    right: 0px;
+.spacer_logo_logout {
+    flex: 1;
+}
+
+.hamburger {
+    display: none;
+}
+
+.hamburger:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .hamburger {
+        display: inline;
+    }
+
+    .spacer_hamburger_logo {
+        flex: 1;
+    }
 }

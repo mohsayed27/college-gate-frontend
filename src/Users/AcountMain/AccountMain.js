@@ -1,4 +1,5 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {useState} from 'react'
 import styles from './AccountMain.module.css'
 import Header from './Header/Header'
 import Sidebar from './Sidebar/Sidebar'
@@ -15,15 +16,32 @@ const AccountMain = ({navItemsAndComponents}) => {
 
     const navItems = navItemsAndComponents.map(item => ({text:item.text, link:item.link, id:item.id}));
 
+
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    let backdropStyle = styles.backdrop;
+    
+    const sidebarShowHideHandler = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    if (isSidebarOpen) {
+        backdropStyle = `${styles.backdrop} ${styles.backdrop_displayed}`;
+        console.log(backdropStyle);
+    } else {
+        backdropStyle = styles.backdrop;
+        console.log(backdropStyle);
+    }
+
     return (
        
         <div className={styles.account_main}>
-            <Header/>
-            <Sidebar navItems={navItems}/>
-            <section className='content'>
+            <Header hamburgerClickHandler={sidebarShowHideHandler}/>
+            <Sidebar navItems={navItems} isSidebarOpen={isSidebarOpen}/>
+            <section className={styles.account_main_section}>
+                <div className={backdropStyle} onClick={sidebarShowHideHandler}></div>
                 <Switch>
                     {navItemsAndComponents.map(item => (
-                        <Route path={item.link}>
+                        <Route path={item.link} key={item.id}>
                             <>{item.component}</>
                         </Route>
                     ))}                     

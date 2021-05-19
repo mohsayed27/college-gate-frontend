@@ -1,6 +1,26 @@
-.account_main section {
+.account_main_section {
     position: absolute;
     top: 43px;
-    left: 200px;
+    left: var(--sidebar_width);
     margin: 10px;
+}
+
+.backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color:rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .account_main_section {
+        left: 0;
+    }
+
+    .backdrop_displayed {
+        display: inline;
+    }
 }

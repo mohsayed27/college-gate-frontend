@@ -7,9 +7,20 @@ navItems = [
     ...
 ]
 */
-const Sidebar = ({navItems}) => {
+const Sidebar = ({navItems, isSidebarOpen}) => {
+
+    let style = styles.sidebar;
+
+    if (isSidebarOpen) {
+        style = `${styles.sidebar} ${styles.sidebar_open}`;
+        //console.log(style);
+    } else {
+        style = styles.sidebar;
+        //console.log(style);
+    }
+
     return (
-        <nav className={styles.sidebar}>
+        <nav className={style} id='sidebar'>
             <ul>
                 {
                     navItems.map(
