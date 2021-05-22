@@ -1,7 +1,7 @@
-const Placeholder = ({text}) => {
+const DummyPlaceholder = ({text}) => {
     return (        
         <p style={{color:'white',margin:'0'}}>{text}</p>
     );
 }
  
-export default Placeholder;
+export default DummyPlaceholder;

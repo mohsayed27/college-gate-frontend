@@ -19,22 +19,22 @@ const AccountMain = ({navItemsAndComponents}) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     let backdropStyle = styles.backdrop;
-    
+
     const sidebarShowHideHandler = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
     if (isSidebarOpen) {
         backdropStyle = `${styles.backdrop} ${styles.backdrop_displayed}`;
-        console.log(backdropStyle);
+        //console.log(backdropStyle);
     } else {
         backdropStyle = styles.backdrop;
-        console.log(backdropStyle);
+        //console.log(backdropStyle);
     }
 
     return (
        
-        <div className={styles.account_main}>
+        <main className={styles.account_main}>
             <Header hamburgerClickHandler={sidebarShowHideHandler}/>
             <Sidebar navItems={navItems} isSidebarOpen={isSidebarOpen}/>
             <section className={styles.account_main_section}>
@@ -47,7 +47,7 @@ const AccountMain = ({navItemsAndComponents}) => {
                     ))}                     
                 </Switch>
             </section>
-        </div>
+        </main>
         
     );
 }

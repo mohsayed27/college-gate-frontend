@@ -1,11 +1,11 @@
 import AccountMain from "./AcountMain/AccountMain";
-import Placeholder from "../Placeholder";
+import DummyPlaceholder from "../DummyPlaceholder";
 
 const Professor = () => {
 
-    const navItemsAndComponents = [{text:'Messages Overview', link:'/professor/messagesoverview', component:<Placeholder text='messagesoverview'/>, id:0}, 
-                                    {text:'Courses', link:'/professor/courses', component:<Placeholder text='courses'/>, id:1}, 
-                                    {text:'Complaints', link:'/professor/complaints', component:<Placeholder text='complaints'/>, id:2}];
+    const navItemsAndComponents = [{text:'Messages Overview', link:'/professor/messagesoverview', component:<DummyPlaceholder text='messagesoverview'/>, id:0}, 
+                                    {text:'Courses', link:'/professor/courses', component:<DummyPlaceholder text='courses'/>, id:1}, 
+                                    {text:'Complaints', link:'/professor/complaints', component:<DummyPlaceholder text='complaints'/>, id:2}];
 
     return (
         <AccountMain navItemsAndComponents={navItemsAndComponents}/>
