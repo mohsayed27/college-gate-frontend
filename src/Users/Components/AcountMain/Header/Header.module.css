@@ -5,6 +5,7 @@
     background-color: var(--darkest);
     padding: 10px;
     z-index: 2;
+    height: var(--header_height);
 }
 
 .main_header_content {

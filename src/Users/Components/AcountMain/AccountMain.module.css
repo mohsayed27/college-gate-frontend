@@ -1,8 +1,10 @@
 .account_main_section {
-    position: absolute;
-    top: 43px;
+    /* position: absolute; */
+    padding-left: var(--sidebar_width);
+    padding-top: var(--header_height);
+    /* top: 43px; */
     left: var(--sidebar_width);
-    margin: 10px;
+    margin: 0;
 }
 
 .backdrop {
@@ -17,7 +19,8 @@
 
 @media screen and (max-width: 600px) {
     .account_main_section {
-        left: 0;
+        padding-left: 0;
+
     }
 
     .backdrop_displayed {
