@@ -4,3 +4,10 @@
     flex-direction: row;
     padding: 5px;
 }
+
+@media screen and (max-width: 885px) {
+    .course_list {
+        max-width: 325px;
+        margin: 0 auto;
+    }
+}
