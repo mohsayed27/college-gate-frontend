@@ -1,4 +1,4 @@
-import AccountMain from "./AcountMain/AccountMain";
+import AccountMain from "./Components/AcountMain/AccountMain";
 import DummyPlaceholder from "../DummyPlaceholder";
 
 const Professor = () => {

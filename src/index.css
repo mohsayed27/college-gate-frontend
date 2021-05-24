@@ -7,6 +7,42 @@ body {
   top: 0;
 }
 
+:root {
+  --darkest: #0E0E0F;
+  --darker: #242426;
+  --dark: #2D2D30;
+  --warning: #FFC700;
+  --blue: #0094FF;
+  --dim: #AAAAAA;
+  --red: #F21D00;
+  --green: #04C600;
+  --magenta: #FA02FF;
+}
+
+.font0 {
+  font-size: 25px;
+}
+
+.font1 {
+  font-size: 18px;
+}
+
+.font2 {
+  font-size: 16px;
+}
+
+.font3 {
+  font-size: 14px;
+}
+
+.font3 {
+  font-size: 12px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -25,3 +61,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

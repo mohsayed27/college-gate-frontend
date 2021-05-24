@@ -8,7 +8,7 @@ const Header = ({hamburgerClickHandler}) => {
             <div className={styles.main_header_content}>
                 <img className={styles.hamburger} onClick={hamburgerClickHandler} src="/images/hamburger.svg" alt="sidebar" />
                 <div className={styles.spacer_hamburger_logo}></div>
-                <h1>College Gate</h1>
+                <h1 className='font0 bold'>College Gate</h1>
                 <div className={styles.spacer_logo_logout}></div>
                 <a href='/'><img src="/images/log-out.svg" alt="log out" /></a>
             </div>

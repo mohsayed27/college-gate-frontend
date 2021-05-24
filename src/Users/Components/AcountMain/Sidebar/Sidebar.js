@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Sidebar.module.css'
+import SidebarButton from './SidebarButton'
+
 /*
 navItems = [
     {text:String, link:String, id:Number}, 
@@ -25,7 +27,11 @@ const Sidebar = ({navItems, isSidebarOpen}) => {
                 {
                     navItems.map(
                         item => (
-                            <Link to={item.link} key={item.id}><li>{item.text}</li></Link>
+                            <Link to={item.link} key={item.id}>
+                                <li>
+                                    <SidebarButton text={item.text} link={item.link}/>
+                                </li>
+                            </Link>
                         )
                     )
                 }
