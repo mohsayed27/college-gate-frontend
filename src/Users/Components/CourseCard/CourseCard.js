@@ -1,8 +1,10 @@
 import styles from './CourseCard.module.css'
+import {Link} from 'react-router-dom'
+import {LINK_COURSE_ANNOUNCEMENTS} from '../../../Constants'
 
-const CourseCard = ({coverImgSrc, profImgSrc, courseTitle, professorName}) => {
+const CourseCard = ({courseId, coverImgSrc, profImgSrc, courseTitle, professorName, userLink}) => {
     return (
-        <div className={styles.course_card}>
+        <Link className={styles.course_card} to={`${userLink}${LINK_COURSE_ANNOUNCEMENTS}`.replace(':id', courseId)}>
             
             <img className={styles.course_cover} src={coverImgSrc} alt="Course image" />
 
@@ -17,7 +19,7 @@ const CourseCard = ({coverImgSrc, profImgSrc, courseTitle, professorName}) => {
                 </div>
 
             </div>
-        </div>
+        </Link>
     );
 }
  

@@ -1,0 +1,32 @@
+.cover_tabs_content {
+    display: flex;
+    flex-direction: column;
+    /* width: 850px; */
+    max-width: min(100%, 850px);
+    height: 100%;
+    top: var(--header_height);
+    gap: 10px;
+    /* background-color: aquamarine; */
+}
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.cover_img {
+    object-fit: cover;
+    /* max-height: 350px; */
+    /* aspect-ratio: 850/350; */
+    /* width: min(100%, 850px); */
+    flex: 1;
+}
+
+.test_div {
+    /* width: 100%; */
+    /* width: 850px; */
+    height: 350px;
+    background-color: aquamarine;
+}

@@ -4,6 +4,7 @@
     padding: 10px;
     background-color: var(--darker);
     margin: 5px;
+    text-decoration: none;
 }
 
 .course_cover {

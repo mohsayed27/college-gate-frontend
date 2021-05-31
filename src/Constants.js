@@ -1,5 +1,5 @@
 export const MOCK = true;
-export const BASE_URL = MOCK ? 'http://localhost:4000/' : 'https://college-gate.com/';
+export const BASE_URL = MOCK ? 'http://192.168.1.7:4000/' : 'https://college-gate.com/';
 
 export const STATUS_IDLE = 'idle';
 export const STATUS_LOADING = 'loading';
@@ -22,7 +22,7 @@ export const LINK_SEND = '/send';
 
 export const LINK_COURSE = LINK_COURSES + '/:id'; 
 export const LINK_COURSE_ANNOUNCEMENTS  = LINK_COURSE + '/announcements';                   // for example: '/professor/courses/:id/announcements'
-export const LINK_COURSE_QUIZES         = LINK_COURSE + '/quizes';                          // for example: '/professor/courses/:id/quizes'
+export const LINK_COURSE_GRADES         = LINK_COURSE + '/grades';                          // for example: '/professor/courses/:id/grades'
 
 export const LINK_COURSE_MESSAGES_RECEIVED  = LINK_COURSE + '/messages' + LINK_RECEIVED;    // for example: '/professor/courses/:id/messages/received'
 export const LINK_COURSE_MESSAGES_SENT      = LINK_COURSE + '/messages' + LINK_SENT;        // for example: '/professor/courses/:id/messages/sent'

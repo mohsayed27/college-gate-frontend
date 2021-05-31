@@ -11,6 +11,15 @@ export const fetchAllCourses = createAsyncThunk(
     }
 )
 
+/*export const fetchCourseById = createAsyncThunk(
+    'courses/fetchCourseById', 
+    async () => {
+        //console.log('fetchAllCourses thunk');
+        const data = await apiRequest('api/v1/course/all', {Authorization: 'Bearer ' + 'token'});
+        return data;
+    }
+)*/
+
 export const coursesSlice = createSlice({
     name: 'courses', 
     initialState: {
