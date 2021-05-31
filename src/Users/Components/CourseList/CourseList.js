@@ -5,6 +5,7 @@ import {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchAllCourses, selectAllCourses} from '../../../Store/CoursesSlice'
 import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED} from '../../../Constants'
+import { Route } from 'react-router-dom';
 
 const CourseList = ({createEnrollText}) => {
     const courses = useSelector(selectAllCourses);
@@ -21,13 +22,7 @@ const CourseList = ({createEnrollText}) => {
 
     return (
         <div className={styles.course_list}>
-            {courses.status == STATUS_LOADING && <p>Loading...</p>}
-            {/*<CourseCard 
-                coverImgSrc='/logo512.png' 
-                courseTitle='Course Title' 
-                profImgSrc='/logo512.png'
-                professorName='Professor Name'
-            />*/}
+            {courses.status == STATUS_LOADING && <p className='font2 bold'>Loading...</p>}
             {
                 courses.status == STATUS_SUCCEEDED &&
                 courses.courses.map(

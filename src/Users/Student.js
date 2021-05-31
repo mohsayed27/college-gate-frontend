@@ -1,15 +1,26 @@
 import AccountMain from "./Components/AcountMain/AccountMain";
 import Placeholder from "../Placeholder";
 
+import {
+    LINK_STUDENT, 
+    LINK_HOME, 
+    LINK_COURSES, 
+    LINK_COMPLAINTS, 
+    LINK_WARNINGS
+} from '../Constants'
+
 const Student = () => {
 
-    const navItemsAndComponents = [{text:'Home', link:'/student/home', component:<Placeholder text='home'/>, id:0}, 
-                                    {text:'Courses', link:'/student/courses', component:<Placeholder text='courses'/>, id:1}, 
-                                    {text:'Warnings', link:'/student/warnings', component:<Placeholder text='warnings'/>, id:2},
-                                    {text:'Complaints', link:'/student/complaints', component:<Placeholder text='complaints'/>, id:3}];
+    const navItemsAndComponents = [{text:'Home',        link:LINK_STUDENT + LINK_HOME,       exactLink:true, component:<Placeholder text='home'/>, id:0}, 
+                                    {text:'Courses',    link:LINK_STUDENT + LINK_COURSES,    exactLink:true, component:<Placeholder text='courses'/>, id:1}, 
+                                    {text:'Warnings',   link:LINK_STUDENT + LINK_WARNINGS,   exactLink:true, component:<Placeholder text='warnings'/>, id:2},
+                                    {text:'Complaints', link:LINK_STUDENT + LINK_COMPLAINTS, exactLink:true, component:<Placeholder text='complaints'/>, id:3}];
+
+    const additionalComponents = [{link:LINK_STUDENT + LINK_COURSE, exactLink:false, component:<CoverTabsContent/>, id:4}]
+
 
     return (
-        <AccountMain navItemsAndComponents={navItemsAndComponents}/>
+        <AccountMain navItemsAndComponents={navItemsAndComponents} additionalComponents={additionalComponents}/>
     );
 }
  

@@ -3,7 +3,7 @@ import {useLocation} from 'react-router-dom'
 const SidebarButton = ({text, link}) => {
 
     let style = 'font2';
-    if (useLocation().pathname == link) {
+    if (useLocation().pathname.includes(link)) {
         style = `font2 bold`;
     } else {
         style = `font2`;

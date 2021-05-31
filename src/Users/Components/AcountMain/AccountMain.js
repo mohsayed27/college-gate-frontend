@@ -6,13 +6,18 @@ import Sidebar from './Sidebar/Sidebar'
 
 /*
 navItemsAndComponents = [
-    {text:String, link:String, component:<ReactComponent/>, id:Number}, 
-    {text:String, link:String, component:<ReactComponent/>, id:Number}, 
+    {text:String, link:String, exactLink:bool, component:<ReactComponent/>, id:Number}, 
+    {text:String, link:String, exactLink:bool, component:<ReactComponent/>, id:Number}, 
     ...
+]
+additionalComponents = [
+    {link:String, exactLink:bool, component:<ReactComponent/>, id:Number}
 ]
 */
 
-const AccountMain = ({navItemsAndComponents}) => {
+// additionalComponents are components that are not associated with a nav button.
+
+const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
 
     const navItems = navItemsAndComponents.map(item => ({text:item.text, link:item.link, id:item.id}));
 
@@ -41,10 +46,15 @@ const AccountMain = ({navItemsAndComponents}) => {
                 <div className={backdropStyle} onClick={sidebarShowHideHandler}></div>
                 <Switch>
                     {navItemsAndComponents.map(item => (
-                        <Route path={item.link} key={item.id}>
+                        <Route path={item.link} exact={item.exactLink} key={item.id}>
                             <>{item.component}</>
                         </Route>
-                    ))}                     
+                    ))}
+                    {additionalComponents.map(item => (
+                        <Route path={item.link} exact={item.exactLink} key={item.id}>
+                            <>{item.component}</>
+                        </Route>
+                    ))}
                 </Switch>
             </section>
         </main>
