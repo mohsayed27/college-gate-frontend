@@ -1,0 +1,1 @@
+json-server --watch db.json --routes routes.json --delay 500 --port 4000

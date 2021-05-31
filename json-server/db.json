@@ -1,0 +1,12 @@
+{
+    "all-courses" : {
+        "courses": [
+            {"Course_id": "course0", "Name": "Course Title0", "Image_url": "https://picsum.photos/id/100/350/150", "Professor": {"_id": "prof0", "Name": "Professor Name0", "ImgUrl": "https://picsum.photos/id/1005/100"}},
+            {"Course_id": "course1", "Name": "Course Title1", "Image_url": "https://picsum.photos/id/1002/350/150", "Professor": {"_id": "prof0", "Name": "Professor Name0", "ImgUrl": "https://picsum.photos/id/1005/100"}},
+            {"Course_id": "course2", "Name": "Course Title2", "Image_url": "https://picsum.photos/id/1003/350/150", "Professor": {"_id": "prof0", "Name": "Professor Name0", "ImgUrl": "https://picsum.photos/id/1005/100"}},
+            {"Course_id": "course3", "Name": "Course Title3", "Image_url": "https://picsum.photos/id/1004/350/150", "Professor": {"_id": "prof0", "Name": "Professor Name0", "ImgUrl": "https://picsum.photos/id/1005/100"}},
+            {"Course_id": "course4", "Name": "Course Title4", "Image_url": "https://picsum.photos/id/1015/350/150", "Professor": {"_id": "prof0", "Name": "Professor Name0", "ImgUrl": "https://picsum.photos/id/1005/100"}},
+            {"Course_id": "course5", "Name": "Course Title5", "Image_url": "https://picsum.photos/id/1006/350/150", "Professor": {"_id": "prof0", "Name": "Professor Name0", "ImgUrl": "https://picsum.photos/id/1005/100"}}
+        ]
+    }
+}
