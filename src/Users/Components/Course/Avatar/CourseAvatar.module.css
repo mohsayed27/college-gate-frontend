@@ -1,0 +1,31 @@
+.course_avatar {
+    display: flex;
+    flex-direction: row;
+    /* background-color: aquamarine; */
+    margin: 10px;
+    gap: 10px;
+}
+
+.avatar_img {
+    width: min(100%, 75px);
+    height: min(100%, 75px);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--darkest);
+}
+
+.avatar_text_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.column_text {
+    display: inline;
+    background-color: var(--darkest);
+    width: fit-content;
+    margin: 0;
+    padding: 3px;
+}

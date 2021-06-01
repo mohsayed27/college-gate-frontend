@@ -14,13 +14,19 @@ additionalComponents = [
 ]
 */
 
-const CoverTabsContent = ({coverImgSrc, tabsAndComponents, additionalComponents}) => {
+const CoverTabsContent = ({coverImgSrc, avatarComponent, tabsAndComponents, additionalComponents}) => {
     //console.log(coverImgSrc);
     //console.log(tabsAndComponents);
     return (
         <div className={styles.cover_tabs_content}>
             {<img className={styles.cover_img} src={coverImgSrc} alt="Cover image" />}
             {/*<div className={styles.test_div}></div>*/}
+
+            <div className={styles.avatar_parent_div}>
+                <div className={styles.avatar_child_div}>
+                    <>{avatarComponent}</>
+                </div>
+            </div>
 
             <div className={styles.tabs}>
                 {tabsAndComponents.map(item => (

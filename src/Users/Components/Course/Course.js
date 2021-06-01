@@ -4,6 +4,7 @@ import DummyPlaceholder from "../../../DummyPlaceholder";
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchAllCourses, selectAllCourses} from '../../../Store/CoursesSlice';
+import CourseAvatar from "./Avatar/CourseAvatar";
 import {withRouter} from 'react-router-dom'
 import {
     STATUS_IDLE, 
@@ -28,6 +29,13 @@ const Course = withRouter(({userLink, match}) => {
     }, []);
 
     const courseId = match.params.id;
+    let course;
+    let professor;
+    if (courses.status === STATUS_SUCCEEDED) {
+        course = courses.courses.find(course => course.Course_id === courseId);
+        professor = course.Professor;
+    }
+
 
     return (
         <div className={styles.course}>
@@ -37,7 +45,8 @@ const Course = withRouter(({userLink, match}) => {
             {
                 courses.status === STATUS_SUCCEEDED &&
                 <CoverTabsContent 
-                    coverImgSrc={courses.courses.find(course => course.Course_id === courseId).Image_url} 
+                    coverImgSrc={course.Image_url} 
+                    avatarComponent={<CourseAvatar imgSrc={professor.ImgUrl} courseTitle={course.Name} profName={professor.Name}/>}
                     tabsAndComponents={[
                         {iconImgSrc:'/logo192.png', text:'Announcements', link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':id', courseId),     exactLink:false, component:<DummyPlaceholder text='announcements'/>, id:0},
                         {iconImgSrc:'/logo192.png', text:'Grades',        link:userLink+LINK_COURSE_GRADES.replace(':id', courseId),            exactLink:false, component:<DummyPlaceholder text='grades'/>, id:1},
