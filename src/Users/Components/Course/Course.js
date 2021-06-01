@@ -5,7 +5,8 @@ import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchAllCourses, selectAllCourses} from '../../../Store/CoursesSlice';
 import CourseAvatar from "./Avatar/CourseAvatar";
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import Messages from '../Messages/Messages'
 import {
     STATUS_IDLE, 
     STATUS_LOADING, 
@@ -23,7 +24,8 @@ const Course = withRouter(({userLink, match}) => {
 
     useEffect(() => {
         //console.log("onMount");
-        if (courses.status !== 'succeeded') {
+        //console.log(match);
+        if (courses.status !== STATUS_SUCCEEDED) {
             dispatch(fetchAllCourses());
         }
     }, []);
@@ -48,9 +50,9 @@ const Course = withRouter(({userLink, match}) => {
                     coverImgSrc={course.Image_url} 
                     avatarComponent={<CourseAvatar imgSrc={professor.ImgUrl} courseTitle={course.Name} profName={professor.Name}/>}
                     tabsAndComponents={[
-                        {iconImgSrc:'/logo192.png', text:'Announcements', link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':id', courseId),     exactLink:false, component:<DummyPlaceholder text='announcements'/>, id:0},
-                        {iconImgSrc:'/logo192.png', text:'Grades',        link:userLink+LINK_COURSE_GRADES.replace(':id', courseId),            exactLink:false, component:<DummyPlaceholder text='grades'/>, id:1},
-                        {iconImgSrc:'/logo192.png', text:'Messages',      link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':id', courseId), exactLink:false, component:<DummyPlaceholder text='messagesreceived'/>, id:2},
+                        {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':id', courseId),     component:<DummyPlaceholder text='announcements'/>, id:0},
+                        {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':id', courseId),            component:<DummyPlaceholder text='grades'/>, id:1},
+                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES_RECEIVED,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':id', courseId), component:<Messages/>, id:2},
                     ]}
                     additionalComponents={[]}
                 />

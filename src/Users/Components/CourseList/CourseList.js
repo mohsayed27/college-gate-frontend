@@ -13,7 +13,7 @@ const CourseList = ({createEnrollText, userLink}) => {
 
     useEffect(() => {
         //console.log("onMount");
-        if (courses.status !== 'succeeded') {
+        if (courses.status !== STATUS_SUCCEEDED) {
             dispatch(fetchAllCourses());
         }
     }, []);

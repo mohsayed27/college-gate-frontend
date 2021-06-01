@@ -1,4 +1,4 @@
-.sidebar {
+/*.sidebar {
     position: fixed;
     width: var(--sidebar_width);
     top: 0;
@@ -11,8 +11,11 @@
     left: 0;
     z-index: 1;
     transition: left 0.1s ease-in-out;
-}
+}*/
 
+/*.sidebar {
+    
+}*/
 
 .sidebar ul {
     display: inline-block;
@@ -30,7 +33,7 @@
     text-decoration: none;
 }
 
-@media screen and (max-width: 600px) {
+/*@media screen and (max-width: 600px) {
     .sidebar {
         left: calc(-1*var(--sidebar_width));
     }
@@ -44,4 +47,4 @@
     .sidebar {
         left: 0;
     }
-}
+}*/

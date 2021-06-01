@@ -1,9 +1,9 @@
 import {BASE_URL} from './Constants'
 
-export async function apiRequest(endpoint, config) {
+export async function apiRequest(url, config) {
     let data;
     try {
-        const response = await fetch(BASE_URL+endpoint, config /*{Authorization: 'Bearer ' + 'token'}*/);
+        const response = await fetch(url, config /*{Authorization: 'Bearer ' + 'token'}*/);
         data = await response.json();
         if (response.ok) {
             return data;

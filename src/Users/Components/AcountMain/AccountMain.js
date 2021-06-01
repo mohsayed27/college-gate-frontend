@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {useState} from 'react'
 import styles from './AccountMain.module.css'
 import Header from './Header/Header'
-import Sidebar from './Sidebar/Sidebar'
+import Sidebar from '../Sidebar/Sidebar'
 
 /*
 navItemsAndComponents = [
@@ -23,7 +23,9 @@ const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
 
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
     let backdropStyle = styles.backdrop;
+    let sidebarStyle = styles.sidebar;
 
     const sidebarShowHideHandler = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -31,9 +33,11 @@ const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
 
     if (isSidebarOpen) {
         backdropStyle = `${styles.backdrop} ${styles.backdrop_displayed}`;
+        sidebarStyle = `${styles.sidebar} ${styles.sidebar_open}`;
         //console.log(backdropStyle);
     } else {
         backdropStyle = styles.backdrop;
+        sidebarStyle = styles.sidebar;
         //console.log(backdropStyle);
     }
 
@@ -41,7 +45,9 @@ const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
        
         <main className={styles.account_main}>
             <Header hamburgerClickHandler={sidebarShowHideHandler}/>
-            <Sidebar navItems={navItems} isSidebarOpen={isSidebarOpen}/>
+            <div className={sidebarStyle}>
+                <Sidebar navItems={navItems}/>
+            </div>
             <section className={styles.account_main_section}>
                 <div className={backdropStyle} onClick={sidebarShowHideHandler}></div>
                 <Switch>

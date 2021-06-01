@@ -1,12 +1,12 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {apiRequest} from '../API'
-import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED} from '../Constants'
+import {BASE_URL, STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED} from '../Constants'
 
 export const fetchAllCourses = createAsyncThunk(
     'courses/fetchAllCourses', 
     async () => {
         //console.log('fetchAllCourses thunk');
-        const data = await apiRequest('api/v1/course/all', {Authorization: 'Bearer ' + 'token'});
+        const data = await apiRequest(BASE_URL+'api/v1/course/all', {Authorization: 'Bearer ' + 'token'});
         return data;
     }
 )
@@ -46,8 +46,8 @@ export const coursesSlice = createSlice({
         }, 
         [fetchAllCourses.rejected]: (state, action) => {
             state.status = STATUS_FAILED;
-            //state.error = action.error;
-            console.log(action);
+            state.error = action.error;
+            //console.log(action.error);
         }
     }
 });

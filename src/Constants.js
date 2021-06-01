@@ -1,5 +1,5 @@
 export const MOCK = true;
-export const BASE_URL = MOCK ? 'http://192.168.1.7:4000/' : 'https://college-gate.com/';
+export const BASE_URL = MOCK ? 'http://192.168.1.198:4000/' : 'https://college-gate.com/';
 
 export const STATUS_IDLE = 'idle';
 export const STATUS_LOADING = 'loading';

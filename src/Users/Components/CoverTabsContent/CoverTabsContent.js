@@ -4,13 +4,13 @@ import styles from './CoverTabsContent.module.css'
 
 /*
 tabsAndComponents = [
-    {iconImgSrc:String, text:String, link:String, exactLink:bool, component:<ReactComponent/>, id:Number}
+    {iconImgSrc:String, text:String, routePath:String, exactPath:bool, link:String, component:<ReactComponent/>, id:Number}
 ]
 */
 
 /*
 additionalComponents = [
-    {link:String, exactLink:bool, component:<ReactComponent/>, id:Number}
+    {routePath:String, exactPath:bool, link:String, component:<ReactComponent/>, id:Number}
 ]
 */
 
@@ -38,13 +38,13 @@ const CoverTabsContent = ({coverImgSrc, avatarComponent, tabsAndComponents, addi
                 
                 <Switch>
                     {tabsAndComponents.map(item => (
-                        <Route path={item.link} exact={item.exactLink} key={item.id}>
+                        <Route path={item.routePath} exact={item.exactPath} key={item.id}>
                             <>{item.component}</>
                         </Route>
                     ))}
                     
                     {additionalComponents.map(item => (
-                        <Route path={item.link} exact={item.exactLink} key={item.id}>
+                        <Route path={item.routePath} exact={item.exactPath} key={item.id}>
                             <>{item.component}</>
                         </Route>
                     ))}
