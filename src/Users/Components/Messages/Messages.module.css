@@ -1,8 +1,14 @@
 .messages {
-    
+    display: flex;
+    gap: 15px;
 }
 
 .messages_sidebar {
     background-color: var(--darkest);
     width: 140px;
+}
+
+.message_list {
+    background-color: var(--darkest);
+    flex: 1;
 }

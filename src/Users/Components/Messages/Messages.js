@@ -5,6 +5,8 @@ import {fetchListOfMessages, fetchMessageById, selectAllMessages} from '../../..
 import {withRouter} from 'react-router-dom';
 import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT} from '../../../Constants'
 import Sidebar from '../Sidebar/Sidebar'
+import MessageListItem from './MessageListItem/MessageListItem';
+
 
 
 /*
@@ -51,8 +53,8 @@ const Messages = withRouter(({receivedAltText, receivedRoutePath, receivedExactP
                 <Sidebar navItems={sidebarNavItems}/>
             </div>
 
-            <div>
-                
+            <div className={styles.message_list}>
+                <MessageListItem senderName='Sender Name' subject='Subject' date='April 23, 2021, 8:30PM' content='0 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur iure ex temporibus doloribus vitae corporis aut, enim vero dicta pariatur repellendus nemo sint, architecto est aliquam provident eum? Cum, blanditiis.'/>
             </div>
         </div>
     );

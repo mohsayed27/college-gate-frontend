@@ -58,6 +58,10 @@ body {
   text-align: center;
 }
 
+.dim {
+  color: var(--dim);
+}
+
 * {
   box-sizing: border-box;
 }
