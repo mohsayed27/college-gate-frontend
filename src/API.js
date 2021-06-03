@@ -4,7 +4,10 @@ export async function apiRequest(url, config) {
     let data;
     try {
         const response = await fetch(url, config /*{Authorization: 'Bearer ' + 'token'}*/);
+        //console.log("Fetched response: ", response);
         data = await response.json();
+        //console.log("Data: ", data);
+
         if (response.ok) {
             return data;
         }

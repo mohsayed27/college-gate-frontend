@@ -31,3 +31,6 @@ export const LINK_COURSE_MESSAGES_SEND      = LINK_COURSE + '/messages' + LINK_S
 export const LINK_COMPLAINTS_RECEIVED  = LINK_COMPLAINTS + LINK_RECEIVED;                   // for example: '/student/complaints/:id/received'
 export const LINK_COMPLAINTS_SENT      = LINK_COMPLAINTS + LINK_SENT;                       // for example: '/student/complaints/:id/sent'
 export const LINK_COMPLAINTS_SEND      = LINK_COMPLAINTS + LINK_SEND;                       // for example: '/student/complaints/:id/send'
+
+export const MESSAGES_TYPE_RECEIVED = "received";
+export const MESSAGES_TYPE_SENT = "sent";

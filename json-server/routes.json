@@ -1,6 +1,6 @@
 {
     "/api/v1/course/all": "/all-courses", 
-    "/api/v1/me/messages/course/*?limit=20&offset=0": "/messages0-20", 
-    "/api/v1/me/messages/course/*?limit=20&offset=20": "/messages20-40",
+    "/api/v1/me/messages/received/course/*?limit=20&offset=0": "/messages0-20", 
+    "/api/v1/me/messages/received/course/*?limit=20&offset=20": "/messages20-40",
     "/api/v1/*/:id": "/:id"
 }
