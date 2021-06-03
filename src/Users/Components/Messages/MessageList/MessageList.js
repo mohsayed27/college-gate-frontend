@@ -26,12 +26,13 @@ const MessageList = withRouter(({messagesType, messagesSendingType, match}) => {
     let currentMessages = (messagesSendingType === MESSAGES_TYPE_RECEIVED) ? messages.received : messages.sent;
 
     const fetchData = (limit, offset) => {
-        let params = {courseId:courseId, type:messagesType, sendingType:MESSAGES_TYPE_RECEIVED, limit:limit, offset:offset};
+        let params = {courseId:courseId, type:messagesType, sendingType:messagesSendingType, limit:limit, offset:offset};
         dispatch(fetchListOfMessages(params));
     }
 
     useEffect(() => {
-
+        console.log("mount");
+        //console.log(currentMessages);
         let fetchRequired = false;
 
         if (currentMessages.status !== STATUS_SUCCEEDED 
@@ -44,7 +45,7 @@ const MessageList = withRouter(({messagesType, messagesSendingType, match}) => {
         if (fetchRequired) {
             fetchData(LIMIT, currentMessages.items.length);
         }
-    }, []);
+    }, [messagesSendingType]);
 
     if (currentMessages.status === STATUS_SUCCEEDED) {
         /*console.log(currentMessages);
