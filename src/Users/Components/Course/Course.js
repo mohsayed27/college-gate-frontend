@@ -33,19 +33,21 @@ const Course = withRouter(({userLink, match}) => {
         }
     }, []);
 
-    const courseId = match.params.id;
+    const courseId = match.params.courseId;
     let course;
     let professor;
     if (courses.status === STATUS_SUCCEEDED) {
         course = courses.courses.find(course => course.Course_id === courseId);
+        //console.log(courses);
         professor = course.Professor;
     }
 
     const messagesComponent = <Messages 
-                                receivedAltText="Received"      receivedRoutePath={userLink+LINK_COURSE_MESSAGES_RECEIVED}  receivedExactPath={false}   receivedLink={userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':id', courseId)}
-                                sentAltText="Sent"              sentRoutePath={userLink+LINK_COURSE_MESSAGES_SENT}          sentExactPath={false}       sentLink={userLink+LINK_COURSE_MESSAGES_SENT.replace(':id', courseId)}
-                                sendAltText="Send a message"    sendRoutePath={userLink+LINK_COURSE_MESSAGES_SEND}          sendExactPath={false}       sendLink={userLink+LINK_COURSE_MESSAGES_SEND.replace(':id', courseId)}
-                                />;
+                                userLink={userLink}
+                                receivedAltText="Received"      receivedRoutePath={userLink+LINK_COURSE_MESSAGES_RECEIVED}  receivedExactPath={false}   receivedLink={userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId)}
+                                sentAltText="Sent"              sentRoutePath={userLink+LINK_COURSE_MESSAGES_SENT}          sentExactPath={false}       sentLink={userLink+LINK_COURSE_MESSAGES_SENT.replace(':courseId', courseId)}
+                                sendAltText="Send a message"    sendRoutePath={userLink+LINK_COURSE_MESSAGES_SEND}          sendExactPath={false}       sendLink={userLink+LINK_COURSE_MESSAGES_SEND.replace(':courseId', courseId)}
+                              />;
 
 
     return (
@@ -59,9 +61,9 @@ const Course = withRouter(({userLink, match}) => {
                     coverImgSrc={course.Image_url} 
                     avatarComponent={<CourseAvatar imgSrc={professor.ImgUrl} courseTitle={course.Name} profName={professor.Name}/>}
                     tabsAndComponents={[
-                        {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':id', courseId),     component:<DummyPlaceholder text='announcements'/>, id:0},
-                        {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':id', courseId),            component:<DummyPlaceholder text='grades'/>, id:1},
-                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':id', courseId), component:messagesComponent, id:2},
+                        {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),     component:<DummyPlaceholder text='announcements'/>, id:0},
+                        {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),            component:<DummyPlaceholder text='grades'/>, id:1},
+                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId), component:messagesComponent, id:2},
                     ]}
                     additionalComponents={[]}
                 />

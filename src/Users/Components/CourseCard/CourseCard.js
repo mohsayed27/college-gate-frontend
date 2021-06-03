@@ -4,7 +4,7 @@ import {LINK_COURSE_ANNOUNCEMENTS} from '../../../Constants'
 
 const CourseCard = ({courseId, coverImgSrc, profImgSrc, courseTitle, professorName, userLink}) => {
     return (
-        <Link className={styles.course_card} to={`${userLink}${LINK_COURSE_ANNOUNCEMENTS}`.replace(':id', courseId)}>
+        <Link className={styles.course_card} to={`${userLink}${LINK_COURSE_ANNOUNCEMENTS}`.replace(':courseId', courseId)}>
             
             <img className={styles.course_cover} src={coverImgSrc} alt="Course image" />
 

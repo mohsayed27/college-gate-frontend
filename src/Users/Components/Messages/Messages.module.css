@@ -1,14 +1,25 @@
 .messages {
     display: flex;
-    gap: 15px;
+    gap: 10px;
 }
 
 .messages_sidebar {
     background-color: var(--darkest);
-    width: 140px;
+    width: 148px;
+    height: fit-content;
 }
 
 .message_list {
     background-color: var(--darkest);
     flex: 1;
+}
+
+@media screen and (max-width: 805px) {
+    .messages {
+        flex-direction: column;
+    }
+    .messages_sidebar {
+        width: 100%;
+        text-align: center;
+    }
 }

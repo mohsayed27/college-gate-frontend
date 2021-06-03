@@ -2,19 +2,20 @@ import styles from './Messages.module.css'
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchListOfMessages, fetchMessageById, selectAllMessages} from '../../../Store/MessagesSlice'
-import {withRouter} from 'react-router-dom';
-import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT} from '../../../Constants'
+import {Route, Switch, withRouter} from 'react-router-dom';
+import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT, MESSAGES_COMPONENT_TYPE_MESSAGES, LINK_COURSE_MESSAGES_SENT, LINK_COURSE_MESSAGES_RECEIVED} from '../../../Constants'
 import Sidebar from '../Sidebar/Sidebar'
 import MessageListItem from './MessageListItem/MessageListItem';
+import MessageList from './MessageList/MessageList';
 
 
 
 /*
-receivedStuff = {receivedAltText}
 
 */
 
-const Messages = withRouter(({receivedAltText, receivedRoutePath, receivedExactPath, receivedLink, 
+const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS*/,
+                                receivedAltText, receivedRoutePath, receivedExactPath, receivedLink, 
                                 sentAltText, sentRoutePath, sentExactPath, sentLink, 
                                 sendAltText, sendRoutePath, sendExactPath, sendLink, 
                                 match}) => {
@@ -22,7 +23,7 @@ const Messages = withRouter(({receivedAltText, receivedRoutePath, receivedExactP
     const messages = useSelector(selectAllMessages);
     const dispatch = useDispatch();
 
-    const courseId = match.params.id;
+    const courseId = match.params.courseId;
     
     useEffect(() => {
         //console.log(match);
@@ -54,7 +55,22 @@ const Messages = withRouter(({receivedAltText, receivedRoutePath, receivedExactP
             </div>
 
             <div className={styles.message_list}>
-                <MessageListItem senderName='Sender Name' subject='Subject' date='April 23, 2021, 8:30PM' content='0 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur iure ex temporibus doloribus vitae corporis aut, enim vero dicta pariatur repellendus nemo sint, architecto est aliquam provident eum? Cum, blanditiis.'/>
+                <Switch>
+                    
+                    <Route path={userLink+LINK_COURSE_MESSAGES_RECEIVED}>
+                        <MessageList 
+                            messagesType={MESSAGES_COMPONENT_TYPE_MESSAGES}
+                            messagesSendingType={MESSAGES_TYPE_RECEIVED}
+                        />
+                    </Route>
+                    <Route path={userLink+LINK_COURSE_MESSAGES_SENT}>
+                        <MessageList 
+                            messagesType={MESSAGES_COMPONENT_TYPE_MESSAGES}
+                            messagesSendingType={MESSAGES_TYPE_SENT}
+                        />
+                    </Route>
+            
+                </Switch>
             </div>
         </div>
     );

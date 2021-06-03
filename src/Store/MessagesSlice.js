@@ -1,10 +1,21 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {apiRequest} from '../API'
-import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT} from '../Constants'
+import {
+    STATUS_IDLE, 
+    STATUS_LOADING, 
+    STATUS_SUCCEEDED, 
+    STATUS_FAILED, 
+    BASE_URL, 
+    MESSAGES_TYPE_RECEIVED, 
+    MESSAGES_TYPE_SENT, 
+    MESSAGES_COMPONENT_TYPE_MESSAGES,
+    MESSAGES_COMPONENT_TYPE_COMPLAITNS
+} from '../Constants'
 
 /*
 state: {
     received: {
+        type: MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS, 
         courseId: String, 
         items: [
             {message:Object, status: STATUS_SUCCEEDED, error: null},
@@ -14,6 +25,7 @@ state: {
         error: null
     }, 
     sent: {
+        type: MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS, 
         courseId: String, 
         items:  [
             {message:Object, status: STATUS_SUCCEEDED, error: null},
@@ -28,13 +40,17 @@ state: {
 export const fetchListOfMessages = createAsyncThunk(
     'messages/fetchListOfMessages', 
     
-    /* params = {courseId:id, type:MESSAGES_TYPE_RECEIVED, limit:20, offset:0}; */
+    /* params = {courseId:id, type:MESSAGES_COMPONENT_TYPE_COMPLAITNS, sendingType:MESSAGES_TYPE_RECEIVED, limit:20, offset:0}; */
     async (params) => {
-        let path = BASE_URL+`api/v1/me/messages/${params.type}/course/${params.courseId}?limit=${params.limit}&offset=${params.offset}`;
+        let path;
+        if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
+            path = BASE_URL+`api/v1/me/messages/${params.sendingType}/course/${params.courseId}?limit=${params.limit}&offset=${params.offset}`;
+        else
+            path = BASE_URL+`api/v1/me/complaintMessages/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
         //console.log(path);
         const data = await apiRequest(path, {Authorization: 'Bearer ' + 'token'});
         //data.courseId = params.courseId;
-        //data.type = params.type;
+        //data.sendingType = params.sendingType;
         //console.log("Data: ", data);
         return data;
     }
@@ -43,14 +59,19 @@ export const fetchListOfMessages = createAsyncThunk(
 export const fetchMessageById = createAsyncThunk(
     'messages/fetchMessageById', 
 
-    /* params = {messageId:id, type:MESSAGES_TYPE_RECEIVED}; */
+    /* params = {messageId:id, type:MESSAGES_COMPONENT_TYPE_COMPLAITNS, sendingType:MESSAGES_TYPE_RECEIVED}; */
     async (params) => {
-        let path = BASE_URL+`api/v1/me/message/${params.messageId}`;
+        let path;
+        if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
+            path = BASE_URL+`api/v1/me/message/${params.messageId}`;
+        else
+            path = BASE_URL+`api/v1/me/complaintMessage/${params.messageId}`;
+
         //console.log(path);
         const data = await apiRequest(path, {Authorization: 'Bearer ' + 'token'});
         //data.courseId = params.courseId;
-        //data.type = params.type;
-        console.log("Data: ", data);
+        //data.sendingType = params.sendingType;
+        //console.log("Data: ", data);
         return data;
     }
 )
@@ -79,21 +100,22 @@ export const messagesSlice = createSlice({
     extraReducers: {
         [fetchListOfMessages.fulfilled]: (state, action) => {
             const receivedData = action.payload;
-            let currentType = (action.meta.arg.type === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
-            /*console.log("currentType:", currentType);
+            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            /*console.log("currentSendingType:", currentSendingType);
             console.log("received:", state.received);
             console.log("sent:", state.sent);*/
             
-            currentType.status = STATUS_SUCCEEDED;
-            currentType.courseId = action.meta.arg.courseId;
+            currentSendingType.status = STATUS_SUCCEEDED;
+            currentSendingType.courseId = action.meta.arg.courseId;
+            currentSendingType.type = action.meta.arg.type; // MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS
 
             //console.log("State: ", state);
             //console.log("Fulfilled action: ", action);
             if (receivedData.offset === '0')
-                currentType.items = [] // clear
+                currentSendingType.items = [] // clear
 
             receivedData.items.map(item => {
-                currentType.items.push({
+                currentSendingType.items.push({
                     message:item, 
                     status:STATUS_SUCCEEDED, 
                     error:null
@@ -102,42 +124,42 @@ export const messagesSlice = createSlice({
         }, 
         [fetchListOfMessages.pending]: (state, action) => {
             //console.log("Pending action:", action);
-            let currentType = (action.meta.arg.type === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
 
-            currentType.status = STATUS_LOADING;
+            currentSendingType.status = STATUS_LOADING;
         }, 
         [fetchListOfMessages.rejected]: (state, action) => {
-            let currentType = (action.meta.arg.type === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
 
-            currentType.status = STATUS_FAILED;
-            currentType.error = action.error;
+            currentSendingType.status = STATUS_FAILED;
+            currentSendingType.error = action.error;
 
         }, 
 
 
         [fetchMessageById.fulfilled]: (state, action) => {
             const receivedData = action.payload;
-            let currentType = (action.meta.arg.type === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
 
-            let currentMessage = currentType.items.find(item => item.message.message_id === action.meta.arg.messageId);
+            let currentMessage = currentSendingType.items.find(item => item.message.message_id === action.meta.arg.messageId);
             currentMessage.message = receivedData;
             currentMessage.status = STATUS_SUCCEEDED;
             currentMessage.error = null;
 
         }, 
         [fetchMessageById.pending]: (state, action) => {
-            let currentType = (action.meta.arg.type === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
             
-            currentType.items.push({
+            currentSendingType.items.push({
                 message:{message_id:action.meta.arg.messageId},
                 status:STATUS_LOADING, 
                 error:null
             });
         }, 
         [fetchMessageById.rejected]: (state, action) => {
-            let currentType = (action.meta.arg.type === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
             
-            let currentMessage = currentType.items.find(item => item.message.message_id === action.meta.arg.messageId);
+            let currentMessage = currentSendingType.items.find(item => item.message.message_id === action.meta.arg.messageId);
             currentMessage.status = STATUS_FAILED;
             currentMessage.error = action.error;
         }

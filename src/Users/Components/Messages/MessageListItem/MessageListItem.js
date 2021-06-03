@@ -8,10 +8,10 @@ const MessageListItem = ({senderName, subject, date, content}) => {
                 <p className='font2 bold'>|</p>
                 <p className='font2'>{subject}</p>
                 <div className={styles.top_section_spacer}></div>
-                <p className='font3 dim'>{date}</p>
+                <p className={`${styles.date} font3 dim`}>{date}</p>
             </div>
 
-            <p className={styles.message_content}>
+            <p className={`${styles.message_content} font2`}>
                 {content}
             </p>
         </div>

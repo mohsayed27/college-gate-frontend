@@ -7,6 +7,7 @@ export const fetchAllCourses = createAsyncThunk(
     async () => {
         //console.log('fetchAllCourses thunk');
         const data = await apiRequest(BASE_URL+'api/v1/course/all', {Authorization: 'Bearer ' + 'token'});
+        //console.log("Courses data:", data);
         return data;
     }
 )
