@@ -46,7 +46,7 @@ const MessageList = withRouter(({messagesType, messagesSendingType, match}) => {
         if (fetchRequired) {
             fetchData(LIMIT, 0);
         }
-    }, [messagesSendingType]);
+    }, [messagesType, messagesSendingType]);
 
     if (currentMessages.status === STATUS_SUCCEEDED) {
         /*console.log(currentMessages);

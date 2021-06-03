@@ -7,6 +7,8 @@
     background-color: var(--darkest);
     width: 148px;
     height: fit-content;
+    position: sticky;
+    top: 59px;
 }
 
 .message_list {
