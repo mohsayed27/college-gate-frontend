@@ -4,9 +4,19 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchListOfMessages, fetchMessageById, selectAllMessages} from '../../../Store/MessagesSlice'
 import {withRouter} from 'react-router-dom';
 import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT} from '../../../Constants'
+import Sidebar from '../Sidebar/Sidebar'
 
 
-const Messages = withRouter(({match}) => {
+/*
+receivedStuff = {receivedAltText}
+
+*/
+
+const Messages = withRouter(({receivedAltText, receivedRoutePath, receivedExactPath, receivedLink, 
+                                sentAltText, sentRoutePath, sentExactPath, sentLink, 
+                                sendAltText, sendRoutePath, sendExactPath, sendLink, 
+                                match}) => {
+
     const messages = useSelector(selectAllMessages);
     const dispatch = useDispatch();
 
@@ -29,9 +39,21 @@ const Messages = withRouter(({match}) => {
         console.log("message10: ", message10);
     }*/
 
+    const sidebarNavItems = [
+        {text:receivedAltText, link:receivedLink, id:0}, 
+        {text:sentAltText, link:sentLink, id:1}, 
+        {text:sendAltText, link:sendLink, id:2}, 
+    ];
+
     return (
         <div className={styles.messages}>
-            Messages Component !!
+            <div className={styles.messages_sidebar}>
+                <Sidebar navItems={sidebarNavItems}/>
+            </div>
+
+            <div>
+                
+            </div>
         </div>
     );
 });

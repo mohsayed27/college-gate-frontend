@@ -14,7 +14,10 @@ import {
     STATUS_FAILED, 
     LINK_COURSE_ANNOUNCEMENTS, 
     LINK_COURSE_GRADES, 
-    LINK_COURSE_MESSAGES_RECEIVED
+    LINK_COURSE_MESSAGES, 
+    LINK_COURSE_MESSAGES_RECEIVED, 
+    LINK_COURSE_MESSAGES_SENT, 
+    LINK_COURSE_MESSAGES_SEND
 } from '../../../Constants'
 
 const Course = withRouter(({userLink, match}) => {
@@ -38,6 +41,12 @@ const Course = withRouter(({userLink, match}) => {
         professor = course.Professor;
     }
 
+    const messagesComponent = <Messages 
+                                receivedAltText="Received"      receivedRoutePath={userLink+LINK_COURSE_MESSAGES_RECEIVED}  receivedExactPath={false}   receivedLink={userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':id', courseId)}
+                                sentAltText="Sent"              sentRoutePath={userLink+LINK_COURSE_MESSAGES_SENT}          sentExactPath={false}       sentLink={userLink+LINK_COURSE_MESSAGES_SENT.replace(':id', courseId)}
+                                sendAltText="Send a message"    sendRoutePath={userLink+LINK_COURSE_MESSAGES_SEND}          sendExactPath={false}       sendLink={userLink+LINK_COURSE_MESSAGES_SEND.replace(':id', courseId)}
+                                />;
+
 
     return (
         <div className={styles.course}>
@@ -52,7 +61,7 @@ const Course = withRouter(({userLink, match}) => {
                     tabsAndComponents={[
                         {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':id', courseId),     component:<DummyPlaceholder text='announcements'/>, id:0},
                         {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':id', courseId),            component:<DummyPlaceholder text='grades'/>, id:1},
-                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES_RECEIVED,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':id', courseId), component:<Messages/>, id:2},
+                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':id', courseId), component:messagesComponent, id:2},
                     ]}
                     additionalComponents={[]}
                 />

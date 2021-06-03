@@ -1,3 +1,8 @@
 .messages {
     
 }
+
+.messages_sidebar {
+    background-color: var(--darkest);
+    width: 140px;
+}
