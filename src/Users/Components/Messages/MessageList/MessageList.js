@@ -40,10 +40,11 @@ const MessageList = withRouter(({messagesType, messagesSendingType, match}) => {
             || (currentMessages.courseId !== courseId && currentMessages.type === MESSAGES_COMPONENT_TYPE_MESSAGES)) 
         {
                 fetchRequired = true;
+                console.log("Fetch Required!!!");
         }
 
         if (fetchRequired) {
-            fetchData(LIMIT, currentMessages.items.length);
+            fetchData(LIMIT, 0);
         }
     }, [messagesSendingType]);
 

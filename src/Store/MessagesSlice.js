@@ -111,8 +111,8 @@ export const messagesSlice = createSlice({
 
             //console.log("State: ", state);
             //console.log("Fulfilled action: ", action);
-            if (receivedData.offset === '0')
-                currentSendingType.items = [] // clear
+            /*if (receivedData.offset === '0')
+                currentSendingType.items = [] // clear*/
 
             receivedData.items.map(item => {
                 currentSendingType.items.push({
@@ -125,6 +125,11 @@ export const messagesSlice = createSlice({
         [fetchListOfMessages.pending]: (state, action) => {
             //console.log("Pending action:", action);
             let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            
+            if (action.meta.arg.offset === 0) {
+                console.log("Should clear");
+                currentSendingType.items = [] // clear
+            }
 
             currentSendingType.status = STATUS_LOADING;
         }, 
