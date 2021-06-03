@@ -19,6 +19,9 @@
 
 .top_section p {
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .top_section_spacer {
@@ -40,7 +43,20 @@
 
 }
 
-@media screen and (max-width: 805px) {
+@media screen and (max-width: 700px) {
+    .date {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .date {
+        display: inline;
+    }
+}
+
+
+@media screen and (max-width: 470px) {
     .date {
         display: none;
     }
