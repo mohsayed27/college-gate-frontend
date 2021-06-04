@@ -5,5 +5,7 @@
     "/api/v1/me/messages/*/course/*?limit=20&offset=0": "/messages0-20", 
     "/api/v1/me/messages/*/course/*?limit=20&offset=20": "/messages20-40",
     "/api/v1/me/messages/*/course/*?limit=*&offset=*": "/messages-empty",
+    "api/v1/user/*/signup":"signup", 
+    "api/v1/user/*/login":"login", 
     "/api/v1/*/:id": "/:id"
 }

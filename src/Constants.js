@@ -56,4 +56,4 @@ export const METHOD_POST = 'POST';
 export const METHOD_PUT = 'PUT';
 export const METHOD_DELETE = 'DELETE';
 
-export const USER_STATE_KEY = 'user_state_key';
+export const AUTHENTICATION_STATE_KEY = 'user_state_key';

@@ -11,12 +11,12 @@ import {
     USER_TYPE_EMPLOYEE, 
     API_DEPARTMENT, 
     METHOD_POST, 
-    USER_STATE_KEY,
+    AUTHENTICATION_STATE_KEY,
     AUTHENTICATION_TYPE_LOGIN
 } from '../Constants';
 
-export const loginSignup = createAsyncThunk(
-    'authentication/login', 
+export const loginSignupRequest = createAsyncThunk(
+    'authentication/loginSignup', 
     /*
     params = {
         userType: USER_TYPE_STUDENT | USER_TYPE_PROFESSOR | USER_TYPE_EMPLOYEE, 
@@ -46,19 +46,27 @@ state: {
 }
 */
 
+const initialState = {
+    userType: '',
+    userInfo: {},
+    status: STATUS_IDLE, 
+    error: null // string | null
+};
+
 export const authenticationSlice = createSlice({
     name: 'authentication',
-    initialState: {
-        userType: '',
-        userInfo: {},
-        status: STATUS_IDLE, 
-        error: null // string | null
-    },
+    initialState: initialState,
     reducers: {
-
+        loadAuthenticationStateCookie: state => {
+            state = localStorage.getItem(AUTHENTICATION_STATE_KEY);
+        }, 
+        logout: state => {
+            localStorage.removeItem(AUTHENTICATION_STATE_KEY);
+            state = initialState;
+        }
     }, 
     extraReducers: {
-        [loginSignup.fulfilled]: (state, action) => {
+        [loginSignupRequest.fulfilled]: (state, action) => {
             const params = action.meta.arg;
             const receivedData = action.payload;
             
@@ -66,12 +74,12 @@ export const authenticationSlice = createSlice({
             state.userInfo = receivedData;
             state.status = STATUS_SUCCEEDED;
             if (params.authenticationType === AUTHENTICATION_TYPE_LOGIN)
-                localStorage.setItem(USER_STATE_KEY, JSON.stringify(state));
+                localStorage.setItem(AUTHENTICATION_STATE_KEY, JSON.stringify(state));
         }, 
-        [loginSignup.pending]: (state, action) => {
+        [loginSignupRequest.pending]: (state, action) => {
             state.status = STATUS_LOADING;
         }, 
-        [loginSignup.rejected]: (state, action) => {
+        [loginSignupRequest.rejected]: (state, action) => {
             state.status = STATUS_FAILED;
             state.error = action.error;
         }
@@ -79,5 +87,6 @@ export const authenticationSlice = createSlice({
 });
 
 export const selectAuthentication = state => state.authentication;
+export const {loadAuthenticationStateCookie, logout} = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

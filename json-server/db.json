@@ -126,5 +126,12 @@
     "message36": {"message_id": "message36", "sender": { "id": "sender0", "name": "Sender Name"}, "subject": "Lorem ipsum dolor36", "content": "36 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur iure ex temporibus doloribus vitae corporis aut, enim vero dicta pariatur repellendus nemo sint, architecto est aliquam provident eum? Cum, blanditiis.", "date": "April 23, 2021, 8:30PM"}, 
     "message37": {"message_id": "message37", "sender": { "id": "sender0", "name": "Sender Name"}, "subject": "Lorem ipsum dolor37", "content": "37 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur iure ex temporibus doloribus vitae corporis aut, enim vero dicta pariatur repellendus nemo sint, architecto est aliquam provident eum? Cum, blanditiis.", "date": "April 23, 2021, 8:30PM"}, 
     "message38": {"message_id": "message38", "sender": { "id": "sender0", "name": "Sender Name"}, "subject": "Lorem ipsum dolor38", "content": "38 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur iure ex temporibus doloribus vitae corporis aut, enim vero dicta pariatur repellendus nemo sint, architecto est aliquam provident eum? Cum, blanditiis.", "date": "April 23, 2021, 8:30PM"}, 
-    "message39": {"message_id": "message39", "sender": { "id": "sender0", "name": "Sender Name"}, "subject": "Lorem ipsum dolor39", "content": "39 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur iure ex temporibus doloribus vitae corporis aut, enim vero dicta pariatur repellendus nemo sint, architecto est aliquam provident eum? Cum, blanditiis.", "date": "April 23, 2021, 8:30PM"} 
+    "message39": {"message_id": "message39", "sender": { "id": "sender0", "name": "Sender Name"}, "subject": "Lorem ipsum dolor39", "content": "39 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur iure ex temporibus doloribus vitae corporis aut, enim vero dicta pariatur repellendus nemo sint, architecto est aliquam provident eum? Cum, blanditiis.", "date": "April 23, 2021, 8:30PM"}, 
+
+    "login": {
+        
+    }, 
+    "signup": {
+        
+    }
 }
