@@ -8,7 +8,7 @@ import {BASE_URL,
     METHOD_GET
 } from '../Constants'
 
-//import store from './Store';
+//import {store} from './Store';
 
 export const fetchAllCourses = createAsyncThunk(
     'courses/fetchAllCourses', 

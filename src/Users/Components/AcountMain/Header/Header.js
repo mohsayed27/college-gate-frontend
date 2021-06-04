@@ -10,7 +10,7 @@ import {
 
 
 const Header = ({hamburgerClickHandler}) => {
-    const authenticationState = useSelector(selectAuthentication);
+    //const authenticationState = useSelector(selectAuthentication);
     const dispatch = useDispatch();
 
     const logoutHandler = (event) => {
@@ -19,10 +19,6 @@ const Header = ({hamburgerClickHandler}) => {
 
     return (
         <header className={styles.main_header}>
-
-            {authenticationState.status !== STATUS_SUCCEEDED &&
-                <Redirect to={LINK_LOGIN}/>
-            }
 
             <div className={styles.main_header_content}>
                 <img className={styles.hamburger} onClick={hamburgerClickHandler} src="/images/hamburger.svg" alt="sidebar" />

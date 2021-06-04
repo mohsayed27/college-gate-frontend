@@ -19,6 +19,7 @@ import {Redirect, useLocation} from 'react-router-dom';
 import {useState} from 'react'
 import {loginSignupRequest, selectAuthentication, loadAuthenticationStateCookie} from '../Store/AuthenticationSlice'
 import {useSelector, useDispatch} from 'react-redux';
+import RedirectHandler from './RedirectHandler';
 
 
 const LoginSignup = () => {
@@ -26,33 +27,6 @@ const LoginSignup = () => {
     const dispatch = useDispatch();
 
     let location = useLocation();
-
-    //console.log(localStorage.getItem(AUTHENTICATION_STATE_KEY));
-    if (authenticationState.status !== STATUS_SUCCEEDED && 
-        localStorage.getItem(AUTHENTICATION_STATE_KEY) !== null) {
-        dispatch(loadAuthenticationStateCookie())
-    }
-
-    let redirect = false;
-    let redirectLink = '';
-
-    if (authenticationState.status === STATUS_SUCCEEDED && 
-        authenticationState.authenticationType === AUTHENTICATION_TYPE_LOGIN) {
-            
-        redirect = true;
-        
-        switch (authenticationState.userType) {
-            case USER_TYPE_STUDENT:
-                redirectLink = LINK_STUDENT;
-                break;
-            case USER_TYPE_PROFESSOR:
-                redirectLink = LINK_PROFESSOR;
-                break;
-            default: //USER_TYPE_EMPLOYEE
-                //redirectLink = LINK_EMPLOYEE;
-                break;
-        }
-    }
  
     
     const [userType, setUserType] = useState(USER_TYPE_STUDENT);
@@ -125,7 +99,9 @@ const LoginSignup = () => {
 
         <main className={styles.login_signup}>
 
-            {redirect && <Redirect to={redirectLink}/>}
+            {/*redirect && <Redirect to={redirectLink}/>*/}
+
+            <RedirectHandler redirectToHome={false}/>
 
             <div className={styles.tabs}>
                 <Tab text='Login' link={LINK_LOGIN}/>

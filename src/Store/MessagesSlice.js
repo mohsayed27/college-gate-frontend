@@ -12,7 +12,7 @@ import {
     MESSAGES_COMPONENT_TYPE_COMPLAITNS,
     METHOD_GET
 } from '../Constants'
-//import store from './Store';
+//import {store} from './Store';
 
 /*
 state: {

@@ -70,7 +70,7 @@ export const authenticationSlice = createSlice({
         }, 
         logout: state => {
             localStorage.removeItem(AUTHENTICATION_STATE_KEY);
-            console.log("After removing: ", localStorage.removeItem(AUTHENTICATION_STATE_KEY));
+            //console.log("After removing: ", localStorage.removeItem(AUTHENTICATION_STATE_KEY));
             state.userType = initialState.userType;
             state.userInfo = initialState.userInfo;
             state.authenticationType = initialState.authenticationType;

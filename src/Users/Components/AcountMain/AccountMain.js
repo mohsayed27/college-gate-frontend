@@ -1,8 +1,10 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import {useState} from 'react'
-import styles from './AccountMain.module.css'
-import Header from './Header/Header'
-import Sidebar from '../Sidebar/Sidebar'
+import {BrowserRouter as Router, Switch, Route, Redirect, useLocation} from 'react-router-dom';
+import {useState} from 'react';
+import styles from './AccountMain.module.css';
+import Header from './Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
+import RedirectHandler from '../../../LoginSignup/RedirectHandler';
+
 
 /*
 navItemsAndComponents = [
@@ -18,6 +20,7 @@ additionalComponents = [
 // additionalComponents are components that are not associated with a nav button.
 
 const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
+
 
     const navItems = navItemsAndComponents.map(item => ({text:item.text, link:item.link, id:item.id}));
 
@@ -41,9 +44,13 @@ const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
         //console.log(backdropStyle);
     }
 
+
     return (
        
         <main className={styles.account_main}>
+
+            <RedirectHandler/>
+
             <Header hamburgerClickHandler={sidebarShowHideHandler}/>
             <div className={sidebarStyle}>
                 <Sidebar navItems={navItems}/>
