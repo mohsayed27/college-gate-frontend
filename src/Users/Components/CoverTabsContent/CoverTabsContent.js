@@ -1,5 +1,5 @@
 import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Tab from './Tab/Tab'
+import Tab from '../Tab/Tab'
 import styles from './CoverTabsContent.module.css'
 
 /*

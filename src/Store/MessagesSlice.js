@@ -9,7 +9,8 @@ import {
     MESSAGES_TYPE_RECEIVED, 
     MESSAGES_TYPE_SENT, 
     MESSAGES_COMPONENT_TYPE_MESSAGES,
-    MESSAGES_COMPONENT_TYPE_COMPLAITNS
+    MESSAGES_COMPONENT_TYPE_COMPLAITNS,
+    METHOD_GET
 } from '../Constants'
 
 /*
@@ -48,7 +49,11 @@ export const fetchListOfMessages = createAsyncThunk(
         else
             path = BASE_URL+`api/v1/me/complaintMessages/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
         //console.log(path);
-        const data = await apiRequest(path, {Authorization: 'Bearer ' + 'token'});
+        const headers = {
+            'Content-Type': 'application/json', 
+            'Authorization': 'Bearer ' + 'token'
+        }
+        const data = await apiRequest(path, METHOD_GET, headers);
         //data.courseId = params.courseId;
         //data.sendingType = params.sendingType;
         //console.log("Data: ", data);
@@ -67,8 +72,12 @@ export const fetchMessageById = createAsyncThunk(
         else
             path = BASE_URL+`api/v1/me/complaintMessage/${params.messageId}`;
 
+        const headers = {
+            'Content-Type': 'application/json', 
+            'Authorization': 'Bearer ' + 'token'
+        }
         //console.log(path);
-        const data = await apiRequest(path, {Authorization: 'Bearer ' + 'token'});
+        const data = await apiRequest(path, METHOD_GET, headers);
         //data.courseId = params.courseId;
         //data.sendingType = params.sendingType;
         //console.log("Data: ", data);

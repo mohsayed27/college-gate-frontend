@@ -1,12 +1,22 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {apiRequest} from '../API'
-import {BASE_URL, STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED} from '../Constants'
+import {BASE_URL, 
+    STATUS_IDLE, 
+    STATUS_LOADING, 
+    STATUS_SUCCEEDED, 
+    STATUS_FAILED, 
+    METHOD_GET
+} from '../Constants'
 
 export const fetchAllCourses = createAsyncThunk(
     'courses/fetchAllCourses', 
     async () => {
         //console.log('fetchAllCourses thunk');
-        const data = await apiRequest(BASE_URL+'api/v1/course/all', {Authorization: 'Bearer ' + 'token'});
+        const headers = {
+            'Content-Type': 'application/json', 
+            'Authorization': 'Bearer ' + 'token'
+        }
+        const data = await apiRequest(BASE_URL+'api/v1/course/all', METHOD_GET, headers);
         //console.log("Courses data:", data);
         return data;
     }

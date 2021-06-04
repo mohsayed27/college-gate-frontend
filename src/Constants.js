@@ -6,7 +6,6 @@ export const STATUS_LOADING = 'loading';
 export const STATUS_SUCCEEDED = 'succeeded';
 export const STATUS_FAILED = 'failed';
 
-
 export const LINK_PROFESSOR = '/professor';
 export const LINK_STUDENT = '/student';
 
@@ -38,3 +37,23 @@ export const MESSAGES_TYPE_SENT = "sent";
 
 export const MESSAGES_COMPONENT_TYPE_MESSAGES = "messages";
 export const MESSAGES_COMPONENT_TYPE_COMPLAITNS = "complaints";
+
+
+export const AUTH_LINK = '/auth';
+
+export const LINK_LOGIN = AUTH_LINK + '/login';
+export const LINK_SIGNUP = AUTH_LINK + '/signup';
+
+export const USER_TYPE_STUDENT = 'student';
+export const USER_TYPE_PROFESSOR = 'professor';
+export const USER_TYPE_EMPLOYEE = 'employee';
+export const API_DEPARTMENT = 'department';
+export const AUTHENTICATION_TYPE_LOGIN = 'login';
+export const AUTHENTICATION_TYPE_SIGNUP = 'signup';
+
+export const METHOD_GET = 'GET';
+export const METHOD_POST = 'POST';
+export const METHOD_PUT = 'PUT';
+export const METHOD_DELETE = 'DELETE';
+
+export const USER_STATE_KEY = 'user_state_key';

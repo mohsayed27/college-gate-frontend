@@ -24,6 +24,11 @@ body {
   --header_height: 50px;
 }
 
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 
 .font0 {
   font-size: 25px;

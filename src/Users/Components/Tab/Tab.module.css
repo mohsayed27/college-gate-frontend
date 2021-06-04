@@ -1,6 +1,8 @@
 .tab {
     display: flex;
     flex-direction: row;
+    flex-flow: row wrap;
+    overflow: hidden;
     justify-content: center;
     align-items: center;
     background-color: var(--darker);
@@ -8,6 +10,7 @@
     padding: 7.5px;
     gap: 10px;
     text-decoration: none;
+    height: 66px;
 }
 
 .tab_img {
@@ -20,8 +23,8 @@
     background-color: var(--darkest);
 }
 
-@media screen and (max-width: 730px) {
+/*@media screen and (max-width: 730px) {
     .tab p {
         display: none;
     }
-}
+}*/

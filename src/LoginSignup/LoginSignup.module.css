@@ -1,0 +1,71 @@
+.login_signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    /* gap: 5px; */
+}
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+    width: min(100%, 500px);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--darkest);
+    width: min(100%, 500px);
+    padding: 30px;
+    gap: 30px;
+}
+
+.radios {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.radio_label {
+    padding: 0px;
+}
+
+.fields {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input_text {
+    width: min(100%, 400px);
+    padding: 12px;
+    border: none;
+    /* border-radius: 4px; */
+    opacity: 0.85;
+    display: inline-block;
+    line-height: 20px;
+    text-decoration: none; /* remove underline from anchors */
+    color: black;
+    margin: 5px auto;
+
+}
+
+.input_button {
+    width: min(100%, 100px);
+    height: 50px;
+    background-color: var(--blue);
+    border: none;
+    /* border-radius: 4px; */
+    color: white;
+    cursor: pointer;
+    margin: 10px auto;
+}

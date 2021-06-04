@@ -12,7 +12,7 @@ const Tab = ({iconImgSrc, text, link}) => {
 
     return (
         <Link className={style} to={link}>
-            <img className={styles.tab_img} src={iconImgSrc} alt="Tab icon" />
+            {iconImgSrc && <img className={styles.tab_img} src={iconImgSrc} alt="Tab icon" />}
             <p className="font2">{text}</p>
         </Link>
     );
