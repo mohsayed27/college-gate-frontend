@@ -8,13 +8,19 @@ import {BASE_URL,
     METHOD_GET
 } from '../Constants'
 
+//import store from './Store';
+
 export const fetchAllCourses = createAsyncThunk(
     'courses/fetchAllCourses', 
     async () => {
         //console.log('fetchAllCourses thunk');
+
+        //console.log(store.getState());
+
         const headers = {
             'Content-Type': 'application/json', 
-            'Authorization': 'Bearer ' + 'token'
+            //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
+            'Authorization': 'Bearer '
         }
         const data = await apiRequest(BASE_URL+'api/v1/course/all', METHOD_GET, headers);
         //console.log("Courses data:", data);

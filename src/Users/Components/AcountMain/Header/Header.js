@@ -28,8 +28,8 @@ const Header = ({hamburgerClickHandler}) => {
                 <img className={styles.hamburger} onClick={hamburgerClickHandler} src="/images/hamburger.svg" alt="sidebar" />
                 <div className={styles.spacer_hamburger_logo}></div>
                 <h1 className='font0 bold'>College Gate</h1>
-                <div className={styles.spacer_logo_logout} onClick={logoutHandler}></div>
-                <a href='/'><img src="/images/log-out.svg" alt="log out" /></a>
+                <div className={styles.spacer_logo_logout}></div>
+                <img className={styles.logout} src="/images/log-out.svg" alt="log out" onClick={logoutHandler}/>
             </div>
         </header>
     );

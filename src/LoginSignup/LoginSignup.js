@@ -27,8 +27,11 @@ const LoginSignup = () => {
 
     let location = useLocation();
 
-    if (localStorage.getItem(AUTHENTICATION_STATE_KEY))
+    //console.log(localStorage.getItem(AUTHENTICATION_STATE_KEY));
+    if (authenticationState.status !== STATUS_SUCCEEDED && 
+        localStorage.getItem(AUTHENTICATION_STATE_KEY) !== null) {
         dispatch(loadAuthenticationStateCookie())
+    }
 
     let redirect = false;
     let redirectLink = '';

@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+.logout {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
     .hamburger {
         display: inline;

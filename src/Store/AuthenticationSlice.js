@@ -27,7 +27,6 @@ export const loginSignupRequest = createAsyncThunk(
     async (params) => {
         const headers = {
             'Content-Type': 'application/json', 
-            'Authorization': 'Bearer ' + 'token'
         }
         let userType = (params.userType === USER_TYPE_EMPLOYEE) ? API_DEPARTMENT : params.userType;
         const data = await apiRequest(BASE_URL+`api/v1/user/${userType}/${params.authenticationType}`, METHOD_POST, headers, JSON.stringify(params.body));
@@ -60,11 +59,23 @@ export const authenticationSlice = createSlice({
     initialState: initialState,
     reducers: {
         loadAuthenticationStateCookie: state => {
-            state = localStorage.getItem(AUTHENTICATION_STATE_KEY);
+            //console.log("Before: ", state.userType);
+            let cookieState = JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY));
+            state.userType = cookieState.userType;
+            state.userInfo = cookieState.userInfo;
+            state.authenticationType = cookieState.authenticationType;
+            state.status = cookieState.status;
+            state.error = cookieState.error;
+            //console.log("After: ", state.userType);
         }, 
         logout: state => {
             localStorage.removeItem(AUTHENTICATION_STATE_KEY);
-            state = initialState;
+            console.log("After removing: ", localStorage.removeItem(AUTHENTICATION_STATE_KEY));
+            state.userType = initialState.userType;
+            state.userInfo = initialState.userInfo;
+            state.authenticationType = initialState.authenticationType;
+            state.status = initialState.status;
+            state.error = initialState.error;
         }
     }, 
     extraReducers: {

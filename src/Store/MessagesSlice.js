@@ -12,6 +12,7 @@ import {
     MESSAGES_COMPONENT_TYPE_COMPLAITNS,
     METHOD_GET
 } from '../Constants'
+//import store from './Store';
 
 /*
 state: {
@@ -51,7 +52,9 @@ export const fetchListOfMessages = createAsyncThunk(
         //console.log(path);
         const headers = {
             'Content-Type': 'application/json', 
-            'Authorization': 'Bearer ' + 'token'
+            //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
+            'Authorization': 'Bearer '
+
         }
         const data = await apiRequest(path, METHOD_GET, headers);
         //data.courseId = params.courseId;
@@ -74,7 +77,9 @@ export const fetchMessageById = createAsyncThunk(
 
         const headers = {
             'Content-Type': 'application/json', 
-            'Authorization': 'Bearer ' + 'token'
+            //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
+            'Authorization': 'Bearer '
+
         }
         //console.log(path);
         const data = await apiRequest(path, METHOD_GET, headers);
