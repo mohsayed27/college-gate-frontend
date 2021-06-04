@@ -15,7 +15,7 @@ import {
     LINK_PROFESSOR,
     LINK_STUDENT
 } from '../Constants'
-import {Redirect, useLocation, useHistory} from 'react-router-dom';
+import {Redirect, useLocation} from 'react-router-dom';
 import {useState} from 'react'
 import {loginSignupRequest, selectAuthentication, loadAuthenticationStateCookie} from '../Store/AuthenticationSlice'
 import {useSelector, useDispatch} from 'react-redux';
@@ -25,24 +25,28 @@ const LoginSignup = () => {
     const authenticationState = useSelector(selectAuthentication);
     const dispatch = useDispatch();
 
-    let history = useHistory();
     let location = useLocation();
 
     if (localStorage.getItem(AUTHENTICATION_STATE_KEY))
         dispatch(loadAuthenticationStateCookie())
 
+    let redirect = false;
+    let redirectLink = '';
+
     if (authenticationState.status === STATUS_SUCCEEDED && 
         authenticationState.authenticationType === AUTHENTICATION_TYPE_LOGIN) {
+            
+        redirect = true;
         
         switch (authenticationState.userType) {
             case USER_TYPE_STUDENT:
-                history.push(LINK_STUDENT);
+                redirectLink = LINK_STUDENT;
                 break;
             case USER_TYPE_PROFESSOR:
-                history.push(LINK_PROFESSOR);
+                redirectLink = LINK_PROFESSOR;
                 break;
             default: //USER_TYPE_EMPLOYEE
-                //history.push(LINK_EMPLOYEE);
+                //redirectLink = LINK_EMPLOYEE;
                 break;
         }
     }
@@ -118,10 +122,7 @@ const LoginSignup = () => {
 
         <main className={styles.login_signup}>
 
-            {(authenticationState.status === STATUS_SUCCEEDED && 
-                location.pathname.includes(LINK_LOGIN)) &&
-                (authenticationState.userType === USER_TYPE_PROFESSOR) && <Redirect to={LINK_PROFESSOR}/>
-            }
+            {redirect && <Redirect to={redirectLink}/>}
 
             <div className={styles.tabs}>
                 <Tab text='Login' link={LINK_LOGIN}/>
