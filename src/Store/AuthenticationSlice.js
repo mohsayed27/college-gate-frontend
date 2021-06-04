@@ -40,7 +40,8 @@ export const loginSignupRequest = createAsyncThunk(
 /*
 state: {
     userType: USER_TYPE_STUDENT | USER_TYPE_PROFESSOR | USER_TYPE_EMPLOYEE
-    userInfo: {}
+    userInfo: {}, 
+    authenticationType: AUTHENTICATION_TYPE_LOGIN | AUTHENTICATION_TYPE_SIGNUP
     status: STATUS_IDLE, 
     error: // string | null
 }
@@ -49,6 +50,7 @@ state: {
 const initialState = {
     userType: '',
     userInfo: {},
+    authenticationType: '', 
     status: STATUS_IDLE, 
     error: null // string | null
 };
@@ -72,6 +74,7 @@ export const authenticationSlice = createSlice({
             
             state.userType = params.userType;
             state.userInfo = receivedData;
+            state.authenticationType = params.authenticationType;
             state.status = STATUS_SUCCEEDED;
             if (params.authenticationType === AUTHENTICATION_TYPE_LOGIN)
                 localStorage.setItem(AUTHENTICATION_STATE_KEY, JSON.stringify(state));

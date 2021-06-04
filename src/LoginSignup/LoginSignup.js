@@ -32,7 +32,7 @@ const LoginSignup = () => {
         dispatch(loadAuthenticationStateCookie())
 
     if (authenticationState.status === STATUS_SUCCEEDED && 
-        location.pathname.includes(LINK_LOGIN)) {
+        authenticationState.authenticationType === AUTHENTICATION_TYPE_LOGIN) {
         
         switch (authenticationState.userType) {
             case USER_TYPE_STUDENT:
