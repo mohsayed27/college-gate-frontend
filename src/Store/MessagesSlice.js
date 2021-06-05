@@ -46,9 +46,9 @@ export const fetchListOfMessages = createAsyncThunk(
     async (params) => {
         let path;
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
-            path = BASE_URL+`api/v1/me/messages/${params.sendingType}/course/${params.courseId}?limit=${params.limit}&offset=${params.offset}`;
+            path = BASE_URL+`/api/v1/me/messages/${params.sendingType}/course/${params.courseId}?limit=${params.limit}&offset=${params.offset}`;
         else
-            path = BASE_URL+`api/v1/me/complaintMessages/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
+            path = BASE_URL+`/api/v1/me/complaintMessages/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
         //console.log(path);
         const headers = {
             'Content-Type': 'application/json', 
@@ -71,9 +71,9 @@ export const fetchMessageById = createAsyncThunk(
     async (params) => {
         let path;
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
-            path = BASE_URL+`api/v1/me/message/${params.messageId}`;
+            path = BASE_URL+`/api/v1/me/message/${params.messageId}`;
         else
-            path = BASE_URL+`api/v1/me/complaintMessage/${params.messageId}`;
+            path = BASE_URL+`/api/v1/me/complaintMessage/${params.messageId}`;
 
         const headers = {
             'Content-Type': 'application/json', 

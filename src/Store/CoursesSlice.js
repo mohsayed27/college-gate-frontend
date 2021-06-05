@@ -22,7 +22,7 @@ export const fetchAllCourses = createAsyncThunk(
             //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
             'Authorization': 'Bearer '
         }
-        const data = await apiRequest(BASE_URL+'api/v1/course/all', METHOD_GET, headers);
+        const data = await apiRequest(BASE_URL+'/api/v1/course/all', METHOD_GET, headers);
         //console.log("Courses data:", data);
         return data;
     }

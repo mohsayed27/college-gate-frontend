@@ -29,7 +29,7 @@ export const loginSignupRequest = createAsyncThunk(
             'Content-Type': 'application/json', 
         }
         let userType = (params.userType === USER_TYPE_EMPLOYEE) ? API_DEPARTMENT : params.userType;
-        const data = await apiRequest(BASE_URL+`api/v1/user/${userType}/${params.authenticationType}`, METHOD_POST, headers, JSON.stringify(params.body));
+        const data = await apiRequest(BASE_URL+`/api/v1/user/${userType}/${params.authenticationType}`, METHOD_POST, headers, JSON.stringify(params.body));
         return data;
     }
 );

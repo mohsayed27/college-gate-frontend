@@ -79,6 +79,11 @@ const MessageList = withRouter(({messagesType, messagesSendingType, match}) => {
             }
 
             {currentMessages.status === STATUS_LOADING && <p className='font2 bold'>Loading...</p>}
+
+            {currentMessages.status === STATUS_SUCCEEDED &&
+                currentMessages.items.length === 0 && 
+                <p className='font2 bold center_text'>Empty</p>
+            }
         </div>
     );
 });

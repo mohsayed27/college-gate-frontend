@@ -1,24 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import { HomePage } from './containers/HomePage';
-import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect,  } from 'react-router-dom';
 import Professor from './Users/Professor';
 import Student from './Users/Student';
 import {
     LINK_PROFESSOR, 
     LINK_STUDENT, 
-    LINK_LOGIN, 
-    LINK_SIGNUP,
+    LINK_LOGIN,
     AUTH_LINK, 
-    STATUS_SUCCEEDED, 
-    AUTHENTICATION_STATE_KEY, 
-    USER_TYPE_STUDENT, 
-    USER_TYPE_PROFESSOR,
-    AUTHENTICATION_TYPE_LOGIN
 } from './Constants'
 import LoginSignup from './LoginSignup/LoginSignup';
-import {useSelector, useDispatch} from 'react-redux';
-import {loginSignupRequest, selectAuthentication, loadAuthenticationStateCookie} from './Store/AuthenticationSlice'
+
 
 
 
@@ -43,51 +36,6 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-
-    /*const authenticationState = useSelector(selectAuthentication);
-    const dispatch = useDispatch();
-
-    let location = useLocation();
-
-    let redirect = false;
-    let redirectLink = '';
-  
-    if (localStorage.getItem(AUTHENTICATION_STATE_KEY) !== null) {
-        if (authenticationState.status !== STATUS_SUCCEEDED)
-            dispatch(loadAuthenticationStateCookie())
-    } else {
-        redirect = true;
-        redirectLink = LINK_LOGIN;
-    }
-
-    
-
-    if (authenticationState.status === STATUS_SUCCEEDED && 
-        authenticationState.authenticationType === AUTHENTICATION_TYPE_LOGIN) {
-            
-        //redirect = true;
-        
-        switch (authenticationState.userType) {
-            case USER_TYPE_STUDENT:
-                if (!location.pathname.includes(LINK_STUDENT)){
-                    redirect = true;
-                    redirectLink = LINK_STUDENT;
-                }
-                break;
-            case USER_TYPE_PROFESSOR:
-                if (!location.pathname.includes(LINK_PROFESSOR)){
-                    redirect = true;
-                    redirectLink = LINK_PROFESSOR;
-                }
-                break;
-            default: //USER_TYPE_EMPLOYEE
-                //if (!location.pathname.includes(LINK_EMPLOYEE)){
-                //    redirect = true;
-                //    redirectLink = LINK_EMPLOYEE;
-                //}
-                break;
-        }
-    }*/
   
 
     return (
@@ -95,12 +43,8 @@ function App() {
       
         <Router>
             <Switch>
-    
-                {/*redirect && <Redirect to={redirectLink}/>*/}
-
-                <Route path='/' exact={true}>
+                <Route path={['/', AUTH_LINK]} exact={true}>
                     <Redirect to={LINK_LOGIN}/>
-                    {/*<LoginSignup/>*/}
                 </Route>
                 <Route path={AUTH_LINK}>
                     <LoginSignup/>

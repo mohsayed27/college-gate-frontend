@@ -8,7 +8,8 @@ import {
     USER_TYPE_STUDENT, 
     USER_TYPE_PROFESSOR, 
     LINK_STUDENT, 
-    LINK_PROFESSOR, 
+    LINK_PROFESSOR,
+    BASE_URL 
 } from '../Constants'
 
 const RedirectHandler = ({redirectToHome=true}) => {
@@ -35,6 +36,7 @@ const RedirectHandler = ({redirectToHome=true}) => {
                     }
                     break;
                 case USER_TYPE_PROFESSOR:
+                    //console.log(location.pathname);
                     if (!location.pathname.includes(LINK_PROFESSOR)){
                         redirect = true;
                         redirectLink = LINK_PROFESSOR;
@@ -54,6 +56,9 @@ const RedirectHandler = ({redirectToHome=true}) => {
             redirectLink = '/';
         }
     }
+
+    if (redirect)
+        console.log("Redirecting: ", redirectLink);
 
     return (
         <div>

@@ -5,7 +5,13 @@
     "/api/v1/me/messages/*/course/*?limit=20&offset=0": "/messages0-20", 
     "/api/v1/me/messages/*/course/*?limit=20&offset=20": "/messages20-40",
     "/api/v1/me/messages/*/course/*?limit=*&offset=*": "/messages-empty",
-    "api/v1/user/*/signup":"signup", 
-    "api/v1/user/*/login":"login", 
+    "/api/v1/announcement/course/course0?offset=0&limit=20": "/announcements0-20",
+    "/api/v1/announcement/course/course0?offset=20&limit=20": "/announcements20-40",
+    "/api/v1/announcement/course/*?offset=*&limit=*": "/announcements-empty",
+    "/api/v1/announcement/?offset=0&limit=20": "/announcements0-20",
+    "/api/v1/announcement/?offset=20&limit=20": "/announcements20-40",
+    "/api/v1/announcement/?offset=*&limit=*": "/announcements-empty",
+    "/api/v1/user/*/signup": "/signup", 
+    "/api/v1/user/*/login": "/login", 
     "/api/v1/*/:id": "/:id"
 }

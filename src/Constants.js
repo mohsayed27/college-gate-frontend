@@ -1,5 +1,5 @@
 export const MOCK = true;
-export const BASE_URL = MOCK ? 'http://192.168.1.198:4000/' : 'https://college-gate.com/';
+export const BASE_URL = MOCK ? 'http://192.168.1.198:4000' : 'https://college-gate.com';
 
 export const STATUS_IDLE = 'idle';
 export const STATUS_LOADING = 'loading';
@@ -19,9 +19,12 @@ export const LINK_RECEIVED = '/received';
 export const LINK_SENT = '/sent';
 export const LINK_SEND = '/send';
 
+export const LINK_ANNOUNCEMENTS = '/announcements';
+export const LINK_GRADES = '/grades';
+
 export const LINK_COURSE = LINK_COURSES + '/:courseId'; 
-export const LINK_COURSE_ANNOUNCEMENTS  = LINK_COURSE + '/announcements';                   // for example: '/professor/courses/:courseId/announcements'
-export const LINK_COURSE_GRADES         = LINK_COURSE + '/grades';                          // for example: '/professor/courses/:courseId/grades'
+export const LINK_COURSE_ANNOUNCEMENTS  = LINK_COURSE + LINK_ANNOUNCEMENTS;                   // for example: '/professor/courses/:courseId/announcements'
+export const LINK_COURSE_GRADES         = LINK_COURSE + LINK_GRADES;                          // for example: '/professor/courses/:courseId/grades'
 
 export const LINK_COURSE_MESSAGES = LINK_COURSE + '/messages'; 
 export const LINK_COURSE_MESSAGES_RECEIVED  = LINK_COURSE_MESSAGES + LINK_RECEIVED;  // for example: '/professor/courses/:courseId/messages/received'

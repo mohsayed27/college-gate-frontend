@@ -19,6 +19,7 @@ import {
     LINK_COURSE_MESSAGES_SENT, 
     LINK_COURSE_MESSAGES_SEND
 } from '../../../Constants'
+import AnnouncementList from '../AnnouncementList/AnnouncementList';
 
 const Course = withRouter(({userLink, match}) => {
     
@@ -49,6 +50,11 @@ const Course = withRouter(({userLink, match}) => {
                                 sendAltText="Send a message"    sendRoutePath={userLink+LINK_COURSE_MESSAGES_SEND}          sendExactPath={false}       sendLink={userLink+LINK_COURSE_MESSAGES_SEND.replace(':courseId', courseId)}
                               />;
 
+    const announcementListComponent = <AnnouncementList 
+                                        allCourses={false} 
+                                        courseId={courseId}
+                                      />
+
 
     return (
         <div className={styles.course}>
@@ -61,9 +67,9 @@ const Course = withRouter(({userLink, match}) => {
                     coverImgSrc={course.Image_url} 
                     avatarComponent={<CourseAvatar imgSrc={professor.ImgUrl} courseTitle={course.Name} profName={professor.Name}/>}
                     tabsAndComponents={[
-                        {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),     component:<DummyPlaceholder text='announcements'/>, id:0},
-                        {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),            component:<DummyPlaceholder text='grades'/>, id:1},
-                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId), component:messagesComponent, id:2},
+                        {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),   component:announcementListComponent, id:0},
+                        {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),          component:<DummyPlaceholder text='grades'/>, id:1},
+                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId),        component:messagesComponent, id:2},
                     ]}
                     additionalComponents={[]}
                 />
