@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import styles from './AnnouncementList.module.css'
-import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, LINK_COURSE_ANNOUNCEMENTS, LINK_ANNOUNCEMENTS} from '../../../Constants'
+import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, LINK_COURSE_ANNOUNCEMENTS, LINK_ANNOUNCEMENTS, LIMIT} from '../../../Constants'
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchAnnouncements, selectAnnouncements} from '../../../Store/AnncouncementsSlice'
 import Announcement from '../Announcement/Announcement';
@@ -33,13 +33,13 @@ const AnnouncementList = ({allCourses, courseId}) => {
 
 
         if (fetchAnn) {
-            let params = {allCourses: allCourses, courseId:courseId, limit:20, offset:0};
+            let params = {allCourses: allCourses, courseId:courseId, limit:LIMIT, offset:0};
             dispatch(fetchAnnouncements(params));
         }
     }, []);
 
     const loadMoreHandler = () => {
-        let params = {allCourses: allCourses, courseId:courseId, limit:20, offset:announcements.items.length};
+        let params = {allCourses: allCourses, courseId:courseId, limit:LIMIT, offset:announcements.items.length};
         dispatch(fetchAnnouncements(params));
     }
     

@@ -5,6 +5,6 @@
     padding: 7px;
 }
 
-.load_more {
-    cursor: pointer;
+.messages_sidebar {
+    /* min-width: 100px; */
 }

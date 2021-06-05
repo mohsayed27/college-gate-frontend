@@ -1,6 +1,6 @@
 import styles from './MessageList.module.css'
 import {fetchListOfMessages, fetchMessageById, selectAllMessages} from '../../../../Store/MessagesSlice'
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {
@@ -9,15 +9,20 @@ import {
     MESSAGES_COMPONENT_TYPE_MESSAGES,
     MESSAGES_COMPONENT_TYPE_COMPLAITNS, 
     STATUS_LOADING, 
-    STATUS_SUCCEEDED
+    STATUS_SUCCEEDED,
+    LINK_RECEIVED,
+    LINK_SENT,
+    LINK_VIEW, 
+    MESSAGES_COMPONENT_VIEWING_TYPE_LIST, 
+    MESSAGES_COMPONENT_VIEWING_TYPE_ITEM,
+    LIMIT
 } from '../../../../Constants'
 import MessageListItem from '../MessageListItem/MessageListItem';
 
-const LIMIT = 20;
 
 // messagesSendingType = MESSAGES_TYPE_RECEIVED | MESSAGES_TYPE_SENT
 // messagesType = MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS
-const MessageList = withRouter(({messagesType, messagesSendingType, match}) => {
+const MessageList = withRouter(({messagesType, messagesSendingType, setViewingType, setCurrentViewedMessageId, match}) => {
 
     const messages = useSelector(selectAllMessages);
     const dispatch = useDispatch();
@@ -57,23 +62,39 @@ const MessageList = withRouter(({messagesType, messagesSendingType, match}) => {
         fetchData(LIMIT, currentMessages.items.length);
     }
 
+    /*const listItemClickHandler = (event) => {
+        setViewingType(MESSAGES_COMPONENT_VIEWING_TYPE_ITEM)
+    }*/
+
     return (
         <div className={styles.message_list}>
             {(currentMessages.status === STATUS_SUCCEEDED || 
                 (currentMessages.items.length > 0)) &&
-                currentMessages.items.map(item => (
-                    <MessageListItem 
-                        senderName={item.message.sender.name} 
-                        subject={item.message.subject}
-                        date={item.message.date}
-                        content={item.message.content}
-                        key={item.message.message_id}
-                    />
-                ))             
+                currentMessages.items.map(item => {
+                    //console.log(item);
+                    /*let currentLink = match.url;
+                    currentLink = currentLink.replace(LINK_RECEIVED, LINK_VIEW);
+                    currentLink = currentLink.replace(LINK_SENT, LINK_VIEW);
+                    currentLink = currentLink.concat('/' + item.message.message_id);*/
+                    return (
+                    //<Link className="no_text_decoration" to={currentLink} key={item.message.message_id}>
+                        <div className="pointer" key={item.message.message_id}>
+                            <MessageListItem 
+                                messageId={item.message.message_id}
+                                senderName={item.message.sender.name} 
+                                subject={item.message.subject}
+                                date={item.message.date}
+                                content={item.message.content}
+                                setViewingType={setViewingType}
+                                setCurrentViewedMessageId={setCurrentViewedMessageId}
+                            />
+                        </div>
+                    //</Link>
+                )})             
             }
 
             {currentMessages.status === STATUS_SUCCEEDED && 
-                <p className={`${styles.load_more} font2 bold center_text`} onClick={loadMoreHandler}>
+                <p className={`pointer font2 bold center_text`} onClick={loadMoreHandler}>
                     Load more
                 </p>
             }

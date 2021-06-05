@@ -1,8 +1,17 @@
 import styles from './MessageListItem.module.css'
+import {
+    MESSAGES_COMPONENT_VIEWING_TYPE_ITEM
+} from '../../../../Constants'
 
-const MessageListItem = ({senderName, subject, date, content}) => {
+const MessageListItem = ({messageId, senderName, subject, date, content, setViewingType, setCurrentViewedMessageId}) => {
+
+    const clickHandler = (event) => {
+        setCurrentViewedMessageId(messageId);
+        setViewingType(MESSAGES_COMPONENT_VIEWING_TYPE_ITEM);
+    }
+
     return (
-        <div className={styles.message_list_item}>
+        <div className={styles.message_list_item} onClick={clickHandler}>
             <div className={styles.top_section}>
                 <p className='font2 bold'>{senderName}</p>
                 <p className='font2 bold'>|</p>

@@ -18,6 +18,7 @@ export const LINK_COMPLAINTS = '/complaints';
 export const LINK_RECEIVED = '/received';
 export const LINK_SENT = '/sent';
 export const LINK_SEND = '/send';
+export const LINK_VIEW = '/view';
 
 export const LINK_ANNOUNCEMENTS = '/announcements';
 export const LINK_GRADES = '/grades';
@@ -27,13 +28,15 @@ export const LINK_COURSE_ANNOUNCEMENTS  = LINK_COURSE + LINK_ANNOUNCEMENTS;     
 export const LINK_COURSE_GRADES         = LINK_COURSE + LINK_GRADES;                          // for example: '/professor/courses/:courseId/grades'
 
 export const LINK_COURSE_MESSAGES = LINK_COURSE + '/messages'; 
-export const LINK_COURSE_MESSAGES_RECEIVED  = LINK_COURSE_MESSAGES + LINK_RECEIVED;  // for example: '/professor/courses/:courseId/messages/received'
-export const LINK_COURSE_MESSAGES_SENT      = LINK_COURSE_MESSAGES + LINK_SENT;      // for example: '/professor/courses/:courseId/messages/sent'
-export const LINK_COURSE_MESSAGES_SEND      = LINK_COURSE_MESSAGES + LINK_SEND;      // for example: '/professor/courses/:courseId/messages/send'
+export const LINK_COURSE_MESSAGES_RECEIVED  = LINK_COURSE_MESSAGES + LINK_RECEIVED;                 // for example: '/professor/courses/:courseId/messages/received'
+export const LINK_COURSE_MESSAGES_SENT      = LINK_COURSE_MESSAGES + LINK_SENT;                     // for example: '/professor/courses/:courseId/messages/sent'
+export const LINK_COURSE_MESSAGES_SEND      = LINK_COURSE_MESSAGES + LINK_SEND;                     // for example: '/professor/courses/:courseId/messages/send'
+//export const LINK_COURSE_MESSAGES_VIEW      = LINK_COURSE_MESSAGES + LINK_VIEW + '/:messageId';     // for example: '/professor/courses/:courseId/messages/view/:messageId'
 
-export const LINK_COMPLAINTS_RECEIVED  = LINK_COMPLAINTS + LINK_RECEIVED;                   // for example: '/student/complaints/:courseId/received'
-export const LINK_COMPLAINTS_SENT      = LINK_COMPLAINTS + LINK_SENT;                       // for example: '/student/complaints/:courseId/sent'
-export const LINK_COMPLAINTS_SEND      = LINK_COMPLAINTS + LINK_SEND;                       // for example: '/student/complaints/:courseId/send'
+export const LINK_COMPLAINTS_RECEIVED  = LINK_COMPLAINTS + LINK_RECEIVED;                   // for example: '/student/complaints/received'
+export const LINK_COMPLAINTS_SENT      = LINK_COMPLAINTS + LINK_SENT;                       // for example: '/student/complaints/sent'
+export const LINK_COMPLAINTS_SEND      = LINK_COMPLAINTS + LINK_SEND;                       // for example: '/student/complaints/send'
+//export const LINK_COMPLAINTS_VIEW      = LINK_COMPLAINTS + LINK_VIEW + '/:complaintId';     // for example: '/student/complaints/view/:complaintId'
 
 export const MESSAGES_TYPE_RECEIVED = "received";
 export const MESSAGES_TYPE_SENT = "sent";
@@ -60,3 +63,7 @@ export const METHOD_PUT = 'PUT';
 export const METHOD_DELETE = 'DELETE';
 
 export const AUTHENTICATION_STATE_KEY = 'user_state_key';
+
+export const MESSAGES_COMPONENT_VIEWING_TYPE_LIST = 'list';
+export const MESSAGES_COMPONENT_VIEWING_TYPE_ITEM = 'item';
+export const LIMIT = 20;

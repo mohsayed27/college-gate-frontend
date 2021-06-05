@@ -67,6 +67,14 @@ body {
   color: var(--dim);
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.no_text_decoration {
+  text-decoration: none;
+}
+
 * {
   box-sizing: border-box;
 }

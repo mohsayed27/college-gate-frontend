@@ -64,6 +64,7 @@ export const fetchListOfMessages = createAsyncThunk(
     }
 )
 
+// I don't use it cause we ran out of time.
 export const fetchMessageById = createAsyncThunk(
     'messages/fetchMessageById', 
 
@@ -186,5 +187,6 @@ export const messagesSlice = createSlice({
 });
 
 export const selectAllMessages = state => state.messages;
+//export const selectMessageById = (state, sendingType, messageId) => {state.messages};
 
 export default messagesSlice.reducer;
