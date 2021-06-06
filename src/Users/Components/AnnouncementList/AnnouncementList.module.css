@@ -2,4 +2,25 @@
     /* width: 100%; */
     /* height: 100%; */
     /* background-color: blue; */
+
+}
+
+.post_announcement_form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+
+.post_button_parent_div {
+    display: flex;
+    flex-direction: row;
+}
+
+.post_button_spacer {
+    flex: 1;
+}
+
+.post_button {
+    
 }

@@ -2,14 +2,14 @@ import {useEffect, useState} from 'react'
 import styles from './AnnouncementList.module.css'
 import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, LINK_COURSE_ANNOUNCEMENTS, LINK_ANNOUNCEMENTS, LIMIT} from '../../../Constants'
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchAnnouncements, selectAnnouncements} from '../../../Store/AnncouncementsSlice'
+import {fetchAnnouncements, postAnnouncement, returnNewAnnouncementToIdle, selectAnnouncements} from '../../../Store/AnncouncementsSlice'
 import Announcement from '../Announcement/Announcement';
 import {useLocation} from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 // allCourses: false=individualCourse
-const AnnouncementList = ({allCourses, courseId}) => {
+const AnnouncementList = ({canPost=true, allCourses, courseId}) => {
     const announcements = useSelector(selectAnnouncements);
     const dispatch = useDispatch();
 
@@ -36,15 +36,73 @@ const AnnouncementList = ({allCourses, courseId}) => {
             let params = {allCourses: allCourses, courseId:courseId, limit:LIMIT, offset:0};
             dispatch(fetchAnnouncements(params));
         }
+
+
+        
+        //setTimeout(() => setNewAnnouncementContent('He5o'), 200);
     }, []);
 
     const loadMoreHandler = () => {
         let params = {allCourses: allCourses, courseId:courseId, limit:LIMIT, offset:announcements.items.length};
         dispatch(fetchAnnouncements(params));
     }
+
+    
+    const [newAnnouncementContent, setNewAnnouncementContent] = useState('');
+    const newAnnouncementContentChangeHandler = (event) => {
+        //console.log(event.target.value);
+        if (announcements.newAnnouncement.status === STATUS_SUCCEEDED)
+            dispatch(returnNewAnnouncementToIdle());
+        setNewAnnouncementContent(event.target.value);
+    }
+
+    const onPost = (event) => {
+        event.preventDefault();
+        //console.log("Submit");
+        if (announcements.newAnnouncement.status !== STATUS_LOADING &&
+            newAnnouncementContent !== '') {
+            
+            let params = {courseId:courseId, content:newAnnouncementContent};
+            dispatch(postAnnouncement(params));
+        }
+        
+    }
+
+    if (announcements.newAnnouncement.status === STATUS_SUCCEEDED) {
+        if (newAnnouncementContent !== '') {
+            setNewAnnouncementContent('');
+            //dispatch(returnNewAnnouncementToIdle());
+        }
+        //dispatch(returnNewAnnouncementToIdle());
+    }
+
+    console.log(announcements.newAnnouncement.status);
     
     return (
         <div className={styles.announcement_list}>
+            
+            {canPost &&
+                <form className={styles.post_announcement_form} onSubmit={onPost}>
+                    <textarea className="textarea font2" name="new_announcement_content" id="new_announcement_content" rows="6" 
+                                value={newAnnouncementContent} onChange={newAnnouncementContentChangeHandler}/>
+                    <div className={styles.post_button_parent_div}>
+                        <div className={styles.post_button_spacer}/>
+                        <button className={`input_button ${styles.post_button}`} type="submit">Post</button>
+                    </div>
+                </form>
+            }
+
+            {/*<Form className={styles.form}>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Control className={`textarea font2`} as="textarea" rows={3}  />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>*/
+            }
+
             {/*(announcements.status === STATUS_SUCCEEDED || 
                 (announcements.items.length > 0)) &&
                 announcements.items.map(item => (

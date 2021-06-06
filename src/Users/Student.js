@@ -14,6 +14,7 @@ const Student = () => {
 
     const announcementListComponent = <AnnouncementList 
                                         allCourses={true}
+                                        canPost={false}
                                       />
 
     const navItemsAndComponents = [{text:'Announcements',link:LINK_STUDENT + LINK_ANNOUNCEMENTS,    exactLink:true, component:announcementListComponent, id:0}, 

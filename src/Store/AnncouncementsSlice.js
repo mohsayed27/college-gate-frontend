@@ -6,7 +6,8 @@ import {
     STATUS_FAILED, 
     STATUS_SUCCEEDED,
     BASE_URL, 
-    METHOD_GET
+    METHOD_GET,
+    METHOD_POST
 } from '../Constants';
 //import {store} from './Store'
 
@@ -33,20 +34,50 @@ export const fetchAnnouncements = createAsyncThunk(
     }
 );
 
+export const postAnnouncement = createAsyncThunk(
+    'announcements/postAnnouncement', 
+    // params = {courseId:courseId, content:String}
+    async (params) => {
+        let path = BASE_URL + `/api/v1/announcement/me/course/${params.courseId}`;
+
+        const headers = {
+            'Content-Type': 'application/json', 
+            //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
+            'Authorization': 'Bearer '
+
+        }
+        //console.log(JSON.stringify(params.content));
+        const postData = {
+            content:params.content
+        };
+        const data = await apiRequest(path, METHOD_POST, headers, JSON.stringify(postData));
+        return data;
+    }
+);
+
 
 const initialState = {
     items: [], 
     allCourses: true, // false=individualCourse
     courseId: '',
     status: STATUS_IDLE,
-    error: null
+    error: null, 
+
+    newAnnouncement: {
+        item:{}, 
+        status: STATUS_IDLE,
+        error: null
+    }
 }
 
 export const announcementsSlice = createSlice({
     name: 'announcements', 
     initialState: initialState,
     reducers: {
-
+        returnNewAnnouncementToIdle: (state) => {
+            state.newAnnouncement.status = STATUS_IDLE;
+            console.log(state.newAnnouncement.status);
+        }
     }, 
     extraReducers: {
         [fetchAnnouncements.fulfilled]: (state, action) => {
@@ -71,9 +102,33 @@ export const announcementsSlice = createSlice({
         [fetchAnnouncements.rejected]: (state, action) => {
             state.status = STATUS_FAILED;
             state.error = action.error;
-        }
+        }, 
+
+
+        [postAnnouncement.fulfilled]: (state, action) => {
+            const params = action.meta.arg;
+            const receivedData = action.payload;
+
+            state.newAnnouncement.status = STATUS_SUCCEEDED;
+            state.newAnnouncement.item = receivedData;
+            state.items.unshift(receivedData);
+
+            //console.log("FULFILLED...");
+            //console.log(state.items);
+        }, 
+        [postAnnouncement.pending]: (state, action) => {
+            state.newAnnouncement.status = STATUS_LOADING;
+            //console.log("LOADING...");
+
+        }, 
+        [postAnnouncement.rejected]: (state, action) => {
+            state.newAnnouncement.status = STATUS_FAILED;
+            state.newAnnouncement.error = action.error;
+        }, 
     }
 });
+
+export const {returnNewAnnouncementToIdle} = announcementsSlice.actions;
 
 export const selectAnnouncements = state => state.announcements;
 

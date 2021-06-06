@@ -2,7 +2,7 @@ import {BASE_URL} from './Constants'
 
 export async function apiRequest(url, method, headers, bodyData) {
     let data;
-
+    console.log(bodyData);
     let config = {
         method: method, // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin

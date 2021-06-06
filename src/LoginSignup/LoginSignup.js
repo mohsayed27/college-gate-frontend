@@ -129,7 +129,7 @@ const LoginSignup = () => {
                     <div className={styles.fields}>
                         <input className={`${styles.input_text} font1`} type="email" placeholder="Enter Email" name="email" onChange={onChangeLoginEmail} required/>
                         <input className={`${styles.input_text} font1`} type="password" placeholder="Enter Password" name="psw" onChange={onChangeLoginPassword} required/>
-                        <button className={`${styles.input_button} font1 bold`} type="submit">Login</button>
+                        <button className={"input_button"} type="submit">Login</button>
                     </div>
                 }
                 {location.pathname.includes(LINK_SIGNUP) && 
@@ -141,7 +141,7 @@ const LoginSignup = () => {
                         <input className={`${styles.input_text} font1`} type="password" placeholder="Re-Enter Password" name="re_psw" onChange={onChangeSignupConformationPassword} required/>
                         {userType === USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Name" name="department_name" onChange={onChangeSignupDepName} required/>}
                         {userType !== USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Id" name="department_id" onChange={onChangeSignupDepId} required/>}
-                        <button className={`${styles.input_button} font1 bold`} type="submit" >Signup</button>
+                        <button className="input_button" type="submit" >Signup</button>
                     </div>
                 }
                 {authenticationState.status === STATUS_LOADING && <p className='font2 bold center_text'>Loading...</p>}
