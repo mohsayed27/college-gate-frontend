@@ -1,4 +1,4 @@
-import {BASE_URL} from './Constants'
+//import {BASE_URL} from './Constants'
 
 export async function apiRequest(url, method, headers, bodyData) {
     let data;

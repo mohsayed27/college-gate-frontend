@@ -1,3 +1,5 @@
+const DELAY = 500;
+
 // server.js
 const jsonServer = require('json-server');
 const server = jsonServer.create();
@@ -41,7 +43,7 @@ server.use((req, res, next) => {
                         date: Date.now()
                     }
                 );
-            }, 500);
+            }, DELAY);
         } else if (req.path.includes('/login')) {
             setTimeout(() => {
                 res.json(
@@ -49,10 +51,33 @@ server.use((req, res, next) => {
                         token: "_TOKEN_"
                     }
                 );
-            }, 500);
+            }, DELAY);
+        } else if (req.path.includes("/api/v1/message/me/course/")) {
+            setTimeout(() => {
+                res.json(
+                    {
+                        message_id: Date.now(),
+                        sender: {
+                          id: Date.now()+1,
+                          name: "string",
+                          imageUrl: "https://picsum.photos/id/1005/100",
+                          type: "string"
+                        },
+                        reciever: {
+                          id: Date.now()+2,
+                          name: "string",
+                          imgUrl: "string",
+                          type: "string"
+                        },
+                        subject: req.body.subject,
+                        content: req.body.content,
+                        date: Date.now()
+                    }
+                );
+            }, DELAY);
         }
     } else {
-        next();
+        setTimeout(next, DELAY);
     }
 });
 server.use(jsonServer.rewriter(require('./routes.json')));

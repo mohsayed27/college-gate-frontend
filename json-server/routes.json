@@ -11,6 +11,6 @@
     "/api/v1/announcement/?offset=0&limit=20": "/announcements0-20",
     "/api/v1/announcement/?offset=20&limit=20": "/announcements20-40",
     "/api/v1/announcement/?offset=*&limit=*": "/announcements-empty",
-    
+    "/api/v1/me/utils/course/*": "/student-list",
     "/api/v1/*/:id": "/:id"
 }

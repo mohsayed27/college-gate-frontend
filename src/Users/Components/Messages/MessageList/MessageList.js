@@ -1,5 +1,5 @@
 import styles from './MessageList.module.css'
-import {fetchListOfMessages, fetchMessageById, selectAllMessages} from '../../../../Store/MessagesSlice'
+import {fetchListOfMessages, fetchMessageById, returnNewMessageToIdle, selectAllMessages} from '../../../../Store/MessagesSlice'
 import {withRouter, Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
@@ -51,6 +51,8 @@ const MessageList = withRouter(({messagesType, messagesSendingType, setViewingTy
         if (fetchRequired) {
             fetchData(LIMIT, 0);
         }
+
+        dispatch(returnNewMessageToIdle());
     }, [messagesType, messagesSendingType]);
 
     if (currentMessages.status === STATUS_SUCCEEDED) {

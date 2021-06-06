@@ -77,7 +77,11 @@ export const announcementsSlice = createSlice({
     reducers: {
         returnNewAnnouncementToIdle: (state) => {
             state.newAnnouncement.status = STATUS_IDLE;
-            console.log(state.newAnnouncement.status);
+            //console.log(state.newAnnouncement.status);
+        }, 
+        reset: (state) => {
+            state.status = STATUS_IDLE;
+            state.newAnnouncement.status = STATUS_IDLE;
         }
     }, 
     extraReducers: {
@@ -107,7 +111,7 @@ export const announcementsSlice = createSlice({
 
 
         [postAnnouncement.fulfilled]: (state, action) => {
-            const params = action.meta.arg;
+            //const params = action.meta.arg;
             const receivedData = action.payload;
 
             state.newAnnouncement.status = STATUS_SUCCEEDED;
@@ -129,7 +133,7 @@ export const announcementsSlice = createSlice({
     }
 });
 
-export const {returnNewAnnouncementToIdle} = announcementsSlice.actions;
+export const {returnNewAnnouncementToIdle, reset} = announcementsSlice.actions;
 
 export const selectAnnouncements = state => state.announcements;
 

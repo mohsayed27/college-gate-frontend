@@ -11,7 +11,8 @@ import {
     MESSAGES_COMPONENT_TYPE_MESSAGES,
     MESSAGES_COMPONENT_TYPE_COMPLAITNS,
     METHOD_GET, 
-    AUTHENTICATION_STATE_KEY
+    AUTHENTICATION_STATE_KEY,
+    METHOD_POST
 } from '../Constants'
 //import {store} from './Store';
 
@@ -92,26 +93,72 @@ export const fetchMessageById = createAsyncThunk(
     }
 )
 
+export const sendMessage = createAsyncThunk(
+    'messages/sendMessage', 
+
+    // params = {receiverId:id, courseId:id, type:MESSAGES_COMPONENT_TYPE_COMPLAITNS, subject:String, content:String}
+    async (params) => {
+        let path, body;
+        if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES) {
+            path = BASE_URL+`/api/v1/message/me/course/${params.courseId}`;
+            body = {
+                receiver_id: params.receiverId,
+                subject: params.subject,
+                content: params.content
+            };
+        } else {
+            path = BASE_URL+'/api/v1/complaintMessage/me';
+            body = {
+                subject: params.subject,
+                content: params.content
+            };
+        }
+
+        const headers = {
+            'Content-Type': 'application/json', 
+            //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
+        }
+
+        const data = await apiRequest(path, METHOD_POST, headers, JSON.stringify(body));
+        return data;
+    }
+);
+
+
+const initialState = {
+    received: {
+        courseId: "", 
+        items: [], 
+        status: STATUS_IDLE,
+        error: null
+    }, 
+    sent: {
+        courseId: "", 
+        items: [], 
+        status: STATUS_IDLE,
+        error: null
+    }, 
+    newMessage: {
+        item: {}, 
+        status: STATUS_IDLE,
+        error: null
+    }
+}
 
 
 export const messagesSlice = createSlice({
     name: 'messages', 
-    initialState: {
-        received: {
-            courseId: "", 
-            items: [], 
-            status: STATUS_IDLE,
-            error: null
-        }, 
-        sent: {
-            courseId: "", 
-            items: [], 
-            status: STATUS_IDLE,
-            error: null
-        }
-    }, 
+    initialState: initialState, 
     reducers: {
-
+        returnNewMessageToIdle: (state) => {
+            state.newMessage.status = STATUS_IDLE;
+        }, 
+        reset: (state) => {
+            state.received.status = STATUS_IDLE;
+            state.sent.status = STATUS_IDLE;
+            state.newMessage.status = STATUS_IDLE;
+        }
     }, 
     extraReducers: {
         [fetchListOfMessages.fulfilled]: (state, action) => {
@@ -158,6 +205,7 @@ export const messagesSlice = createSlice({
         }, 
 
 
+        
         [fetchMessageById.fulfilled]: (state, action) => {
             const receivedData = action.payload;
             let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
@@ -183,9 +231,34 @@ export const messagesSlice = createSlice({
             let currentMessage = currentSendingType.items.find(item => item.message.message_id === action.meta.arg.messageId);
             currentMessage.status = STATUS_FAILED;
             currentMessage.error = action.error;
-        }
+        }, 
+
+
+
+        [sendMessage.fulfilled]: (state, action) => {
+            //const params = action.meta.arg;
+            const receivedData = action.payload;
+
+            state.newMessage.status = STATUS_SUCCEEDED;
+            state.newMessage.item = receivedData;
+            state.sent.items.unshift({
+                message: receivedData, 
+                status: STATUS_SUCCEEDED, 
+                error: null
+            });
+        }, 
+        [sendMessage.pending]: (state, action) => {
+            state.newMessage.status = STATUS_LOADING;
+        }, 
+        [sendMessage.rejected]: (state, action) => {
+            state.newMessage.status = STATUS_FAILED;
+            state.newMessage.error = action.error;
+        }, 
+        
     }
 });
+
+export const {returnNewMessageToIdle, reset} = messagesSlice.actions;
 
 export const selectAllMessages = state => state.messages;
 //export const selectMessageById = (state, sendingType, messageId) => {state.messages};

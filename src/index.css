@@ -97,6 +97,9 @@ body {
   width: 100%;
   font-family: Arial, sans-serif;
   background-color: var(--darker);
+}
+
+.remove_user_agent_stylesheet{
   border: none;
   padding: 10px;
   outline: none;

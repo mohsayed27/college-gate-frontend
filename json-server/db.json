@@ -193,15 +193,18 @@
         "total": 0
     },
 
-
-
-    "login": {
-        
-    }, 
-    "signup": {
-        
-    }, 
-    "post-announcement": {
-        
-    }
+    "student-list": {
+        "items": [
+            {"student_id": "student0", "name": "Student Name0", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student1", "name": "Student Name1", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student2", "name": "Student Name2", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student3", "name": "Student Name3", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student4", "name": "Student Name4", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student5", "name": "Student Name5", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student6", "name": "Student Name6", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student7", "name": "Student Name7", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student8", "name": "Student Name8", "image_url": "https://picsum.photos/50"}, 
+            {"student_id": "student9", "name": "Student Name9", "image_url": "https://picsum.photos/50"}
+        ]
+      }
 }

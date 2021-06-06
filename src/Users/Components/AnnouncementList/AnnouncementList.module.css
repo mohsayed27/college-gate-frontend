@@ -9,7 +9,9 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    gap: 5px;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--darkest);
 }
 
 .post_button_parent_div {

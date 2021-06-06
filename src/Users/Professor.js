@@ -17,7 +17,7 @@ const Professor = () => {
                                     {text:'Complaints',         link:LINK_PROFESSOR + LINK_COMPLAINTS,         exactLink:true, component:<DummyPlaceholder text='complaints'/>,        id:2}];
 
     
-    const additionalComponents = [{link:LINK_PROFESSOR + LINK_COURSE, exactLink:false, component:<Course userLink={LINK_PROFESSOR}/>, id:3}]
+    const additionalComponents = [{link:LINK_PROFESSOR + LINK_COURSE, exactLink:false, component:<Course userLink={LINK_PROFESSOR} sendMessageShowStudentList={true}/>, id:3}]
     
     return (
         <AccountMain navItemsAndComponents={navItemsAndComponents} additionalComponents={additionalComponents}/>

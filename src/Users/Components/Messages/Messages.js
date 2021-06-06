@@ -1,7 +1,7 @@
 import styles from './Messages.module.css'
 import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchListOfMessages, fetchMessageById, selectAllMessages} from '../../../Store/MessagesSlice'
+import {fetchListOfMessages, fetchMessageById, returnNewMessageToIdle, selectAllMessages} from '../../../Store/MessagesSlice'
 import {selectAllCourses} from '../../../Store/CoursesSlice'
 import {Route, Switch, withRouter, useLocation} from 'react-router-dom';
 import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT, MESSAGES_COMPONENT_TYPE_MESSAGES, LINK_COURSE_MESSAGES_SENT, LINK_COURSE_MESSAGES_RECEIVED} from '../../../Constants'
@@ -13,6 +13,7 @@ import {
     MESSAGES_COMPONENT_VIEWING_TYPE_LIST, 
     MESSAGES_COMPONENT_VIEWING_TYPE_ITEM,
 } from '../../../Constants'
+import SendMessage from '../SendMessage/SendMessage';
 
 
 
@@ -21,6 +22,7 @@ import {
 */
 
 const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS*/,
+                                sendMessageShowStudentList, 
                                 receivedAltText, receivedRoutePath, receivedExactPath, receivedLink, 
                                 sentAltText, sentRoutePath, sentExactPath, sentLink, 
                                 sendAltText, sendRoutePath, sendExactPath, sendLink, 
@@ -46,7 +48,6 @@ const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES 
         }*/
         /*let params = {messageId:"message10", type:MESSAGES_TYPE_RECEIVED};
         dispatch(fetchMessageById(params));*/
-
     }, []);
 
     /*let message10 = messages.received.items.find(item => item.message.message_id === "message10");
@@ -102,20 +103,29 @@ const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES 
                     
                     <Switch>
                         
-                        <Route path={userLink+LINK_COURSE_MESSAGES_RECEIVED}>
+                        <Route path={receivedRoutePath} exact={receivedExactPath}>
                             <MessageList 
-                                messagesType={MESSAGES_COMPONENT_TYPE_MESSAGES}
+                                messagesType={type}
                                 messagesSendingType={MESSAGES_TYPE_RECEIVED}
                                 setViewingType={setViewingType}
                                 setCurrentViewedMessageId={setCurrentViewedMessageId}
                             />
                         </Route>
-                        <Route path={userLink+LINK_COURSE_MESSAGES_SENT}>
+                        <Route path={sentRoutePath} exact={sentExactPath}>
                             <MessageList 
-                                messagesType={MESSAGES_COMPONENT_TYPE_MESSAGES}
+                                messagesType={type}
                                 messagesSendingType={MESSAGES_TYPE_SENT}
                                 setViewingType={setViewingType}
                                 setCurrentViewedMessageId={setCurrentViewedMessageId}
+                            />
+                        </Route>
+
+                        <Route path={sendRoutePath} exact={sendExactPath}>
+                            <SendMessage
+                                messageComponentType={type}
+                                showStudentList={sendMessageShowStudentList}
+                                courseId={courseId}
+                                sentMessagesLink={sentLink}
                             />
                         </Route>
                 

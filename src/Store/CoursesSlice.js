@@ -52,6 +52,9 @@ export const coursesSlice = createSlice({
         fetchCourseById: (state, id) => {
             
         }*/
+        reset: (state) => {
+            state.status = STATUS_IDLE;
+        }
     }, 
     extraReducers: {
         [fetchAllCourses.fulfilled]: (state, action) => {
@@ -71,6 +74,7 @@ export const coursesSlice = createSlice({
 });
 
 //export const {fetchAllCourses, fetchCourseById} = coursesSlice.actions;
+export const {reset} = coursesSlice.actions;
 
 export const selectAllCourses = state => state.courses;
 export const selectCourseById = (state, courseId) => state.courses.find(

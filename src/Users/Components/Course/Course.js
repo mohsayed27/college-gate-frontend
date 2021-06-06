@@ -17,11 +17,12 @@ import {
     LINK_COURSE_MESSAGES, 
     LINK_COURSE_MESSAGES_RECEIVED, 
     LINK_COURSE_MESSAGES_SENT, 
-    LINK_COURSE_MESSAGES_SEND
+    LINK_COURSE_MESSAGES_SEND,
+    MESSAGES_COMPONENT_TYPE_MESSAGES
 } from '../../../Constants'
 import AnnouncementList from '../AnnouncementList/AnnouncementList';
 
-const Course = withRouter(({userLink, match}) => {
+const Course = withRouter(({userLink, sendMessageShowStudentList, match}) => {
     
     const courses = useSelector(selectAllCourses);
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Course = withRouter(({userLink, match}) => {
     }
 
     const messagesComponent = <Messages 
-                                userLink={userLink}
+                                userLink={userLink} type={MESSAGES_COMPONENT_TYPE_MESSAGES} sendMessageShowStudentList={sendMessageShowStudentList}
                                 receivedAltText="Received"      receivedRoutePath={userLink+LINK_COURSE_MESSAGES_RECEIVED}  receivedExactPath={false}   receivedLink={userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId)}
                                 sentAltText="Sent"              sentRoutePath={userLink+LINK_COURSE_MESSAGES_SENT}          sentExactPath={false}       sentLink={userLink+LINK_COURSE_MESSAGES_SENT.replace(':courseId', courseId)}
                                 sendAltText="Send a message"    sendRoutePath={userLink+LINK_COURSE_MESSAGES_SEND}          sendExactPath={false}       sendLink={userLink+LINK_COURSE_MESSAGES_SEND.replace(':courseId', courseId)}

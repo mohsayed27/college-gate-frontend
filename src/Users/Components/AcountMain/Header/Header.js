@@ -1,6 +1,11 @@
 import { Redirect } from 'react-router';
 import styles from './Header.module.css';
 import {selectAuthentication, logout} from '../../../../Store/AuthenticationSlice';
+import {reset as resetAnncouncements} from '../../../../Store/AnncouncementsSlice';
+import {reset as resetCourses} from '../../../../Store/CoursesSlice';
+import {reset as resetMessages} from '../../../../Store/MessagesSlice';
+import {reset as resetStudentList} from '../../../../Store/StudentListSlice';
+//import {rootReducer} from '../../../../Store/Store';
 import {useSelector, useDispatch} from 'react-redux';
 import {
     STATUS_SUCCEEDED, 
@@ -15,6 +20,10 @@ const Header = ({hamburgerClickHandler}) => {
 
     const logoutHandler = (event) => {
         dispatch(logout());
+        dispatch(resetAnncouncements());
+        dispatch(resetCourses());
+        dispatch(resetMessages());
+        dispatch(resetStudentList());
     };
 
     return (
