@@ -13,7 +13,7 @@ navItemsAndComponents = [
     ...
 ]
 additionalComponents = [
-    {link:String, exactLink:bool, component:<ReactComponent/>, id:Number}
+    {link:String, exactLink:bool, component:<ReactComponent/>, overlay:false, id:Number}
 ]
 */
 
@@ -55,6 +55,22 @@ const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
             <div className={sidebarStyle}>
                 <Sidebar navItems={navItems}/>
             </div>
+
+            
+            {/*<Switch>
+                {additionalComponents.map(item => {
+                    if (item.overlay) {
+                        return (
+                            <Route path={item.link} exact={item.exactLink} key={item.id}>
+                                <div className={styles.overlay}>
+                                    <>{item.component}</>
+                                </div>
+                            </Route>
+                        );
+                    }
+                })}
+            </Switch>*/}
+
             <section className={styles.account_main_section}>
                 <div className={backdropStyle} onClick={sidebarShowHideHandler}></div>
                 <Switch>
@@ -63,13 +79,18 @@ const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
                             <>{item.component}</>
                         </Route>
                     ))}
-                    {additionalComponents.map(item => (
-                        <Route path={item.link} exact={item.exactLink} key={item.id}>
-                            <>{item.component}</>
-                        </Route>
-                    ))}
+                    {additionalComponents.map(item => {
+                        //if (!item.overlay) {
+                            return (
+                                <Route path={item.link} exact={item.exactLink} key={item.id}>
+                                    <>{item.component}</>
+                                </Route>
+                            );
+                        //}
+                    })}
                 </Switch>
             </section>
+            
         </main>
         
     );

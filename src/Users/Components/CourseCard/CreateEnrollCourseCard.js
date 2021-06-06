@@ -1,8 +1,11 @@
 import styles from './CourseCard.module.css'
+import {Link} from 'react-router-dom'
 
-const CreateEnrollCourseCard = ({createEnrollText}) => {
+const CreateEnrollCourseCard = ({createEnrollText, link, createEnrollCardClickHandler}) => {
     return (
-        <div className={`${styles.course_card} ${styles.create_enroll_course_card}`}>
+        //<Link to={link} className={`no_text_decoration ${styles.course_card} ${styles.create_enroll_course_card}`}>
+        <div className={`pointer no_text_decoration ${styles.course_card} ${styles.create_enroll_course_card}`} onClick={createEnrollCardClickHandler}>
+        
             <div className={styles.create_enroll_course_card_spacer}/>
 
             <img className={styles.plus} src='/images/plus.svg' alt='Plus'/>
@@ -10,6 +13,7 @@ const CreateEnrollCourseCard = ({createEnrollText}) => {
             
             <div className={styles.create_enroll_course_card_spacer}/>
         </div>
+        //</Link>
     );
 }
  

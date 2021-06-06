@@ -58,13 +58,13 @@ server.use((req, res, next) => {
                     {
                         message_id: Date.now(),
                         sender: {
-                          id: Date.now()+1,
+                          id: Date.now()*1.5,
                           name: "string",
                           imageUrl: "https://picsum.photos/id/1005/100",
                           type: "string"
                         },
                         reciever: {
-                          id: Date.now()+2,
+                          id: Date.now()*2,
                           name: "string",
                           imgUrl: "string",
                           type: "string"
@@ -72,6 +72,46 @@ server.use((req, res, next) => {
                         subject: req.body.subject,
                         content: req.body.content,
                         date: Date.now()
+                    }
+                );
+            }, DELAY);
+        } else if (req.path.includes('/enroll')) {
+            setTimeout(() => {
+                res.json(
+                    {
+                        Course_id: Date.now(),
+                        Name: req.body.name,
+                        Image_url: "https://picsum.photos/850/350",
+                        Professor: {
+                          _id: Date.now()*1.5,
+                          Name: "Bahgat Saber",
+                          ImgUrl: "https://picsum.photos/id/1005/100"
+                        },
+                        student: {
+                          id: Date.now()*2,
+                          name: "",
+                          imgUrl: ""
+                        }
+                    }
+                );
+            }, DELAY);
+        } else if (req.path === '/api/v1/course/me') {
+            setTimeout(() => {
+                res.json(
+                    {
+                        Course_id: Date.now(),
+                        Name: req.body.name,
+                        Image_url: "https://picsum.photos/850/350",
+                        Professor: {
+                          _id: Date.now()*1.5,
+                          Name: "Bahgat Saber",
+                          ImgUrl: "https://picsum.photos/id/1005/100"
+                        },
+                        student: {
+                          id: Date.now()*2,
+                          name: "",
+                          imgUrl: ""
+                        }
                     }
                 );
             }, DELAY);

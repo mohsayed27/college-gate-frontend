@@ -15,6 +15,11 @@ export const LINK_COURSES = '/courses';
 export const LINK_WARNINGS = '/warnings';
 export const LINK_COMPLAINTS = '/complaints';
 
+//export const LINK_CREATE = LINK_COURSES + '/create'
+//export const LINK_ENROLL = LINK_COURSES + '/enroll'
+export const CREATE = 'Create';
+export const ENROLL = 'Enroll';
+
 export const LINK_RECEIVED = '/received';
 export const LINK_SENT = '/sent';
 export const LINK_SEND = '/send';
@@ -23,7 +28,7 @@ export const LINK_VIEW = '/view';
 export const LINK_ANNOUNCEMENTS = '/announcements';
 export const LINK_GRADES = '/grades';
 
-export const LINK_COURSE = LINK_COURSES + '/:courseId'; 
+export const LINK_COURSE = /*LINK_COURSES*/"/course" + '/:courseId'; 
 export const LINK_COURSE_ANNOUNCEMENTS  = LINK_COURSE + LINK_ANNOUNCEMENTS;                   // for example: '/professor/courses/:courseId/announcements'
 export const LINK_COURSE_GRADES         = LINK_COURSE + LINK_GRADES;                          // for example: '/professor/courses/:courseId/grades'
 
