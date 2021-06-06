@@ -89,6 +89,7 @@ export const authenticationSlice = createSlice({
             state.status = STATUS_SUCCEEDED;
             if (params.authenticationType === AUTHENTICATION_TYPE_LOGIN)
                 localStorage.setItem(AUTHENTICATION_STATE_KEY, JSON.stringify(state));
+            
         }, 
         [loginSignupRequest.pending]: (state, action) => {
             state.status = STATUS_LOADING;

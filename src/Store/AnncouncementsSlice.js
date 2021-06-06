@@ -7,7 +7,8 @@ import {
     STATUS_SUCCEEDED,
     BASE_URL, 
     METHOD_GET,
-    METHOD_POST
+    METHOD_POST,
+    AUTHENTICATION_STATE_KEY
 } from '../Constants';
 //import {store} from './Store'
 
@@ -26,7 +27,7 @@ export const fetchAnnouncements = createAsyncThunk(
         const headers = {
             'Content-Type': 'application/json', 
             //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
-            'Authorization': 'Bearer '
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
 
         }
         const data = await apiRequest(path, METHOD_GET, headers);

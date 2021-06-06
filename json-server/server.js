@@ -17,11 +17,12 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
     //console.log(req);
+    //console.log(req.headers);
     if (req.method === 'POST') {
-        console.log("POST", req.path);
+        //console.log("POST", req.path);
         if (req.path.includes('/api/v1/announcement/me/course/')) {
-            console.log("HERE");
-            console.log(req.body);
+            //console.log("HERE");
+            //console.log(req.body);
             let courseId = req.path.replace('/api/v1/announcement/me/course/', "");
             setTimeout(() => {
                 res.json(
@@ -38,6 +39,14 @@ server.use((req, res, next) => {
                         }, 
                         content: req.body.content, 
                         date: Date.now()
+                    }
+                );
+            }, 500);
+        } else if (req.path.includes('/login')) {
+            setTimeout(() => {
+                res.json(
+                    {
+                        token: "_TOKEN_"
                     }
                 );
             }, 500);

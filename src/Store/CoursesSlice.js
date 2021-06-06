@@ -5,7 +5,8 @@ import {BASE_URL,
     STATUS_LOADING, 
     STATUS_SUCCEEDED, 
     STATUS_FAILED, 
-    METHOD_GET
+    METHOD_GET, 
+    AUTHENTICATION_STATE_KEY
 } from '../Constants'
 
 //import {store} from './Store';
@@ -20,7 +21,7 @@ export const fetchAllCourses = createAsyncThunk(
         const headers = {
             'Content-Type': 'application/json', 
             //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
-            'Authorization': 'Bearer '
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
         }
         const data = await apiRequest(BASE_URL+'/api/v1/course/all', METHOD_GET, headers);
         //console.log("Courses data:", data);

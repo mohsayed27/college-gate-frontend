@@ -10,7 +10,8 @@ import {
     MESSAGES_TYPE_SENT, 
     MESSAGES_COMPONENT_TYPE_MESSAGES,
     MESSAGES_COMPONENT_TYPE_COMPLAITNS,
-    METHOD_GET
+    METHOD_GET, 
+    AUTHENTICATION_STATE_KEY
 } from '../Constants'
 //import {store} from './Store';
 
@@ -53,7 +54,7 @@ export const fetchListOfMessages = createAsyncThunk(
         const headers = {
             'Content-Type': 'application/json', 
             //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
-            'Authorization': 'Bearer '
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
 
         }
         const data = await apiRequest(path, METHOD_GET, headers);
@@ -79,7 +80,7 @@ export const fetchMessageById = createAsyncThunk(
         const headers = {
             'Content-Type': 'application/json', 
             //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
-            'Authorization': 'Bearer '
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
 
         }
         //console.log(path);
