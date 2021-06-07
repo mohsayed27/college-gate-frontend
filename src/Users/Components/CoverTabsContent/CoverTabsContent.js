@@ -14,7 +14,7 @@ additionalComponents = [
 ]
 */
 
-const CoverTabsContent = ({coverImgSrc, avatarComponent, tabsAndComponents, additionalComponents}) => {
+const CoverTabsContent = ({coverImgSrc, avatarComponent, tabsAndComponents, additionalComponents, courseKey}) => {
     //console.log(coverImgSrc);
     //console.log(tabsAndComponents);
     return (

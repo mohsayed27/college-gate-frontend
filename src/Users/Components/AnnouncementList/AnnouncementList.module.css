@@ -5,6 +5,10 @@
 
 }
 
+.padding_added {
+    padding: 10px;
+}
+
 .post_announcement_form {
     display: flex;
     flex-direction: column;

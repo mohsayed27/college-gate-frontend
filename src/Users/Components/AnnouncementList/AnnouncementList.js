@@ -9,7 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 // allCourses: false=individualCourse
-const AnnouncementList = ({canPost=true, allCourses, courseId}) => {
+const AnnouncementList = ({canPost, allCourses, courseId}) => {
     const announcements = useSelector(selectAnnouncements);
     const dispatch = useDispatch();
 
@@ -76,10 +76,14 @@ const AnnouncementList = ({canPost=true, allCourses, courseId}) => {
         //dispatch(returnNewAnnouncementToIdle());
     }
 
-    console.log(announcements.newAnnouncement.status);
+    //console.log(announcements.newAnnouncement.status);
+
+    let style = styles.announcement_list;
+    if (allCourses)
+        style = `${styles.announcement_list} ${styles.padding_added}`;
     
     return (
-        <div className={styles.announcement_list}>
+        <div className={style}>
             
             {canPost &&
                 <form className={styles.post_announcement_form} onSubmit={onPost}>

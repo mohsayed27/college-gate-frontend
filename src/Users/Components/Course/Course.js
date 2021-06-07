@@ -22,7 +22,7 @@ import {
 } from '../../../Constants'
 import AnnouncementList from '../AnnouncementList/AnnouncementList';
 
-const Course = withRouter(({userLink, sendMessageShowStudentList, match}) => {
+const Course = withRouter(({userLink, sendMessageShowStudentList, match, showCourseKey}) => {
     
     const courses = useSelector(selectAllCourses);
     const dispatch = useDispatch();
@@ -66,7 +66,7 @@ const Course = withRouter(({userLink, sendMessageShowStudentList, match}) => {
                 courses.status === STATUS_SUCCEEDED &&
                 <CoverTabsContent 
                     coverImgSrc={course.Image_url} 
-                    avatarComponent={<CourseAvatar imgSrc={professor.ImgUrl} courseTitle={course.Name} profName={professor.Name} courseKey={courseId}/>}
+                    avatarComponent={<CourseAvatar imgSrc={professor.ImgUrl} courseTitle={course.Name} profName={professor.Name} showCourseKey={showCourseKey ? courseId : undefined}/>}
                     tabsAndComponents={[
                         {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),   component:announcementListComponent, id:0},
                         {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),          component:<DummyPlaceholder text='grades'/>, id:1},
