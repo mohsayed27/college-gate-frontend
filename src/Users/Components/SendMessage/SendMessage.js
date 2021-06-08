@@ -36,7 +36,7 @@ const SendMessage = ({messageComponentType, showStudentList=true, courseId, sent
             return;
         }
         let params;
-        if (messageComponentType === MESSAGES_COMPONENT_TYPE_MESSAGES)
+        //if (messageComponentType === MESSAGES_COMPONENT_TYPE_MESSAGES)
             params = {
                 receiverId: selectedStudent,
                 courseId: courseId, 

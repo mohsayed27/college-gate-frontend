@@ -1,6 +1,6 @@
 import styles from './MessageList.module.css'
 import {fetchListOfMessages, fetchMessageById, returnNewMessageToIdle, selectAllMessages} from '../../../../Store/MessagesSlice'
-import {withRouter, Link} from 'react-router-dom';
+import {withRouter, Link, useParams, useRouteMatch} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {
@@ -13,21 +13,26 @@ import {
     LINK_RECEIVED,
     LINK_SENT,
     LINK_VIEW, 
-    MESSAGES_COMPONENT_VIEWING_TYPE_LIST, 
-    MESSAGES_COMPONENT_VIEWING_TYPE_ITEM,
-    LIMIT
+    LIMIT,
+    LINK_MESSAGE_ID,
+    MESSAGES_SENDING_TYPE,
+    LINK_COURSE_ID
 } from '../../../../Constants'
 import MessageListItem from '../MessageListItem/MessageListItem';
 
 
 // messagesSendingType = MESSAGES_TYPE_RECEIVED | MESSAGES_TYPE_SENT
 // messagesType = MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS
-const MessageList = withRouter(({messagesType, messagesSendingType, setViewingType, setCurrentViewedMessageId, match}) => {
+const MessageList = ({messagesType, messagesSendingType, messageViewerRoutePath}) => {
 
     const messages = useSelector(selectAllMessages);
     const dispatch = useDispatch();
 
-    const courseId = match.params.courseId;
+    let pathParams = useParams();
+    let match = useRouteMatch();
+    //console.log(match.path);
+
+    const courseId = pathParams.courseId;
     let currentMessages = (messagesSendingType === MESSAGES_TYPE_RECEIVED) ? messages.received : messages.sent;
 
     const fetchData = (limit, offset) => {
@@ -68,27 +73,33 @@ const MessageList = withRouter(({messagesType, messagesSendingType, setViewingTy
         setViewingType(MESSAGES_COMPONENT_VIEWING_TYPE_ITEM)
     }*/
 
+    //console.log(messageViewerRoutePath)
+    
+
     return (
         <div className={styles.message_list}>
             {(currentMessages.status === STATUS_SUCCEEDED || 
                 (currentMessages.items.length > 0)) &&
                 currentMessages.items.map(item => {
-                    //console.log(item);
+                    console.log(item);
                     /*let currentLink = match.url;
                     currentLink = currentLink.replace(LINK_RECEIVED, LINK_VIEW);
                     currentLink = currentLink.replace(LINK_SENT, LINK_VIEW);
-                    currentLink = currentLink.concat('/' + item.message.id);*/
+                    currentLink = currentLink.concat('/' + item.id);*/
+                    /*console.log(messageViewerRoutePath.replace(LINK_COURSE_ID, '/'+courseId)
+                                                        .replace(MESSAGES_SENDING_TYPE, '/'+messagesSendingType)
+                                                        .replace(LINK_MESSAGE_ID, '/'+item.id));*/
                     return (
-                    //<Link className="no_text_decoration" to={currentLink} key={item.message.id}>
-                        <div className="pointer" key={item.message.id}>
+                    //<Link className="no_text_decoration" to={currentLink} key={item.id}>
+                        <div className="pointer" key={item.id}>
                             <MessageListItem 
-                                messageId={item.message.id}
-                                senderName={item.message.sender.name} 
-                                subject={item.message.subject}
-                                date={item.message.date}
-                                content={item.message.content}
-                                setViewingType={setViewingType}
-                                setCurrentViewedMessageId={setCurrentViewedMessageId}
+                                link={messageViewerRoutePath.replace(LINK_COURSE_ID, '/'+courseId)
+                                                            .replace(MESSAGES_SENDING_TYPE, '/'+messagesSendingType)
+                                                            .replace(LINK_MESSAGE_ID, '/'+item.id)}
+                                senderName={item.sender.name} 
+                                subject={item.subject}
+                                date={item.date}
+                                content={item.content}
                             />
                         </div>
                     //</Link>
@@ -109,6 +120,6 @@ const MessageList = withRouter(({messagesType, messagesSendingType, setViewingTy
             }
         </div>
     );
-});
+};
  
 export default MessageList;

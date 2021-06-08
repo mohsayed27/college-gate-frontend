@@ -11,7 +11,7 @@
     top: 59px;
 }
 
-.message_list {
+.messages_content {
     background-color: var(--darkest);
     flex: 1;
 }

@@ -3,6 +3,7 @@ import styles from './Course.module.css'
 import DummyPlaceholder from "../../../DummyPlaceholder";
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {useParams} from 'react-router-dom';
 import {fetchAllCourses, selectAllCourses} from '../../../Store/CoursesSlice';
 import CourseAvatar from "./Avatar/CourseAvatar";
 import {withRouter} from 'react-router-dom';
@@ -18,11 +19,12 @@ import {
     LINK_COURSE_MESSAGES_RECEIVED, 
     LINK_COURSE_MESSAGES_SENT, 
     LINK_COURSE_MESSAGES_SEND,
-    MESSAGES_COMPONENT_TYPE_MESSAGES
+    MESSAGES_COMPONENT_TYPE_MESSAGES, 
+    LINK_COURSE_MESSAGES_VIEW
 } from '../../../Constants'
 import AnnouncementList from '../AnnouncementList/AnnouncementList';
 
-const Course = withRouter(({canPost, userLink, sendMessageShowStudentList, match, showCourseKey}) => {
+const Course = ({canPost, userLink, sendMessageShowStudentList, match, showCourseKey}) => {
     
     const courses = useSelector(selectAllCourses);
     const dispatch = useDispatch();
@@ -35,7 +37,9 @@ const Course = withRouter(({canPost, userLink, sendMessageShowStudentList, match
         }
     }, []);
 
-    const courseId = match.params.courseId;
+    let pathParams = useParams();
+
+    const courseId = pathParams.courseId;
     let course;
     let professor;
     if (courses.status === STATUS_SUCCEEDED) {
@@ -45,10 +49,12 @@ const Course = withRouter(({canPost, userLink, sendMessageShowStudentList, match
     }
 
     const messagesComponent = <Messages 
-                                userLink={userLink} type={MESSAGES_COMPONENT_TYPE_MESSAGES} sendMessageShowStudentList={sendMessageShowStudentList}
-                                receivedAltText="Received"      receivedRoutePath={userLink+LINK_COURSE_MESSAGES_RECEIVED}  receivedExactPath={false}   receivedLink={userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId)}
-                                sentAltText="Sent"              sentRoutePath={userLink+LINK_COURSE_MESSAGES_SENT}          sentExactPath={false}       sentLink={userLink+LINK_COURSE_MESSAGES_SENT.replace(':courseId', courseId)}
-                                sendAltText="Send a message"    sendRoutePath={userLink+LINK_COURSE_MESSAGES_SEND}          sendExactPath={false}       sendLink={userLink+LINK_COURSE_MESSAGES_SEND.replace(':courseId', courseId)}
+                                type={MESSAGES_COMPONENT_TYPE_MESSAGES} sendMessageShowStudentList={sendMessageShowStudentList}
+                                subjectAltText="Subject"
+                                receivedAltText="Received"      receivedRoutePath={userLink+LINK_COURSE_MESSAGES_RECEIVED}  receivedExactPath={true}   receivedLink={userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId)}
+                                sentAltText="Sent"              sentRoutePath={userLink+LINK_COURSE_MESSAGES_SENT}          sentExactPath={true}       sentLink={userLink+LINK_COURSE_MESSAGES_SENT.replace(':courseId', courseId)}
+                                sendAltText="Send a message"    sendRoutePath={userLink+LINK_COURSE_MESSAGES_SEND}          sendExactPath={true}       sendLink={userLink+LINK_COURSE_MESSAGES_SEND.replace(':courseId', courseId)}
+                                messageViewerRoutePath={userLink+LINK_COURSE_MESSAGES_VIEW} messmessageViewerExactPath={false}
                               />;
 
     const announcementListComponent = <AnnouncementList 
@@ -71,7 +77,7 @@ const Course = withRouter(({canPost, userLink, sendMessageShowStudentList, match
                     tabsAndComponents={[
                         {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),   component:announcementListComponent, id:0},
                         {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),          component:<DummyPlaceholder text='grades'/>, id:1},
-                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,  exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId),        component:messagesComponent, id:2},
+                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,           exactPath:false, link:userLink+LINK_COURSE_MESSAGES.replace(':courseId', courseId),        component:messagesComponent, id:2},
                     ]}
                     additionalComponents={[]}
                 />
@@ -79,6 +85,6 @@ const Course = withRouter(({canPost, userLink, sendMessageShowStudentList, match
             
         </div>    
     );
-});
+};
  
 export default Course;

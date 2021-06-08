@@ -14,32 +14,7 @@ import {
     AUTHENTICATION_STATE_KEY,
     METHOD_POST
 } from '../Constants'
-//import {store} from './Store';
 
-/*
-state: {
-    received: {
-        type: MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS, 
-        courseId: String, 
-        items: [
-            {message:Object, status: STATUS_SUCCEEDED, error: null},
-            ...
-        ], 
-        status: STATUS_IDLE,
-        error: null
-    }, 
-    sent: {
-        type: MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS, 
-        courseId: String, 
-        items:  [
-            {message:Object, status: STATUS_SUCCEEDED, error: null},
-            ...
-        ], 
-        status: STATUS_IDLE,
-        error: null
-    }
-}
-*/
 
 export const fetchListOfMessages = createAsyncThunk(
     'messages/fetchListOfMessages', 
@@ -66,11 +41,10 @@ export const fetchListOfMessages = createAsyncThunk(
     }
 )
 
-// I don't use it cause we ran out of time.
 export const fetchMessageById = createAsyncThunk(
     'messages/fetchMessageById', 
 
-    /* params = {messageId:id, type:MESSAGES_COMPONENT_TYPE_COMPLAITNS, sendingType:MESSAGES_TYPE_RECEIVED}; */
+    /* params = {messageId:id, type:MESSAGES_COMPONENT_TYPE_COMPLAITNS}; */
     async (params) => {
         let path;
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
@@ -128,14 +102,23 @@ export const sendMessage = createAsyncThunk(
 
 const initialState = {
     received: {
+        type: '', 
         courseId: "", 
         items: [], 
         status: STATUS_IDLE,
         error: null
     }, 
     sent: {
+        type: '', 
         courseId: "", 
         items: [], 
+        status: STATUS_IDLE,
+        error: null
+    }, 
+    individuallyFetchedMessage: {
+        type: '', 
+        courseId: '', 
+        item: {}, 
         status: STATUS_IDLE,
         error: null
     }, 
@@ -158,6 +141,7 @@ export const messagesSlice = createSlice({
             state.received.status = STATUS_IDLE;
             state.sent.status = STATUS_IDLE;
             state.newMessage.status = STATUS_IDLE;
+            state.individuallyFetchedMessage.status = STATUS_IDLE;
         }
     }, 
     extraReducers: {
@@ -178,11 +162,7 @@ export const messagesSlice = createSlice({
                 currentSendingType.items = [] // clear*/
 
             receivedData.items.map(item => {
-                currentSendingType.items.push({
-                    message:item, 
-                    status:STATUS_SUCCEEDED, 
-                    error:null
-                });
+                currentSendingType.items.push(item);
             });
         }, 
         [fetchListOfMessages.pending]: (state, action) => {
@@ -207,23 +187,26 @@ export const messagesSlice = createSlice({
 
         
         [fetchMessageById.fulfilled]: (state, action) => {
+            const params = action.meta.arg;
             const receivedData = action.payload;
-            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            //let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
 
-            let currentMessage = currentSendingType.items.find(item => item.message.id === action.meta.arg.messageId);
-            currentMessage.message = receivedData;
-            currentMessage.status = STATUS_SUCCEEDED;
-            currentMessage.error = null;
+            //let currentMessage = currentSendingType.items.find(item => item.message.id === action.meta.arg.messageId);
+            state.individuallyFetchedMessage.type = params.type;
+            state.individuallyFetchedMessage.courseId = params.courseId;
+            state.individuallyFetchedMessage.item = receivedData;
+            state.individuallyFetchedMessage.status = STATUS_SUCCEEDED;
+            state.individuallyFetchedMessage.error = null;
 
         }, 
         [fetchMessageById.pending]: (state, action) => {
             let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
             
-            currentSendingType.items.push({
+            /*currentSendingType.items.push({
                 message:{id:action.meta.arg.messageId},
                 status:STATUS_LOADING, 
                 error:null
-            });
+            });*/
         }, 
         [fetchMessageById.rejected]: (state, action) => {
             let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
@@ -236,16 +219,16 @@ export const messagesSlice = createSlice({
 
 
         [sendMessage.fulfilled]: (state, action) => {
-            //const params = action.meta.arg;
+            const params = action.meta.arg;
             const receivedData = action.payload;
 
             state.newMessage.status = STATUS_SUCCEEDED;
             state.newMessage.item = receivedData;
-            state.sent.items.unshift({
-                message: receivedData, 
-                status: STATUS_SUCCEEDED, 
-                error: null
-            });
+            if (params.type === state.sent.type &&
+                ((params.type === MESSAGES_COMPONENT_TYPE_MESSAGES && params.courseId === state.sent.courseId) ||
+                params.type === MESSAGES_COMPONENT_TYPE_COMPLAITNS))
+
+                state.sent.items.unshift(receivedData);
         }, 
         [sendMessage.pending]: (state, action) => {
             state.newMessage.status = STATUS_LOADING;

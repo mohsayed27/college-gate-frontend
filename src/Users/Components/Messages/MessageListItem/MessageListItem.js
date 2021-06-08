@@ -2,23 +2,15 @@ import styles from './MessageListItem.module.css'
 import {
     MESSAGES_COMPONENT_VIEWING_TYPE_ITEM
 } from '../../../../Constants'
-import {useHistory, useLocation} from 'react-router-dom'
+import {Link, useHistory, useLocation} from 'react-router-dom'
 
-const MessageListItem = ({messageId, senderName, subject, date, content, setViewingType, setCurrentViewedMessageId}) => {
+const MessageListItem = ({link, senderName, subject, date, content}) => {
 
     let location = useLocation();
     let history = useHistory();
 
-    const clickHandler = (event) => {
-        setCurrentViewedMessageId(messageId);
-        setViewingType(MESSAGES_COMPONENT_VIEWING_TYPE_ITEM);
-        //history.goForward(1);
-        history.push(location.pathname+'/'+messageId);
-        //console.log(history.state);
-    }
-
     return (
-        <div className={styles.message_list_item} onClick={clickHandler}>
+        <Link className={`${styles.message_list_item} no_text_decoration`} to={link}>
             <div className={styles.top_section}>
                 <p className='font2 bold'>{senderName}</p>
                 <p className='font2 bold'>|</p>
@@ -30,7 +22,7 @@ const MessageListItem = ({messageId, senderName, subject, date, content, setView
             <p className={`${styles.message_content} font2`}>
                 {content}
             </p>
-        </div>
+        </Link>
     );
 }
 
