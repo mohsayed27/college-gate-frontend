@@ -105,7 +105,7 @@ const MessageViewer = ({messagesType, subjectAltText="Subject"}) => {
                 <div className={styles.actual_message_subject}>{messageItem && messageItem.subject}</div>
             </div>
 
-            <div className={`${styles.message_content} font2`}>{messageItem && messageItem.content}</div>}
+            <div className={`${styles.message_content} font2`}>{messageItem && messageItem.content}</div>
         </div>
     );
 };
