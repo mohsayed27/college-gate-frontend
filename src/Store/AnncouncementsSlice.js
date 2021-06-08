@@ -44,7 +44,7 @@ export const postAnnouncement = createAsyncThunk(
         const headers = {
             'Content-Type': 'application/json', 
             //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
-            'Authorization': 'Bearer '
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
 
         }
         //console.log(JSON.stringify(params.content));

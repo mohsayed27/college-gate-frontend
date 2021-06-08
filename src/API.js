@@ -2,7 +2,8 @@
 
 export async function apiRequest(url, method, headers, bodyData) {
     let data;
-    console.log(bodyData);
+    console.log("API request @", url);
+    if (bodyData) console.log("To be sent body", bodyData);
     let config = {
         method: method, // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -19,14 +20,16 @@ export async function apiRequest(url, method, headers, bodyData) {
         //console.log("Fetched response: ", response);
         data = await response.json();
         //console.log("Data: ", data);
+        console.log("Received data", data);
 
         if (response.ok) {
             return data;
         }
         throw new Error(response.statusText)
     } catch(err) {
-        console.log('err');
-        console.log(err);
+        console.log('err', err);
+        if (err.message === "Failed to fetch")
+            err.message = "Server communication failure";
         return Promise.reject(err.message ? err.message : data)
     }
 }

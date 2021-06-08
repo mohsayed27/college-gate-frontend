@@ -104,7 +104,7 @@ export const coursesSlice = createSlice({
         [fetchAllCourses.fulfilled]: (state, action) => {
             state.status = STATUS_SUCCEEDED;
             //console.log(action);
-            state.courses = action.payload.courses;
+            state.courses = action.payload.items;
         }, 
         [fetchAllCourses.pending]: (state) => {
             state.status = STATUS_LOADING

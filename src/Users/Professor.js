@@ -9,8 +9,10 @@ import {
     LINK_COMPLAINTS, 
     LINK_COURSE,
     LINK_CREATE,
-    CREATE
+    CREATE,
+    LINK_PROFESSOR_HOME
 } from '../Constants'
+import {useLocation, Redirect} from 'react-router-dom'
 
 const Professor = () => {
 
@@ -20,8 +22,13 @@ const Professor = () => {
 
     
     const additionalComponents = [
-        {link:LINK_PROFESSOR + LINK_COURSE, exactLink:false, component:<Course userLink={LINK_PROFESSOR} sendMessageShowStudentList={true} showCourseKey={true}/>, id:3}, 
+        {link:LINK_PROFESSOR + LINK_COURSE, exactLink:false, component:<Course canPost={true} userLink={LINK_PROFESSOR} sendMessageShowStudentList={true} showCourseKey={true}/>, id:3}, 
     ];
+
+    let location = useLocation();
+
+    if (location.pathname === LINK_PROFESSOR)
+        return <Redirect to={LINK_PROFESSOR_HOME}/>;
     
     return (
         <AccountMain navItemsAndComponents={navItemsAndComponents} additionalComponents={additionalComponents}/>

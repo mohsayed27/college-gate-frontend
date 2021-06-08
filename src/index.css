@@ -67,8 +67,16 @@ body {
   color: var(--dim);
 }
 
+.red {
+  color: var(--red);
+}
+
 .pointer {
   cursor: pointer;
+}
+
+.flex1 {
+  flex: 1;
 }
 
 .no_text_decoration {

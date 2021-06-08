@@ -5,6 +5,7 @@ import {fetchStudentList, selectStudentList} from '../../../Store/StudentListSli
 import {sendMessage, returnNewMessageToIdle, selectAllMessages} from '../../../Store/MessagesSlice'
 import {
     MESSAGES_COMPONENT_TYPE_MESSAGES,
+    STATUS_FAILED,
     STATUS_SUCCEEDED
 } from '../../../Constants';
 import { Redirect } from 'react-router';
@@ -87,7 +88,7 @@ const SendMessage = ({messageComponentType, showStudentList=true, courseId, sent
                         }
                         {
                             studentList.items.map(item => (
-                                <option value={item.student_id} key={item.student_id}>{item.name}</option>
+                                <option value={item.id} key={item.id}>{item.name}</option>
                             ))
                         }
                     </select>
@@ -105,7 +106,7 @@ const SendMessage = ({messageComponentType, showStudentList=true, courseId, sent
                                 value={messageContent} onChange={messageContentChangeHandler} required/>
 
             <div className={styles.send_button_parent_div}>
-                <div className={styles.send_button_spacer}/>
+                <p className='font2 bold red flex1'>{messages.newMessage.status === STATUS_FAILED && messages.newMessage.error.message}</p>
                 <button className={`input_button ${styles.send_button}`} type="submit">Send</button>
             </div>
         </form>

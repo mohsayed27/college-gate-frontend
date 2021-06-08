@@ -8,12 +8,13 @@ import {
     LINK_COMPLAINTS, 
     LINK_WARNINGS, 
     LINK_ANNOUNCEMENTS,
-    ENROLL
+    ENROLL,
+    LINK_STUDENT_HOME
 } from '../Constants'
 import AnnouncementList from './Components/AnnouncementList/AnnouncementList'
 import CourseList from './Components/CourseList/CourseList'
 import Course from './Components/Course/Course'
-
+import {useLocation, Redirect} from 'react-router-dom'
 
 
 const Student = () => {
@@ -29,8 +30,13 @@ const Student = () => {
                                       {text:'Complaints',  link:LINK_STUDENT + LINK_COMPLAINTS,       exactLink:true, component:<DummyPlaceholder text='complaints'/>, id:3}*/];
 
     const additionalComponents = [
-        {link:LINK_STUDENT + LINK_COURSE, exactLink:false, component:<Course userLink={LINK_STUDENT} sendMessageShowStudentList={false} showCourseKey={false}/>, id:3}
+        {link:LINK_STUDENT + LINK_COURSE, exactLink:false, component:<Course canPost={false} userLink={LINK_STUDENT} sendMessageShowStudentList={false} showCourseKey={false}/>, id:3}
     ]
+
+    let location = useLocation();
+
+    if (location.pathname === LINK_STUDENT)
+        return <Redirect to={LINK_STUDENT_HOME}/>;
 
 
     return (

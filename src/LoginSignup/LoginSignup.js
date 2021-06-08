@@ -145,7 +145,7 @@ const LoginSignup = () => {
                     </div>
                 }
                 {authenticationState.status === STATUS_LOADING && <p className='font2 bold center_text'>Loading...</p>}
-                {authenticationState.status === STATUS_FAILED && <p className='font2 bold center_text'>{authenticationState.error.message}</p>}
+                {authenticationState.status === STATUS_FAILED && <p className='font2 bold center_text red'>{authenticationState.error.message}</p>}
                 {/*console.log(authenticationState)*/}
                 {(authenticationState.status === STATUS_SUCCEEDED && 
                     location.pathname.includes(LINK_SIGNUP)) &&

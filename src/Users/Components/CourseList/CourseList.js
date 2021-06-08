@@ -57,12 +57,12 @@ const CourseList = ({userLink, createEnrollText/*, createEnrollLink*/}) => {
                 courses.courses.map(
                     course => (
                         <CourseCard
-                            key={course.Course_id}
-                            courseId={course.Course_id}
-                            coverImgSrc={course.Image_url}
-                            courseTitle={course.Name}
-                            profImgSrc={course.Professor.ImgUrl}
-                            professorName={course.Professor.Name}
+                            key={course.id}
+                            courseId={course.id}
+                            coverImgSrc={course.imgUrl}
+                            courseTitle={course.name}
+                            profImgSrc={course.professor.imgUrl}
+                            professorName={course.professor.name}
                             userLink={userLink}
                         />
                     )
@@ -84,7 +84,8 @@ const CourseList = ({userLink, createEnrollText/*, createEnrollLink*/}) => {
                             value={courseKeyInput} onChange={courseKeyInputChangeHandler} required/>
                     
                     <div className={styles.enroll_button_parent_div}>
-                        <div className={styles.enroll_button_spacer}/>
+                        {/*<div className={styles.enroll_button_spacer}/>*/}
+                        <p className='font2 bold red flex1'>{courses.createEnroll.status === STATUS_FAILED && courses.createEnroll.error.message}</p>
                         <button className="input_button" type="submit">{createEnrollText}</button>
                     </div>
                 </form>

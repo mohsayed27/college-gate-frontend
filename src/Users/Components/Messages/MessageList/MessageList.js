@@ -77,12 +77,12 @@ const MessageList = withRouter(({messagesType, messagesSendingType, setViewingTy
                     /*let currentLink = match.url;
                     currentLink = currentLink.replace(LINK_RECEIVED, LINK_VIEW);
                     currentLink = currentLink.replace(LINK_SENT, LINK_VIEW);
-                    currentLink = currentLink.concat('/' + item.message.message_id);*/
+                    currentLink = currentLink.concat('/' + item.message.id);*/
                     return (
-                    //<Link className="no_text_decoration" to={currentLink} key={item.message.message_id}>
-                        <div className="pointer" key={item.message.message_id}>
+                    //<Link className="no_text_decoration" to={currentLink} key={item.message.id}>
+                        <div className="pointer" key={item.message.id}>
                             <MessageListItem 
-                                messageId={item.message.message_id}
+                                messageId={item.message.id}
                                 senderName={item.message.sender.name} 
                                 subject={item.message.subject}
                                 date={item.message.date}

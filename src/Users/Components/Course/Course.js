@@ -22,7 +22,7 @@ import {
 } from '../../../Constants'
 import AnnouncementList from '../AnnouncementList/AnnouncementList';
 
-const Course = withRouter(({userLink, sendMessageShowStudentList, match, showCourseKey}) => {
+const Course = withRouter(({canPost, userLink, sendMessageShowStudentList, match, showCourseKey}) => {
     
     const courses = useSelector(selectAllCourses);
     const dispatch = useDispatch();
@@ -39,9 +39,9 @@ const Course = withRouter(({userLink, sendMessageShowStudentList, match, showCou
     let course;
     let professor;
     if (courses.status === STATUS_SUCCEEDED) {
-        course = courses.courses.find(course => course.Course_id === courseId);
+        course = courses.courses.find(course => course.id === courseId);
         //console.log(courses);
-        professor = course.Professor;
+        professor = course.professor;
     }
 
     const messagesComponent = <Messages 
@@ -52,6 +52,7 @@ const Course = withRouter(({userLink, sendMessageShowStudentList, match, showCou
                               />;
 
     const announcementListComponent = <AnnouncementList 
+                                        canPost={canPost}
                                         allCourses={false} 
                                         courseId={courseId}
                                       />
@@ -65,8 +66,8 @@ const Course = withRouter(({userLink, sendMessageShowStudentList, match, showCou
             {
                 courses.status === STATUS_SUCCEEDED &&
                 <CoverTabsContent 
-                    coverImgSrc={course.Image_url} 
-                    avatarComponent={<CourseAvatar imgSrc={professor.ImgUrl} courseTitle={course.Name} profName={professor.Name} showCourseKey={showCourseKey ? courseId : undefined}/>}
+                    coverImgSrc={course.imgUrl} 
+                    avatarComponent={<CourseAvatar imgSrc={professor.imgUrl} courseTitle={course.name} profName={professor.name} showCourseKey={showCourseKey ? courseId : undefined}/>}
                     tabsAndComponents={[
                         {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),   component:announcementListComponent, id:0},
                         {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),          component:<DummyPlaceholder text='grades'/>, id:1},

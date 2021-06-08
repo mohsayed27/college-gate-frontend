@@ -50,7 +50,7 @@ const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES 
         dispatch(fetchMessageById(params));*/
     }, []);
 
-    /*let message10 = messages.received.items.find(item => item.message.message_id === "message10");
+    /*let message10 = messages.received.items.find(item => item.message.id === "message10");
 
     if (message10 && (message10.status === STATUS_SUCCEEDED)) {
         console.log("message10: ", message10);
@@ -74,17 +74,17 @@ const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES 
         //console.log(currentSendingTypeMessages.items);
         let messageItem = currentSendingTypeMessages.items.find(item => {
             //console.log(item);
-            return item.message.message_id === currentViewedMessageId;
+            return item.message.id === currentViewedMessageId;
         }).message;
 
-        let courseItem = courses.courses.find(item => item.Course_id === courseId);
+        let courseItem = courses.courses.find(item => item.id === courseId);
         
         //console.log(messageItem);
 
         messageViewerComponent = <MessageViewer
                                     imgSenderSrc={messageItem.sender.imgUrl}
                                     messageSender={messageItem.sender.name}
-                                    courseTitle={courseItem.Name}
+                                    courseTitle={courseItem.name}
                                     date={messageItem.date}
                                     messageSubject={messageItem.subject}
                                     messageContent={messageItem.content}

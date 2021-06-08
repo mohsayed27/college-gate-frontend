@@ -102,7 +102,7 @@ export const sendMessage = createAsyncThunk(
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES) {
             path = BASE_URL+`/api/v1/message/me/course/${params.courseId}`;
             body = {
-                receiver_id: params.receiverId,
+                id: params.receiverId,
                 subject: params.subject,
                 content: params.content
             };
@@ -210,7 +210,7 @@ export const messagesSlice = createSlice({
             const receivedData = action.payload;
             let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
 
-            let currentMessage = currentSendingType.items.find(item => item.message.message_id === action.meta.arg.messageId);
+            let currentMessage = currentSendingType.items.find(item => item.message.id === action.meta.arg.messageId);
             currentMessage.message = receivedData;
             currentMessage.status = STATUS_SUCCEEDED;
             currentMessage.error = null;
@@ -220,7 +220,7 @@ export const messagesSlice = createSlice({
             let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
             
             currentSendingType.items.push({
-                message:{message_id:action.meta.arg.messageId},
+                message:{id:action.meta.arg.messageId},
                 status:STATUS_LOADING, 
                 error:null
             });
@@ -228,7 +228,7 @@ export const messagesSlice = createSlice({
         [fetchMessageById.rejected]: (state, action) => {
             let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
             
-            let currentMessage = currentSendingType.items.find(item => item.message.message_id === action.meta.arg.messageId);
+            let currentMessage = currentSendingType.items.find(item => item.message.id === action.meta.arg.messageId);
             currentMessage.status = STATUS_FAILED;
             currentMessage.error = action.error;
         }, 

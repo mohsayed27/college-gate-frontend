@@ -90,7 +90,7 @@ const AnnouncementList = ({canPost, allCourses, courseId}) => {
                     <textarea className="textarea remove_user_agent_stylesheet font2" name="new_announcement_content" id="new_announcement_content" rows="6" 
                                 value={newAnnouncementContent} onChange={newAnnouncementContentChangeHandler} required/>
                     <div className={styles.post_button_parent_div}>
-                        <div className={styles.post_button_spacer}/>
+                        <p className='font2 bold red flex1'>{announcements.newAnnouncement.status === STATUS_FAILED && announcements.newAnnouncement.error.message}</p>
                         <button className={`input_button ${styles.post_button}`} type="submit">Post</button>
                     </div>
                 </form>

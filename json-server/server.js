@@ -56,11 +56,11 @@ server.use((req, res, next) => {
             setTimeout(() => {
                 res.json(
                     {
-                        message_id: Date.now(),
+                        id: Date.now(),
                         sender: {
                           id: Date.now()*1.5,
                           name: "string",
-                          imageUrl: "https://picsum.photos/id/1005/100",
+                          imgUrl: "https://picsum.photos/id/1005/100",
                           type: "string"
                         },
                         reciever: {
@@ -76,16 +76,17 @@ server.use((req, res, next) => {
                 );
             }, DELAY);
         } else if (req.path.includes('/enroll')) {
+            //console.log(req.body.name);
             setTimeout(() => {
                 res.json(
                     {
-                        Course_id: Date.now(),
-                        Name: req.body.name,
-                        Image_url: "https://picsum.photos/850/350",
-                        Professor: {
-                          _id: Date.now()*1.5,
-                          Name: "Bahgat Saber",
-                          ImgUrl: "https://picsum.photos/id/1005/100"
+                        id: Date.now(),
+                        name: "Course Title",
+                        imgUrl: "https://picsum.photos/850/350",
+                        professor: {
+                          id: Date.now()*1.5,
+                          name: "Bahgat Saber",
+                          imgUrl: "https://picsum.photos/id/1005/100"
                         },
                         student: {
                           id: Date.now()*2,
@@ -99,13 +100,13 @@ server.use((req, res, next) => {
             setTimeout(() => {
                 res.json(
                     {
-                        Course_id: Date.now(),
-                        Name: req.body.name,
-                        Image_url: "https://picsum.photos/850/350",
-                        Professor: {
-                          _id: Date.now()*1.5,
-                          Name: "Bahgat Saber",
-                          ImgUrl: "https://picsum.photos/id/1005/100"
+                        id: Date.now(),
+                        name: req.body.name,
+                        imgUrl: "https://picsum.photos/850/350",
+                        professor: {
+                          id: Date.now()*1.5,
+                          name: "Bahgat Saber",
+                          imgUrl: "https://picsum.photos/id/1005/100"
                         },
                         student: {
                           id: Date.now()*2,
@@ -122,6 +123,12 @@ server.use((req, res, next) => {
 });
 server.use(jsonServer.rewriter(require('./routes.json')));
 server.use(router);
-server.listen(4000, '192.168.1.198', () => {
+/*server.listen(4000, '192.168.1.198', () => {
+    console.log('JSON Server is running');
+});*/
+//, '41.238.49.126'
+server.listen(7000, '192.168.1.198', () => {
     console.log('JSON Server is running');
 });
+
+// 41.238.49.126:7000/api/v1/course/all
