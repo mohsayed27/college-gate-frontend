@@ -2,12 +2,19 @@ import styles from './MessageListItem.module.css'
 import {
     MESSAGES_COMPONENT_VIEWING_TYPE_ITEM
 } from '../../../../Constants'
+import {useHistory, useLocation} from 'react-router-dom'
 
 const MessageListItem = ({messageId, senderName, subject, date, content, setViewingType, setCurrentViewedMessageId}) => {
+
+    let location = useLocation();
+    let history = useHistory();
 
     const clickHandler = (event) => {
         setCurrentViewedMessageId(messageId);
         setViewingType(MESSAGES_COMPONENT_VIEWING_TYPE_ITEM);
+        //history.goForward(1);
+        history.push(location.pathname+'/'+messageId);
+        //console.log(history.state);
     }
 
     return (

@@ -3,8 +3,8 @@ import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchListOfMessages, fetchMessageById, returnNewMessageToIdle, selectAllMessages} from '../../../Store/MessagesSlice'
 import {selectAllCourses} from '../../../Store/CoursesSlice'
-import {Route, Switch, withRouter, useLocation} from 'react-router-dom';
-import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT, MESSAGES_COMPONENT_TYPE_MESSAGES, LINK_COURSE_MESSAGES_SENT, LINK_COURSE_MESSAGES_RECEIVED} from '../../../Constants'
+import {Route, Switch, withRouter, useLocation, useHistory} from 'react-router-dom';
+import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT, MESSAGES_COMPONENT_TYPE_MESSAGES, LINK_COURSE_MESSAGES_SENT, LINK_COURSE_MESSAGES_RECEIVED, LINK_RECEIVED, LINK_SENT, LINK_SEND} from '../../../Constants'
 import Sidebar from '../Sidebar/Sidebar'
 import MessageListItem from './MessageListItem/MessageListItem';
 import MessageList from './MessageList/MessageList';
@@ -35,6 +35,7 @@ const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES 
     const courses = useSelector(selectAllCourses);
 
     let location = useLocation();
+    let history = useHistory();
 
     
     const [viewingType, setViewingType] = useState(MESSAGES_COMPONENT_VIEWING_TYPE_LIST);
@@ -64,6 +65,20 @@ const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES 
         {text:sendAltText, link:sendLink, id:2}, 
     ];
 
+
+    //console.log(location.pathname.split(LINK_RECEIVED).pop());
+    if ((location.pathname.split(LINK_RECEIVED).pop() === "" || //LINK_RECEIVED is at the end of the pathname
+        location.pathname.split(LINK_SENT).pop() === "" ||
+        location.pathname.split(LINK_SEND).pop() === "")) {
+
+        if (viewingType !== MESSAGES_COMPONENT_VIEWING_TYPE_LIST)
+            setViewingType(MESSAGES_COMPONENT_VIEWING_TYPE_LIST);
+            
+    } else {
+        
+    }
+
+
     let messageViewerComponent;
     if (viewingType === MESSAGES_COMPONENT_VIEWING_TYPE_ITEM) {
         //console.log(match);
@@ -75,20 +90,25 @@ const Messages = withRouter(({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES 
         let messageItem = currentSendingTypeMessages.items.find(item => {
             //console.log(item);
             return item.message.id === currentViewedMessageId;
-        }).message;
+        });
+        /*if (!messageItem)
+            setViewingType(MESSAGES_COMPONENT_VIEWING_TYPE_LIST);
+        else {*/
+            messageItem = messageItem.message;
 
-        let courseItem = courses.courses.find(item => item.id === courseId);
-        
-        //console.log(messageItem);
+            let courseItem = courses.courses.find(item => item.id === courseId);
+            
+            //console.log(messageItem);
 
-        messageViewerComponent = <MessageViewer
-                                    imgSenderSrc={messageItem.sender.imgUrl}
-                                    messageSender={messageItem.sender.name}
-                                    courseTitle={courseItem.name}
-                                    date={messageItem.date}
-                                    messageSubject={messageItem.subject}
-                                    messageContent={messageItem.content}
-                                 />
+            messageViewerComponent = <MessageViewer
+                                        imgSenderSrc={messageItem.sender.imgUrl}
+                                        messageSender={messageItem.sender.name}
+                                        courseTitle={courseItem.name}
+                                        date={messageItem.date}
+                                        messageSubject={messageItem.subject}
+                                        messageContent={messageItem.content}
+                                    />
+        //}
     }
     
 
