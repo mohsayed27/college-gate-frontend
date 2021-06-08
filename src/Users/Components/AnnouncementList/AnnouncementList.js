@@ -80,7 +80,7 @@ const AnnouncementList = ({canPost, allCourses, courseId}) => {
 
     let style = styles.announcement_list;
     if (allCourses)
-        style = `${styles.announcement_list} ${styles.padding_added}`;
+        style = `${styles.announcement_list} add_padding`;
     
     return (
         <div className={style}>

@@ -3,8 +3,8 @@ import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchListOfMessages, fetchMessageById, returnNewMessageToIdle, selectAllMessages} from '../../../Store/MessagesSlice'
 import {selectAllCourses} from '../../../Store/CoursesSlice'
-import {Route, Switch, withRouter, useLocation, useHistory, useParams, useRouteMatch} from 'react-router-dom';
-import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT, MESSAGES_COMPONENT_TYPE_MESSAGES, LINK_COURSE_MESSAGES_SENT, LINK_COURSE_MESSAGES_RECEIVED, LINK_RECEIVED, LINK_SENT, LINK_SEND} from '../../../Constants'
+import {Route, Switch, withRouter, useLocation, useHistory, useParams, useRouteMatch, Redirect} from 'react-router-dom';
+import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT, MESSAGES_COMPONENT_TYPE_MESSAGES, LINK_COURSE_MESSAGES_SENT, LINK_COURSE_MESSAGES_RECEIVED, LINK_RECEIVED, LINK_SENT, LINK_SEND, LINK_COURSE_MESSAGES} from '../../../Constants'
 import Sidebar from '../Sidebar/Sidebar'
 import MessageListItem from './MessageListItem/MessageListItem';
 import MessageList from './MessageList/MessageList';
@@ -20,12 +20,13 @@ import SendMessage from '../SendMessage/SendMessage';
 
 */
 
-const Messages = ({type /*MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS*/,
+const Messages = ({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS*/,
                                 sendMessageShowStudentList, subjectAltText, 
                                 receivedAltText, receivedRoutePath, receivedExactPath, receivedLink, 
                                 sentAltText, sentRoutePath, sentExactPath, sentLink, 
                                 sendAltText, sendRoutePath, sendExactPath, sendLink, 
-                                messageViewerRoutePath, messageViewerExactPath}) => {
+                                messageViewerRoutePath, messageViewerExactPath, 
+                                addPadding=false}) => {
 
     let messages = useSelector(selectAllMessages);
     const dispatch = useDispatch();
@@ -71,8 +72,18 @@ const Messages = ({type /*MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_
 
     //professor/course/course0/messages/received/view/message0
     //professor/course/course0/messages/received/view/message0
+
+    /*console.log(userL+match.path);
+    console.log(LINK_COURSE_MESSAGES);*/
+    /*if ()
+        return <Redirect to={location.pathname+LINK_COURSE_MESSAGES_RECEIVED}/>;*/
+
+    let style = styles.messages;
+    if (addPadding)
+        style = `${styles.messages} add_padding`
+
     return (
-        <div className={styles.messages}>
+        <div className={style}>
             <div className={styles.messages_sidebar}>
                 <Sidebar navItems={sidebarNavItems}/>
             </div>
@@ -113,8 +124,8 @@ const Messages = ({type /*MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_
                     </Route>
             
                 </Switch>
-            </div>               
-            
+            </div>
+
         </div>
     );
 };

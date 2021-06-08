@@ -5,7 +5,7 @@
 
 .messages_sidebar {
     background-color: var(--darkest);
-    width: 148px;
+    width: 155px;
     height: fit-content;
     position: sticky;
     top: 59px;

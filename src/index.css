@@ -116,6 +116,10 @@ body {
   box-shadow: none;
 }
 
+.add_padding {
+  padding: 10px;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -25,7 +25,7 @@ export const fetchListOfMessages = createAsyncThunk(
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
             path = BASE_URL+`/api/v1/message/${params.sendingType}/course/${params.courseId}?offset=${params.offset}&limit=${params.limit}`;
         else
-            path = BASE_URL+`/api/v1/complaintMessages/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
+            path = BASE_URL+`/api/v1/complaintMessage/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
         //console.log(path);
         const headers = {
             'Content-Type': 'application/json', 

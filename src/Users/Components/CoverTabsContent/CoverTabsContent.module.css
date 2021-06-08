@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     /* width: 850px; */
-    max-width: min(100%, 850px);
+    width: min(100%, 850px);
+    /* width: 100px; */
     height: 100%;
     /* top: var(--header_height); */
     /* gap: 10px; */
@@ -15,10 +16,10 @@
     object-fit: cover;
     /* max-height: 350px; */
     /* aspect-ratio: 850/350; */
-    width: min(100%, 850px);
-    /* width: 850px; */
+    /* max-width: min(100%, 850px); */
+    width: 100%;
+    /* height: min(100%, 350px); */
     max-height: 350px;
-    /* max-height: 350px; */
     flex: 1;
 }
 
