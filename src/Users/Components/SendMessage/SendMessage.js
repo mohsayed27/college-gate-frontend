@@ -38,7 +38,7 @@ const SendMessage = ({messageComponentType, showStudentList=true, courseId, sent
         let params;
         //if (messageComponentType === MESSAGES_COMPONENT_TYPE_MESSAGES)
             params = {
-                receiverId: selectedStudent,
+                receiverId: showStudentList ? selectedStudent : undefined,
                 courseId: courseId, 
                 type: messageComponentType, 
                 subject: subjectInput, 

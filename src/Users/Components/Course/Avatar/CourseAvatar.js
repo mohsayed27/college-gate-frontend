@@ -1,6 +1,9 @@
 import styles from './CourseAvatar.module.css';
 
 const CourseAvatar = ({imgSrc, courseTitle, profName, courseKey}) => {
+    
+    console.log("courseKey: ", courseKey);
+
     return (
         <div className={styles.course_avatar}>
             <img className={styles.avatar_img} src={imgSrc} alt="Course avatar" />

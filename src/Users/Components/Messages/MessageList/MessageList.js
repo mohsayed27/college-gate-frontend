@@ -81,7 +81,7 @@ const MessageList = ({messagesType, messagesSendingType, messageViewerRoutePath}
             {(currentMessages.status === STATUS_SUCCEEDED || 
                 (currentMessages.items.length > 0)) &&
                 currentMessages.items.map(item => {
-                    console.log(item);
+                    //console.log(item);
                     /*let currentLink = match.url;
                     currentLink = currentLink.replace(LINK_RECEIVED, LINK_VIEW);
                     currentLink = currentLink.replace(LINK_SENT, LINK_VIEW);

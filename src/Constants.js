@@ -1,5 +1,6 @@
-export const MOCK = true;
-export const BASE_URL = MOCK ? 'http://192.168.1.198:7000' : 'http://localhost:3000';
+export const MOCK = false;
+export const BASE_URL = MOCK ? 'http://192.168.1.198:7000' : 'http://192.168.1.199:4000';
+//export const BASE_URL = MOCK ? 'http://192.168.1.198:7000' : 'http://localhost:4000';
 
 export const STATUS_IDLE = 'idle';
 export const STATUS_LOADING = 'loading';

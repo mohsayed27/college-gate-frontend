@@ -63,6 +63,7 @@ const Course = ({canPost, userLink, sendMessageShowStudentList, match, showCours
                                         courseId={courseId}
                                       />
 
+    console.log("showCourseKey: ", showCourseKey ? courseId : undefined);
 
     return (
         <div className={styles.course}>
@@ -73,7 +74,7 @@ const Course = ({canPost, userLink, sendMessageShowStudentList, match, showCours
                 courses.status === STATUS_SUCCEEDED &&
                 <CoverTabsContent 
                     coverImgSrc={course.imgUrl} 
-                    avatarComponent={<CourseAvatar imgSrc={professor.imgUrl} courseTitle={course.name} profName={professor.name} showCourseKey={showCourseKey ? courseId : undefined}/>}
+                    avatarComponent={<CourseAvatar imgSrc={professor.imgUrl} courseTitle={course.name} profName={professor.name} courseKey={showCourseKey ? course.key : undefined}/>}
                     tabsAndComponents={[
                         {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),   component:announcementListComponent, id:0},
                         {iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),          component:<DummyPlaceholder text='grades'/>, id:1},

@@ -17,7 +17,7 @@ export const fetchStudentList = createAsyncThunk(
             'Content-Type': 'application/json', 
             'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
         }
-        const data = await apiRequest(BASE_URL+`/api/v1/me/utils/course/${params.courseId}`, METHOD_GET, headers);
+        const data = await apiRequest(BASE_URL+`/api/v1/course/${params.courseId}/students`, METHOD_GET, headers);
         return data;
     }
 );

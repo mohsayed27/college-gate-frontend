@@ -23,9 +23,9 @@ export const fetchListOfMessages = createAsyncThunk(
     async (params) => {
         let path;
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
-            path = BASE_URL+`/api/v1/me/messages/${params.sendingType}/course/${params.courseId}?limit=${params.limit}&offset=${params.offset}`;
+            path = BASE_URL+`/api/v1/message/${params.sendingType}/course/${params.courseId}?offset=${params.offset}&limit=${params.limit}`;
         else
-            path = BASE_URL+`/api/v1/me/complaintMessages/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
+            path = BASE_URL+`/api/v1/complaintMessages/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
         //console.log(path);
         const headers = {
             'Content-Type': 'application/json', 
@@ -48,9 +48,9 @@ export const fetchMessageById = createAsyncThunk(
     async (params) => {
         let path;
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
-            path = BASE_URL+`/api/v1/me/message/${params.messageId}`;
+            path = BASE_URL+`/api/v1/message/${params.messageId}`;
         else
-            path = BASE_URL+`/api/v1/me/complaintMessage/${params.messageId}`;
+            path = BASE_URL+`/api/v1/complaintMessage/${params.messageId}`;
 
         const headers = {
             'Content-Type': 'application/json', 
@@ -76,7 +76,7 @@ export const sendMessage = createAsyncThunk(
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES) {
             path = BASE_URL+`/api/v1/message/me/course/${params.courseId}`;
             body = {
-                id: params.receiverId,
+                receiver_id: params.receiverId,
                 subject: params.subject,
                 content: params.content
             };
@@ -200,8 +200,9 @@ export const messagesSlice = createSlice({
 
         }, 
         [fetchMessageById.pending]: (state, action) => {
-            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
-            
+            //let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            state.individuallyFetchedMessage.status = STATUS_LOADING;
+
             /*currentSendingType.items.push({
                 message:{id:action.meta.arg.messageId},
                 status:STATUS_LOADING, 
@@ -209,11 +210,14 @@ export const messagesSlice = createSlice({
             });*/
         }, 
         [fetchMessageById.rejected]: (state, action) => {
-            let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
+            /*let currentSendingType = (action.meta.arg.sendingType === MESSAGES_TYPE_RECEIVED) ? state.received : state.sent;
             
-            let currentMessage = currentSendingType.items.find(item => item.message.id === action.meta.arg.messageId);
+            let currentMessage = currentSendingType.items.find(item => item.id === action.meta.arg.messageId);
             currentMessage.status = STATUS_FAILED;
-            currentMessage.error = action.error;
+            currentMessage.error = action.error;*/
+
+            state.individuallyFetchedMessage.status = STATUS_FAILED;
+            state.individuallyFetchedMessage.error = action.error;
         }, 
 
 

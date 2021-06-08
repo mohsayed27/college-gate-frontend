@@ -16,6 +16,9 @@
     /* max-height: 350px; */
     /* aspect-ratio: 850/350; */
     width: min(100%, 850px);
+    /* width: 850px; */
+    max-height: 350px;
+    /* max-height: 350px; */
     flex: 1;
 }
 
