@@ -46,7 +46,7 @@ const Student = () => {
                                     {text:'Complaints',         link:LINK_STUDENT + LINK_COMPLAINTS,         exactLink:false, component:complaintsComponent,        id:2}];
 
     const additionalComponents = [
-        {link:LINK_STUDENT + LINK_COURSE, exactLink:false, component:<Course canPost={false} userLink={LINK_STUDENT} sendMessageShowStudentList={false} showCourseKey={false}/>, id:3}
+        {link:LINK_STUDENT + LINK_COURSE, exactLink:false, component:<Course userLink={LINK_STUDENT} canPost={false} canAnnounceGrade={false} sendMessageShowStudentList={false} showCourseKey={false}/>, id:3}
     ]
 
     let location = useLocation();

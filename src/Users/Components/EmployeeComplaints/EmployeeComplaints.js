@@ -48,7 +48,7 @@ const EmployeeComplaints = ({userLink=LINK_EMPLOYEE}) => {
         <div className={`${styles.employee_complaints} add_padding`}>
             <Switch>
                 <Route path={LINK_EMPLOYEE_HOME} exact={true}>
-                    <div style={{backgroundColor:'black'}}>
+                    <div style={{backgroundColor:'var(--darkest)'}}>
                         <MessageList
                             messagesType={MESSAGES_COMPONENT_TYPE_COMPLAITNS}
                             messagesSendingType={MESSAGES_TYPE_RECEIVED}

@@ -119,7 +119,7 @@ const MessageViewer = ({messagesType, messagesSendingType, subjectAltText="Subje
                 imgSrc={messageItem && messageItem.sender.imgUrl}
                 announcementOwner={messageItem && messageItem.sender.name}
                 //courseTitle={courseTitle}
-                date={messageItem && messageItem.date}
+                date={messageItem && (messageItem.date || messageItem.date_response)}
             />
 
             <div className={`${styles.subject_div} font2 bold`}>
@@ -127,7 +127,7 @@ const MessageViewer = ({messagesType, messagesSendingType, subjectAltText="Subje
                 <div className={styles.actual_message_subject}>{messageItem && messageItem.subject}</div>
             </div>
 
-            <div className={`${styles.message_content} font2`}>{messageItem && messageItem.content}</div>
+            <div className={`${styles.message_content} font2`}>{messageItem && (messageItem.content || messageItem.content_response)}</div>
         </div>
     );
 };

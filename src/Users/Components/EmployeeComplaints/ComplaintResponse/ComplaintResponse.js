@@ -28,7 +28,7 @@ const ComplaintResponse = ({}) => {
     const responseContentChangeHandler = (event) => setResponseTextareaContent(event.target.value);
     const submitResponseHandler = (event) => {
         event.preventDefault();
-        if (responseTextareaContent != '') {
+        if (responseTextareaContent !== '') {
             // Post to server
             let params = {
                 complaintId: complaintId,

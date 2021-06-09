@@ -1,17 +1,8 @@
-.course_card {
-    width: min(326px, 100%);
-    height: 231px;
-    padding: 10px;
-    background-color: var(--darker);
-    margin: 5px;
-    text-decoration: none;
-}
-
 .course_cover {
     width: 100%;
     height: 126px;
     object-fit: cover;
-    background-color: dimgrey;
+    background-color: var(--darkest);
     margin-bottom: 8px;
 }
 

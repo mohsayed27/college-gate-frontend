@@ -1,0 +1,13 @@
+.exam_name {
+    background-color: var(--darkest);
+    margin: 0;
+    text-align: center;
+    padding: 10px;
+}
+
+.items {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -5,6 +5,7 @@ import {reset as resetAnncouncements} from '../../../../Store/AnncouncementsSlic
 import {reset as resetCourses} from '../../../../Store/CoursesSlice';
 import {reset as resetMessages} from '../../../../Store/MessagesSlice';
 import {reset as resetStudentList} from '../../../../Store/StudentListSlice';
+import {reset as resetGrades} from '../../../../Store/GradesSlice';
 //import {rootReducer} from '../../../../Store/Store';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -24,6 +25,7 @@ const Header = ({hamburgerClickHandler}) => {
         dispatch(resetCourses());
         dispatch(resetMessages());
         dispatch(resetStudentList());
+        dispatch(resetGrades());
     };
 
     return (

@@ -9,7 +9,7 @@ navItems = [
     ...
 ]
 */
-const Sidebar = ({navItems}) => {
+const Sidebar = ({navItems, additionalComponent}) => {
 
     return (
         <nav className={styles.sidebar}>
@@ -26,6 +26,7 @@ const Sidebar = ({navItems}) => {
                     )
                 }
             </ul>
+            <>{additionalComponent}</>
         </nav>
     );
 }

@@ -4,13 +4,15 @@ import messagesReducer from './MessagesSlice'
 import authenticationReducer from './AuthenticationSlice'
 import announcementsReducer from './AnncouncementsSlice'
 import studentListReducer from './StudentListSlice'
+import gradesReducer from './GradesSlice'
 
 export const appReducer = combineReducers({
     courses: coursesReducer, 
     messages: messagesReducer, 
     authentication: authenticationReducer, 
     announcements: announcementsReducer, 
-    studentList: studentListReducer
+    studentList: studentListReducer, 
+    grades: gradesReducer
 });
 
 const store = configureStore({

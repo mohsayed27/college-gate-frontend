@@ -98,12 +98,19 @@ const MessageList = ({messagesType, messagesSendingType, messageViewerRoutePath}
                                                             .replace(LINK_MESSAGE_ID, '/'+item.id)}
                                 senderName={item.sender.name} 
                                 subject={item.subject}
-                                date={item.date}
-                                content={item.content}
+                                date={item.date ? item.date : item.date_response}
+                                content={item.content ? item.content : item.content_response}
                             />
                         </div>
                     //</Link>
                 )})             
+            }
+
+            {currentMessages.status === STATUS_SUCCEEDED && 
+                currentMessages.items.length === 0 &&   
+                <p className={`pointer font2 bold center_text`}>
+                    Empty
+                </p>
             }
 
             {currentMessages.status === STATUS_SUCCEEDED && 

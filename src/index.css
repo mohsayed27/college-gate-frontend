@@ -71,6 +71,10 @@ body {
   color: var(--red);
 }
 
+.green {
+  color: var(--green);
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -124,6 +128,38 @@ body {
 
 .add_padding {
   padding: 10px;
+}
+
+.course_card {
+  width: min(326px, 100%);
+  height: 231px;
+  padding: 10px;
+  background-color: var(--darker);
+  margin: 5px;
+  text-decoration: none;
+}
+
+.grade_card {
+  background-color: var(--darker);
+  width: 100%;
+  height: 139px;
+  max-width: 276px;
+  /* max-height: 139px; */
+  min-width: 150px;
+}
+
+.parent_flex_div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  /* background-color: var(--darkest); */
+  gap: 10px;
+}
+
+.dark_background {
+  background-color: var(--dark);
 }
 
 * {

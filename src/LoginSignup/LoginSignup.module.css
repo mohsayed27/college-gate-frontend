@@ -54,7 +54,7 @@
     display: inline-block;
     line-height: 20px;
     text-decoration: none; /* remove underline from anchors */
-    color: black;
+    color: var(--darkest);
     margin: 5px auto;
 
 }

@@ -71,7 +71,7 @@ const LoginSignup = () => {
         };
 
         let departmentSignupBody = {
-            "key": "123123",
+            "key": signupKey,
             "department": {
                 "name": signupName,
                 "email": signupEmail,
@@ -127,19 +127,19 @@ const LoginSignup = () => {
                 </div>
                 {location.pathname.includes(LINK_LOGIN) && 
                     <div className={styles.fields}>
-                        <input className={`${styles.input_text} font1`} type="email" placeholder="Enter Email" name="email" onChange={onChangeLoginEmail} required/>
-                        <input className={`${styles.input_text} font1`} type="password" placeholder="Enter Password" name="psw" onChange={onChangeLoginPassword} required/>
+                        <input className={`${styles.input_text} font1`} type="email" placeholder="Enter Email" name="email" value={loginEmail} onChange={onChangeLoginEmail} required/>
+                        <input className={`${styles.input_text} font1`} type="password" placeholder="Enter Password" name="psw" value={loginPassword} onChange={onChangeLoginPassword} required/>
                         <button className={"input_button"} type="submit">Login</button>
                     </div>
                 }
                 {location.pathname.includes(LINK_SIGNUP) && 
                     <div className={styles.fields}>
-                        <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Signup Key" name="key" onChange={onChangeSignupKey} required/>
-                        <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Name" name="name" onChange={onChangeSignupName} required/>
-                        <input className={`${styles.input_text} font1`} type="email" placeholder="Enter Email" name="email" onChange={onChangeSignupEmail} required/>
-                        <input className={`${styles.input_text} font1`} type="password" placeholder="Enter Password" name="psw" onChange={onChangeSignupPassword} required/>
-                        <input className={`${styles.input_text} font1`} type="password" placeholder="Re-Enter Password" name="re_psw" onChange={onChangeSignupConformationPassword} required/>
-                        {userType === USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Name" name="department_name" onChange={onChangeSignupDepName} required/>}
+                        <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Signup Key" name="key" value={signupKey} onChange={onChangeSignupKey} required/>
+                        <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Name" name="name" value={signupName} onChange={onChangeSignupName} required/>
+                        <input className={`${styles.input_text} font1`} type="email" placeholder="Enter Email" name="email" value={signupEmail} onChange={onChangeSignupEmail} required/>
+                        <input className={`${styles.input_text} font1`} type="password" placeholder="Enter Password" name="psw" value={signupPassword} onChange={onChangeSignupPassword} required/>
+                        <input className={`${styles.input_text} font1`} type="password" placeholder="Re-Enter Password" name="re_psw" value={signupConformationPassword} onChange={onChangeSignupConformationPassword} required/>
+                        {userType === USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Name" name="department_name" value={signupDepName} onChange={onChangeSignupDepName} required/>}
                         {/*userType !== USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Id" name="department_id" onChange={onChangeSignupDepId} required/>*/}
                         <button className="input_button" type="submit" >Signup</button>
                     </div>

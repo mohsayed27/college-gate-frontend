@@ -38,7 +38,7 @@ const Professor = () => {
 
     
     const additionalComponents = [
-        {link:LINK_PROFESSOR + LINK_COURSE, exactLink:false, component:<Course canPost={true} userLink={LINK_PROFESSOR} sendMessageShowStudentList={true} showCourseKey={true}/>, id:3}, 
+        {link:LINK_PROFESSOR + LINK_COURSE, exactLink:false, component:<Course userLink={LINK_PROFESSOR} canPost={true} canAnnounceGrade={true} sendMessageShowStudentList={true} showCourseKey={true}/>, id:3}, 
     ];
 
     let location = useLocation();

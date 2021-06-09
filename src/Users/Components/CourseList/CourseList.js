@@ -1,5 +1,5 @@
 import CourseCard from '../CourseCard/CourseCard'
-import CreateEnrollCourseCard from '../CourseCard/CreateEnrollCourseCard'
+import PlusCard from '../PlusCard/PlusCard'
 import styles from './CourseList.module.css'
 import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
@@ -68,9 +68,11 @@ const CourseList = ({userLink, createEnrollText/*, createEnrollLink*/}) => {
                     )
                 )
             }
-            {/*<Link to={userLink+LINK_CREATE} className="no_text_decoration">*/}
-                <CreateEnrollCourseCard  createEnrollText={createEnrollText}  createEnrollCardClickHandler={createEnrollCardClickHandler}/*link={userLink+createEnrollLink}*/ />
-            {/*</Link>*/}
+            
+            <div className="course_card">
+                <PlusCard  text={createEnrollText}  clickHandler={createEnrollCardClickHandler}/>
+            </div>
+            
             {isCreateEnroll && 
                 <div className={styles.overlay} onClick={overlayClickHandler}/>
             }

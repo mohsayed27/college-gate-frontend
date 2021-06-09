@@ -19,7 +19,7 @@ additionalComponents = [
 
 // additionalComponents are components that are not associated with a nav button.
 
-const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
+const AccountMain = ({navItemsAndComponents, additionalComponents, additionalSidebarComponent}) => {
 
 
     const navItems = navItemsAndComponents.map(item => ({text:item.text, link:item.link, id:item.id}));
@@ -53,7 +53,7 @@ const AccountMain = ({navItemsAndComponents, additionalComponents}) => {
 
             <Header hamburgerClickHandler={sidebarShowHideHandler}/>
             <div className={sidebarStyle}>
-                <Sidebar navItems={navItems}/>
+                <Sidebar navItems={navItems} additionalComponent={additionalSidebarComponent}/>
             </div>
 
             

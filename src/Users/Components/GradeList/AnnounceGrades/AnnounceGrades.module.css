@@ -1,0 +1,21 @@
+.announce_grades {
+    z-index: inherit;
+    /* color: cyan; */
+    max-height: 75%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: min(100%, 350px);
+    background-color: var(--darker);
+    padding: 15px;
+}
+
+.input_field {
+    background-color: var(--dark);
+    height: 30px;
+    width: 80px;
+    padding: 5px;
+}
+
