@@ -140,7 +140,7 @@ const LoginSignup = () => {
                         <input className={`${styles.input_text} font1`} type="password" placeholder="Enter Password" name="psw" onChange={onChangeSignupPassword} required/>
                         <input className={`${styles.input_text} font1`} type="password" placeholder="Re-Enter Password" name="re_psw" onChange={onChangeSignupConformationPassword} required/>
                         {userType === USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Name" name="department_name" onChange={onChangeSignupDepName} required/>}
-                        {userType !== USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Id" name="department_id" onChange={onChangeSignupDepId} required/>}
+                        {/*userType !== USER_TYPE_EMPLOYEE && <input className={`${styles.input_text} font1`} type="text" placeholder="Enter Department Id" name="department_id" onChange={onChangeSignupDepId} required/>*/}
                         <button className="input_button" type="submit" >Signup</button>
                     </div>
                 }

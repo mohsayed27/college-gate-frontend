@@ -12,11 +12,13 @@ export const MESSAGES_COMPONENT_TYPE_COMPLAITNS = "complaints";
 
 export const LINK_PROFESSOR = '/professor';
 export const LINK_STUDENT = '/student';
+export const LINK_EMPLOYEE = '/employee';
 
 export const LINK_HOME = '/home';
 export const LINK_MESSAGES_OVERVIEW = '/messagesoverview';
 export const LINK_COURSES = '/courses';
 export const LINK_WARNINGS = '/warnings';
+export const LINK_MESSAGES = '/' + MESSAGES_COMPONENT_TYPE_MESSAGES;
 export const LINK_COMPLAINTS = '/' + MESSAGES_COMPONENT_TYPE_COMPLAITNS;
 
 //export const LINK_CREATE = LINK_COURSES + '/create'
@@ -36,15 +38,12 @@ export const LINK_VIEW = '/view';
 export const LINK_ANNOUNCEMENTS = '/announcements';
 export const LINK_GRADES = '/grades';
 
-export const LINK_PROFESSOR_HOME = LINK_PROFESSOR + LINK_COURSES;
-export const LINK_STUDENT_HOME = LINK_STUDENT + LINK_ANNOUNCEMENTS;
-
 export const LINK_COURSE_ID = '/:courseId';
 export const LINK_COURSE = /*LINK_COURSES*/"/course" + LINK_COURSE_ID; 
 export const LINK_COURSE_ANNOUNCEMENTS  = LINK_COURSE + LINK_ANNOUNCEMENTS;                   // for example: '/professor/courses/:courseId/announcements'
 export const LINK_COURSE_GRADES         = LINK_COURSE + LINK_GRADES;                          // for example: '/professor/courses/:courseId/grades'
 
-export const LINK_COURSE_MESSAGES = LINK_COURSE + '/' + MESSAGES_COMPONENT_TYPE_MESSAGES; 
+export const LINK_COURSE_MESSAGES = LINK_COURSE + LINK_MESSAGES; 
 export const LINK_MESSAGE_ID = '/:messageId';
 export const LINK_COURSE_MESSAGES_RECEIVED  = LINK_COURSE_MESSAGES + LINK_RECEIVED;                 // for example: '/professor/courses/:courseId/messages/received'
 export const LINK_COURSE_MESSAGES_SENT      = LINK_COURSE_MESSAGES + LINK_SENT;                     // for example: '/professor/courses/:courseId/messages/sent'
@@ -54,9 +53,12 @@ export const LINK_COURSE_MESSAGES_VIEW      = LINK_COURSE_MESSAGES + MESSAGES_SE
 export const LINK_COMPLAINTS_RECEIVED  = LINK_COMPLAINTS + LINK_RECEIVED;                   // for example: '/student/complaints/received'
 export const LINK_COMPLAINTS_SENT      = LINK_COMPLAINTS + LINK_SENT;                       // for example: '/student/complaints/sent'
 export const LINK_COMPLAINTS_SEND      = LINK_COMPLAINTS + LINK_SEND;                       // for example: '/student/complaints/send'
-export const LINK_COMPLAINTS_VIEW      = LINK_COMPLAINTS + MESSAGES_SENDING_TYPE + LINK_VIEW + LINK_MESSAGE_ID;     // for example: '/student/complaints/view/:complaintId'
+export const LINK_COMPLAINTS_VIEW      = LINK_COMPLAINTS + MESSAGES_SENDING_TYPE + LINK_VIEW + LINK_MESSAGE_ID;     // for example: '/student/complaints/view/:messageId'
 
 
+export const LINK_PROFESSOR_HOME = LINK_PROFESSOR + LINK_COURSES;
+export const LINK_STUDENT_HOME = LINK_STUDENT + LINK_ANNOUNCEMENTS;
+export const LINK_EMPLOYEE_HOME = LINK_EMPLOYEE + LINK_COMPLAINTS;
 
 
 export const AUTH_LINK = '/auth';

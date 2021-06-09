@@ -1,0 +1,22 @@
+.complain_respone {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--darkest);
+    padding: 10px;
+}
+
+.response_title {
+    margin: 10px 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.respond_button_parent_div {
+    display: flex;
+    flex-direction: row;
+}

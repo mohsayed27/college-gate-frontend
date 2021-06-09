@@ -78,7 +78,7 @@ const Course = ({canPost, userLink, sendMessageShowStudentList, match, showCours
                     tabsAndComponents={[
                         {iconImgSrc:'/logo192.png', text:'Announcements', routePath:userLink+LINK_COURSE_ANNOUNCEMENTS,      exactPath:false, link:userLink+LINK_COURSE_ANNOUNCEMENTS.replace(':courseId', courseId),   component:announcementListComponent, id:0},
                         /*{iconImgSrc:'/logo192.png', text:'Grades',        routePath:userLink+LINK_COURSE_GRADES,             exactPath:false, link:userLink+LINK_COURSE_GRADES.replace(':courseId', courseId),          component:<DummyPlaceholder text='grades'/>, id:1}*/,
-                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,           exactPath:false, link:userLink+LINK_COURSE_MESSAGES_RECEIVED.replace(':courseId', courseId), component:messagesComponent, id:2},
+                        {iconImgSrc:'/logo192.png', text:'Messages',      routePath:userLink+LINK_COURSE_MESSAGES,           exactPath:false, link:userLink+LINK_COURSE_MESSAGES.replace(':courseId', courseId), component:messagesComponent, id:2},
                     ]}
                     additionalComponents={[]}
                 />

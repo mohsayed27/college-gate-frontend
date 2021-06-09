@@ -4,7 +4,24 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchListOfMessages, fetchMessageById, returnNewMessageToIdle, selectAllMessages} from '../../../Store/MessagesSlice'
 import {selectAllCourses} from '../../../Store/CoursesSlice'
 import {Route, Switch, withRouter, useLocation, useHistory, useParams, useRouteMatch, Redirect} from 'react-router-dom';
-import {STATUS_IDLE, STATUS_LOADING, STATUS_SUCCEEDED, STATUS_FAILED, BASE_URL, MESSAGES_TYPE_RECEIVED, MESSAGES_TYPE_SENT, MESSAGES_COMPONENT_TYPE_MESSAGES, LINK_COURSE_MESSAGES_SENT, LINK_COURSE_MESSAGES_RECEIVED, LINK_RECEIVED, LINK_SENT, LINK_SEND, LINK_COURSE_MESSAGES} from '../../../Constants'
+import {STATUS_IDLE, 
+    STATUS_LOADING, 
+    STATUS_SUCCEEDED, 
+    STATUS_FAILED, 
+    BASE_URL, 
+    MESSAGES_TYPE_RECEIVED, 
+    MESSAGES_TYPE_SENT, 
+    MESSAGES_COMPONENT_TYPE_MESSAGES, 
+    LINK_COURSE_MESSAGES_SENT, 
+    LINK_COURSE_MESSAGES_RECEIVED, 
+    LINK_RECEIVED, 
+    LINK_SENT, 
+    LINK_SEND, 
+    LINK_COURSE_MESSAGES, 
+    LINK_MESSAGES, 
+    MESSAGES_COMPONENT_TYPE_COMPLAITNS,
+    LINK_COMPLAINTS
+} from '../../../Constants'
 import Sidebar from '../Sidebar/Sidebar'
 import MessageListItem from './MessageListItem/MessageListItem';
 import MessageList from './MessageList/MessageList';
@@ -75,8 +92,17 @@ const Messages = ({userLink, type /*MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_
 
     /*console.log(userL+match.path);
     console.log(LINK_COURSE_MESSAGES);*/
-    /*if ()
-        return <Redirect to={location.pathname+LINK_COURSE_MESSAGES_RECEIVED}/>;*/
+    if ((type === MESSAGES_COMPONENT_TYPE_MESSAGES && 
+        location.pathname.split(LINK_MESSAGES).pop() === '') // LINK_MESSAGES is at the end of the url
+        
+        || (type === MESSAGES_COMPONENT_TYPE_COMPLAITNS && 
+            location.pathname.split(LINK_COMPLAINTS).pop() === '')) {
+        
+        return <Redirect to={location.pathname+LINK_RECEIVED}/>;
+    }
+    
+        
+
 
     let style = styles.messages;
     if (addPadding)

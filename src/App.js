@@ -6,9 +6,11 @@ import {
     LINK_PROFESSOR, 
     LINK_STUDENT, 
     LINK_LOGIN,
-    AUTH_LINK, 
+    AUTH_LINK,
+    LINK_EMPLOYEE, 
 } from './Constants'
 import LoginSignup from './LoginSignup/LoginSignup';
+import Employee from './Users/Employee';
 
 function App() {
     return (
@@ -27,6 +29,9 @@ function App() {
                 </Route>
                 <Route path={LINK_STUDENT}>
                     <Student/>
+                </Route>
+                <Route path={LINK_EMPLOYEE}>
+                    <Employee/>
                 </Route>
             </Switch>
         </Router>

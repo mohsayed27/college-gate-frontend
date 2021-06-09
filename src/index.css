@@ -105,6 +105,8 @@ body {
   width: 100%;
   font-family: Arial, sans-serif;
   background-color: var(--darker);
+  padding: 5px;
+  min-height: 150px;
 }
 
 .remove_user_agent_stylesheet{
@@ -114,6 +116,10 @@ body {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+
+.no_margin {
+  margin: 0px;
 }
 
 .add_padding {

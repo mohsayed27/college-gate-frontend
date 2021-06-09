@@ -12,7 +12,9 @@ import {
 } from '../../../../Constants'
 
 
-const MessageViewer = ({messagesType, subjectAltText="Subject"}) => {
+// messagesType = MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS
+// messagesSendingType = MESSAGES_TYPE_RECEIVED | MESSAGES_TYPE_SENT
+const MessageViewer = ({messagesType, messagesSendingType, subjectAltText="Subject"}) => {
 
     const messages = useSelector(selectAllMessages);
     const dispatch = useDispatch();
@@ -22,7 +24,9 @@ const MessageViewer = ({messagesType, subjectAltText="Subject"}) => {
 
     let pathParams = useParams();
 
-    let messagesSendingType = pathParams.sendingType;
+    let sendingType = messagesSendingType;
+    if (!messagesSendingType) //If no prop value is passed
+        sendingType = pathParams.sendingType;
     let messageId = pathParams.messageId;
     let courseId = pathParams.courseId;
 
@@ -31,7 +35,10 @@ const MessageViewer = ({messagesType, subjectAltText="Subject"}) => {
     useEffect(() => {
         //console.log("Mounted!!!!!!");
 
-        let currentMessages = (messagesSendingType === MESSAGES_TYPE_RECEIVED) ? messages.received : messages.sent;
+        let foundMessageItem;
+
+        //console.log("Sending type HERE!!!", sendingType);
+        let currentMessages = (sendingType === MESSAGES_TYPE_RECEIVED) ? messages.received : messages.sent;
 
         let itemFoundAmoungAllMessages = false;
         let itemFoundIndividually = false;
@@ -39,23 +46,30 @@ const MessageViewer = ({messagesType, subjectAltText="Subject"}) => {
         if (currentMessages.status === STATUS_SUCCEEDED && 
             currentMessages.type === messagesType) {
 
-
             
             if ((currentMessages.courseId === courseId && currentMessages.type === MESSAGES_COMPONENT_TYPE_MESSAGES) ||
                 currentMessages.type === MESSAGES_COMPONENT_TYPE_COMPLAITNS) {
             
-                    //console.log("HERE");
                 
-                setMessageItem(currentMessages.items.find(item => item.id === messageId));
-                console.log(messageItem);
-                if (messageItem)
+                //console.log("messageId:", messageId);
+                foundMessageItem = currentMessages.items.find(item => {
+                    //console.log("item.id:  ", item.id, item.id === messageId);
+                    return item.id === messageId;
+                });
+
+                //console.log("messageItem:", messageItem);
+
+
+                if (foundMessageItem) {
                     itemFoundAmoungAllMessages = true;
+                    //console.log("HERE");
+                }
             }            
         }
 
         if (!itemFoundAmoungAllMessages) {
 
-            console.log("HERE");
+            //console.log("HERE");
 
 
             if (messages.individuallyFetchedMessage.status === STATUS_SUCCEEDED &&
@@ -66,14 +80,15 @@ const MessageViewer = ({messagesType, subjectAltText="Subject"}) => {
                     messages.individuallyFetchedMessage.type === MESSAGES_COMPONENT_TYPE_COMPLAITNS) {
                     
                     if (messages.individuallyFetchedMessage.item.id === messageId) {
-                        setMessageItem(messages.individuallyFetchedMessage.item);
+                        foundMessageItem = messages.individuallyFetchedMessage.item;
                         itemFoundIndividually = true;
                     }
                 }
             }
         }
 
-
+        //console.log("itemFoundAmoungAllMessages:", itemFoundAmoungAllMessages);
+        //console.log("itemFoundIndividually:", itemFoundIndividually);
 
         if (!itemFoundAmoungAllMessages && !itemFoundIndividually) {
             let params;
@@ -84,11 +99,18 @@ const MessageViewer = ({messagesType, subjectAltText="Subject"}) => {
             dispatch(fetchMessageById(params));
         }
 
+        if (foundMessageItem) {
+            setMessageItem(foundMessageItem);
+        }
+
     }, []);
 
-    if (messages.individuallyFetchedMessage.status === STATUS_SUCCEEDED && !messageItem) 
+    if (messages.individuallyFetchedMessage.status === STATUS_SUCCEEDED && !messageItem) {
         setMessageItem(messages.individuallyFetchedMessage.item);
+    }
 
+    
+    //console.log("messageItem:", messageItem);
 
 
     return (

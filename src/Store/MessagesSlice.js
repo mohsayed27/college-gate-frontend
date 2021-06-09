@@ -12,7 +12,8 @@ import {
     MESSAGES_COMPONENT_TYPE_COMPLAITNS,
     METHOD_GET, 
     AUTHENTICATION_STATE_KEY,
-    METHOD_POST
+    METHOD_POST, 
+    METHOD_PUT
 } from '../Constants'
 
 
@@ -25,7 +26,7 @@ export const fetchListOfMessages = createAsyncThunk(
         if (params.type === MESSAGES_COMPONENT_TYPE_MESSAGES)
             path = BASE_URL+`/api/v1/message/${params.sendingType}/course/${params.courseId}?offset=${params.offset}&limit=${params.limit}`;
         else
-            path = BASE_URL+`/api/v1/complaintMessage/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
+            path = BASE_URL+`/api/v1/complaintMessage/type/${params.sendingType}?limit=${params.limit}&offset=${params.offset}`;
         //console.log(path);
         const headers = {
             'Content-Type': 'application/json', 
@@ -65,7 +66,7 @@ export const fetchMessageById = createAsyncThunk(
         //console.log("Data: ", data);
         return data;
     }
-)
+);
 
 export const sendMessage = createAsyncThunk(
     'messages/sendMessage', 
@@ -95,6 +96,25 @@ export const sendMessage = createAsyncThunk(
         }
 
         const data = await apiRequest(path, METHOD_POST, headers, JSON.stringify(body));
+        return data;
+    }
+);
+
+export const respondToComplaint = createAsyncThunk(
+    'messages/respondToComplaint', 
+    // params = {complaint_id: id,content: String}
+    async (params) => {
+        let path = BASE_URL+`/api/v1/complaintMessage/${params.complaintId}/me/response`;
+        let body = {
+            content: params.content
+        };
+        const headers = {
+            'Content-Type': 'application/json', 
+            //'Authorization': `Bearer ${store.getState().authenticationState.userInfo.token}`
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem(AUTHENTICATION_STATE_KEY)).userInfo.token}`
+        }
+
+        const data = await apiRequest(path, METHOD_PUT, headers, JSON.stringify(body));
         return data;
     }
 );
@@ -242,6 +262,36 @@ export const messagesSlice = createSlice({
             state.newMessage.error = action.error;
         }, 
         
+
+        
+        [respondToComplaint.fulfilled]: (state, action) => {
+            const params = action.meta.arg;
+            const receivedData = action.payload;
+            
+            state.newMessage.status = STATUS_SUCCEEDED;
+            state.newMessage.item = receivedData;
+            if (state.received.type === MESSAGES_COMPONENT_TYPE_COMPLAITNS) {
+                state.received.items.find(item => {
+                    if (item.id === params.complaintId) {
+                        item = receivedData; // replace if found
+                        return true;
+                    }
+                    return false;
+                });
+                /*if (alreadyExistingItem) {
+                    let i = state.received.items.indexOf(alreadyExistingItem);
+                    state.received.items[i] = receivedData;
+                }*/
+                    
+            }
+        }, 
+        [respondToComplaint.pending]: (state, action) => {
+            state.newMessage.status = STATUS_LOADING;
+        }, 
+        [respondToComplaint.rejected]: (state, action) => {
+            state.newMessage.status = STATUS_FAILED;
+            state.newMessage.error = action.error;
+        }, 
     }
 });
 

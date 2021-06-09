@@ -21,8 +21,8 @@ import {
 import MessageListItem from '../MessageListItem/MessageListItem';
 
 
-// messagesSendingType = MESSAGES_TYPE_RECEIVED | MESSAGES_TYPE_SENT
 // messagesType = MESSAGES_COMPONENT_TYPE_MESSAGES | MESSAGES_COMPONENT_TYPE_COMPLAITNS
+// messagesSendingType = MESSAGES_TYPE_RECEIVED | MESSAGES_TYPE_SENT
 const MessageList = ({messagesType, messagesSendingType, messageViewerRoutePath}) => {
 
     const messages = useSelector(selectAllMessages);
@@ -41,7 +41,7 @@ const MessageList = ({messagesType, messagesSendingType, messageViewerRoutePath}
     }
 
     useEffect(() => {
-        console.log("mount");
+        //console.log("mount");
         //console.log(currentMessages);
         let fetchRequired = false;
 

@@ -9,7 +9,8 @@ import {
     USER_TYPE_PROFESSOR, 
     LINK_STUDENT, 
     LINK_PROFESSOR,
-    BASE_URL 
+    BASE_URL, 
+    LINK_EMPLOYEE
 } from '../Constants'
 
 const RedirectHandler = ({redirectToHome=true}) => {
@@ -43,10 +44,10 @@ const RedirectHandler = ({redirectToHome=true}) => {
                     }
                     break;
                 default: //USER_TYPE_EMPLOYEE
-                    //if (!location.pathname.includes(LINK_EMPLOYEE)){
-                    //    redirect = true;
-                    //    redirectLink = LINK_EMPLOYEE;
-                    //}
+                    if (!location.pathname.includes(LINK_EMPLOYEE)){
+                        redirect = true;
+                        redirectLink = LINK_EMPLOYEE;
+                    }
                     break;
             }
         }
