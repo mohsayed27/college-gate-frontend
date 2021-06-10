@@ -38,8 +38,7 @@ const AnnounceGrades = ({}) => {
     }, []);
 
     if (studentList.status === STATUS_SUCCEEDED && 
-        studentList.courseId === courseId &&
-        idList.length == 0) {
+        studentList.courseId === courseId) {
             
             let ids = [];
             let gs = [];
@@ -48,8 +47,18 @@ const AnnounceGrades = ({}) => {
                 gs.push(0);
             });
 
-            setIdList(ids);
-            setGradeList(gs);
+
+            /*console.log(ids.every((id, index) => {
+                console.log(id, idList[index]);
+                return id !== idList[index]
+            }));*/
+
+            if (ids.length !== idList.length ||
+                (ids.length > 0 && ids.every((id, index) => id !== idList[index]))) {
+
+                setIdList(ids);
+                setGradeList(gs);
+            }
     }
 
     const markedOfInputChangeHandler = (event) => setMarkedOf(event.target.value);
@@ -116,9 +125,9 @@ const AnnounceGrades = ({}) => {
 
 
             <div className="parent_flex_div">
-                {/*<div className={styles.enroll_button_spacer}/>*/}
-                <p className='font2 bold red flex1'>{grades.newlyAnnouncedGrades.status === STATUS_FAILED && grades.newlyAnnouncedGrades.message}</p>
-                <p className='font2 bold green flex1'>{grades.newlyAnnouncedGrades.status === STATUS_SUCCEEDED && "Successful"}</p>
+                <div className="flex1"/>
+                {grades.newlyAnnouncedGrades.status === STATUS_FAILED && <p className='font2 bold red flex1'>{grades.newlyAnnouncedGrades.message}</p>}
+                {grades.newlyAnnouncedGrades.status === STATUS_SUCCEEDED && <p className='font2 bold green flex1'>Successful</p>}
                 <button className="input_button" type="submit">Annnounce</button>
             </div>
         </form>

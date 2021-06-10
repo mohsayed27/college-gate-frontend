@@ -19,7 +19,7 @@ export async function apiRequest(url, method, headers, bodyData) {
         const response = await fetch(url, config);
         //console.log("Fetched response: ", response);
         data = await response.json();
-        console.log("Data: ", data);
+        //console.log("Data: ", data);
         console.log("Received data", data);
 
         if (response.ok) {
@@ -31,7 +31,8 @@ export async function apiRequest(url, method, headers, bodyData) {
         console.log('err', err);
         if (err.message === "Failed to fetch")
             return Promise.reject("Server communication failure");
-        //return Promise.reject(err.message ? err.message : data)
-        return Promise.reject(data);
+        if (data)
+            return Promise.reject(data);
+        return Promise.reject(err.message ? err.message : data)
     }
 }

@@ -1,8 +1,8 @@
 .announce_grades {
     z-index: inherit;
     /* color: cyan; */
+    height: fit-content;
     max-height: 75%;
-
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -10,6 +10,7 @@
     width: min(100%, 350px);
     background-color: var(--darker);
     padding: 15px;
+    overflow: scroll;
 }
 
 .input_field {
@@ -19,3 +20,8 @@
     padding: 5px;
 }
 
+.student_list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
