@@ -127,7 +127,7 @@ server.use(router);
     console.log('JSON Server is running');
 });*/
 //, '41.238.49.126'
-server.listen(7000, '192.168.1.198', () => {
+server.listen(4000, '192.168.1.7', () => {
     console.log('JSON Server is running');
 });
 
